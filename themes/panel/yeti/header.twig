@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+{% for lang in site['languages'] %}
+{% if lang['active'] %}
+<html lang="{{ lang['code'] }}">
+{% endif %}
+{% endfor %}
+<head>
+  <base href="{{ site['url'] }}/">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }}</title>
+  <meta name="keywords" content="{{ keywords }}">
+  <meta name="description" content="{{ description }}">
+  {% if site['favicon'] %}
+    <link rel="shortcut icon" type="image/ico" href="{{ site['favicon'] }}" />
+  {% endif %}
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  
+    {{ headerCode }}
+     
+    {% for style in styleList %}
+      <link rel="stylesheet" type="text/css" href="{{ style }}">
+    {% endfor %}
+	<!-- owl -->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.2/umd/popper.min.js"></script> 
+  </head>
+
+{% if user['auth'] %}
+   <body>
+      <script>
+         var app = document.getElementsByTagName("BODY")[0];
+         if (localStorage.lightMode == "dark") {
+         	app.setAttribute("class", "dark");
+         }
+      </script>
+      <div class="app-container">
+         <div class="app-sidebar">
+            <div class="close-sidebar-btn" onclick="dashMenuToggle()">
+               <i class="fas fa-angle-left"></i>
+            </div>
+            <div class="sidebar-header">
+               <div class="sh-bg"></div>
+               <div class="app-logo">
+                  <a href="/">
+                  {% if site["logo"] %}
+					<img src="{{ site['logo'] }}" width="220" alt="{{ site["site_name"] }}" class="logo-lg" title="{{ site["site_name"] }}">
+                  {% else %}
+                    {{ site["site_name"] }}
+                  {% endif %}
+                  <img src="{{ site['favicon'] }}" class="logo-sm" alt="">
+                  </a>
+               </div>
+               <div class="app-user">
+                  <div class="user-name">
+                     {{ user['username'] }}
+                  </div>
+				  <a class="user-balance" href="/addfunds" data-second-text="ADICIONAR SALDO"> Saldo: R$ {{ user['balance'] }}</a>
+               </div>
+            </div>
+            <div class="sidebar-content">
+					<ul class="sidebar-menu">	
+			{% if ( settings['sms_verify'] == 2 and user['sms_verify'] == 1 ) or (settings['mail_verify'] == 2 and user['mail_verify'] == 1 ) %}
+			<li {% if active_menu == "verify" %} class="active" {% endif %}><a class="menu-link" href="/">{{ lang['verify.title'] }}</a></li>
+			{% else %}
+			
+			<li {% if active_menu == "neworder" %} class="active" {% endif %}><a class="menu-link" href="/"><i class="menu-icon fas fa-inbox"></i> <span class="menu-text">{{ lang['neworder.title'] }}</span></a></li>
+			
+			<li {% if active_menu == "services" %} class="active" {% endif %}><a class="menu-link" href="/services"><i class="menu-icon fas fa-list-alt"></i> <span class="menu-text">{{ lang['services.title'] }}</span></a></li>
+		 
+			<li {% if active_menu == "orders" %} class="active" {% endif %}><a class="menu-link" href="/orders"><i class="menu-icon fas fa-box-open"></i> <span class="menu-text">{{ lang['orders.title'] }}</span></a></li>
+			
+           	{% if site["dripfeedcount"] %}
+			<li {% if active_menu == "dripfeeds" %} class="active" {% endif %}><a class="menu-link" href="/dripfeeds"><i class="menu-icon fas fa-stopwatch"></i> <span class="menu-text">{{ lang['dripfeed.title'] }}</span></a></li>
+			{% endif %}
+			
+			{% if site["subscriptionscount"] %}
+			<li {% if active_menu == "subscriptions" %} class="active" {% endif %} ><a class="menu-link" href="/subscriptions"><i class="menu-icon fas fa-box-check"></i> <span class="menu-text">{{ lang['subscriptions.title'] }}</span></a></li>
+			{% endif %}
+			
+            <li {% if active_menu == "addfunds" %} class="active" {% endif %}><a class="menu-link" href="/addfunds"> <i class="menu-icon fas fa-credit-card"></i> <span class="menu-text">{{ lang['addfunds.title'] }}</span></a></li>
+			
+			{% if affiliates %}
+            <li {% if active_menu == "affiliates" %} class="active" {% endif %}><a class="menu-link" href="/affiliates"><i class="menu-icon fas fa-gem"></i> <span class="menu-text">{{ lang['affiliates.title'] }}</span></a></li>
+            {% endif %}
+			
+            {% if panelSelling %}
+            <li {% if active_menu == "child-panels" %} class="active" {% endif %}><a class="menu-link" href="/child-panels"><i class="menu-icon fas fa-store"></i> <span class="menu-text">{{ lang['childpanels.title'] }}</span></a></li>
+            {% endif %}
+			
+            {% if apiPage %}
+            <li {% if active_menu == "api" %} class="active" {% endif %}><a class="menu-link" href="/api"><i class="menu-icon fas fa-laptop-code"></i> <span class="menu-text">{{ lang['api.title'] }}</span></a></li>
+            {% endif %}
+			
+            {% if ticketPage %}
+            <li {% if active_menu == "tickets" %} class="active" {% endif %}><a class="menu-link" href="/tickets"><i class="menu-icon fas fa-user-headset"></i> <span class="menu-text">{{ lang['tickets.title'] }} {% if ticketCount %} <span class="badge">{{ ticketCount }}</span> {% endif %}</span></a></li>  
+            {% endif %}
+			
+            {% if blogPage %}    
+            <li {% if active_menu == "blog" %} class="active" {% endif %}><a class="menu-link" href="/blog"><i class="menu-icon far fa-file-alt"></i> <span class="menu-text">{{ lang['blog.title'] }}</span></a></li>
+            {% endif %}
+			
+            {% if faqPage %} 
+            <li {% if active_menu == "faq" %} class="active" {% endif %}><a class="menu-link" href="/faq"><i class="menu-icon fas fa-question-square"></i> <span class="menu-text">{{ lang['faq.title'] }}</span></a></li>
+            {% endif %}
+			
+            {% if termsPage %} 
+            <li {% if active_menu == "terms" %} class="active" {% endif %}><a class="menu-link" href="/terms"><i class="menu-icon fas fa-scroll"></i> <span class="menu-text">{{ lang['terms.title'] }}</span></a></li> 
+            {% endif %}
+			
+			{% endif %}
+					</ul>
+            </div>
+         </div>
+         <!-- app-sidebar -->
+         <div class="app-header">
+            <div class="container-fluid">
+               <div class="row row-100">
+                  <div class="col-auto align-self-center">
+                     <div class="dash-menu-btn" onclick="dashMenuToggle()">
+                        <i class="fas fa-bars"></i>
+                     </div>
+                  </div>
+                  <div class="col d-inline-block d-md-none align-self-center">
+                     <div class="app-logo mobiles">
+                          <a href="/">
+                          {% if site['logo'] %}
+                            <img src="{{ site['logo'] }}" width="220" alt="{{ site['name'] }}" class="logo-lg" height="45" title="{{ site['name'] }}">
+                          {% else %}
+                            {{ site['name'] }}
+                          {% endif %}
+                          </a>
+                     </div>
+                  </div>
+                  <div class="col-auto d-none d-lg-inline-block align-self-center">
+                     <div class="hea-ann-title">
+                        Noticias:
+                     </div>
+                  </div>
+                  <div class="col col-100 d-none d-md-inline-block align-self-center">
+                     <marquee class="dhr-marquee" direction="left">
+                        Renovamos a interface do nosso site para melhor atendê-lo!
+                     </marquee>
+                  </div>
+                  <div class="col-auto align-self-center">
+                     <button class="darkMode" onclick="change_mode()">
+                     <i class="fas fa-sun"></i>
+                     <i class="fas fa-moon"></i>
+                     </button>
+                     <a class="header-btn mr-1" href="/account" data-toggle="tooltip" data-placement="top" title="Configurações de Conta">
+                     <span class="icon">
+                     <i class="fas fa-cog"></i>
+                     </span>
+                     </a>
+                     <a class="header-btn" href="/logout" data-toggle="tooltip" data-placement="top" title="Sair">
+                     <span class="icon">
+                     <i class="fas fa-power-off"></i>
+                     </span>
+                     </a>
+                  </div>
+               </div>
+               <!-- row -->
+            </div>
+         </div>
+         <!-- app-header -->
+  
+         <div class="app-navbar">
+            <div class="row">
+               <div class="col text-center align-self-center">
+                  <a {% if page['url'] == '/services' %} class="active" {% else %} {% endif %} href="/services">
+                     <i class="fas fa-list-alt"></i>
+                     <div class="navbar-texts">Serviços</div>
+                  </a>
+               </div>
+               <div class="col text-center align-self-center">
+                  <a {% if page['url'] == '/addfunds' %} class="active" {% else %} {% endif %} href="/addfunds">
+                     <i class="fas fa-credit-card"></i>
+                     <div class="navbar-texts">Adicionar Saldo</div>
+                  </a>
+               </div>
+               <div class="col text-center align-self-center">
+                  <a {% if page['url'] == '/' %} class="active" {% else %} {% endif %} href="/">
+                  <img src="../img/btn-mid.png" class="navbar-mid-icon" alt="">
+                  <div class="navbar-texts">Novo Pedido</div>
+                  </a>
+               </div>
+               <div class="col text-center align-self-center">
+                  <a {% if page['url'] == '/orders' %} class="active" {% else %} {% endif %} href="/orders">
+                     <i class="fas fa-box-open"></i>
+                     <div class="navbar-texts">Pedidos</div>
+                  </a>
+               </div>
+               <div class="col text-center align-self-center">
+                  <a {% if page['url'] == '/tickets' %} class="active" {% else %} {% endif %} href="/tickets">
+                     <i class="fas fa-user-headset"></i>
+                     <div class="navbar-texts">Suporte</div>
+                  </a>
+               </div>
+            </div>
+         </div>
+      </div>
+
+{% else %}
+<body class="home-body">
+
+    <div class="header">
+        <div class="container m-flex">
+            <div class="row" style="height: 99px;">
+                <div class="col-auto align-self-center">
+                    <div class="row">
+                        <div class="col align-self-center">
+                            <div class="site-name">
+								  <a class="navbar-brand" href="/">
+									{% if site["logo"] %}
+									  <img src="{{ site['logo'] }}" width="220" height="45" alt="{{ site["site_name"] }}" title="{{ site["site_name"] }}">
+									{% else %}
+									  {{ site["site_name"] }}
+									{% endif %}
+								  </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col d-none d-lg-block">
+                    <div class="head-menu">
+                        <div class="row">
+                            <div class="col text-lg-right mh-fullw">
+                                <div class="header-menu">
+                                    <ul>
+                                        <li class="active">
+                                            <a href="/services">Serviços</a>
+                                        </li>
+                                        <li>
+                                            <a href="/api">API</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-auto align-self-center mh-fullw">
+                                <a href="/signup" class="btn btn-secondary">
+                                    <i class="fas fa-user mr-2"></i>
+                                    Registrar-Se
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+      <div class="app-navbar">
+         <div class="row">
+            <div class="col text-center align-self-center">
+              <a href="/">
+                  <i class="fa fa-home"></i>
+                  <div class="navbar-texts">Inicio</div>
+               </a>
+            </div>
+            <div class="col text-center align-self-center">
+              <a href="/signup">
+                <img src="../img/btn-mid-user.png" class="navbar-mid-icon" alt="">
+                  <div class="navbar-texts">Registrar-Se</div>
+               </a>
+            </div>
+            <div class="col text-center align-self-center">
+              <a href="/services">
+                <i class="fas fa-list-alt"></i>
+                  <div class="navbar-texts"><strong>Serviços</strong></div>
+               </a>
+            </div>
+         </div>
+      </div>
+  
+{% endif %}

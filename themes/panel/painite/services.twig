@@ -1,0 +1,190 @@
+{% include 'header.twig' %}
+<style> .dugme{
+  cursor:pointer;
+  display:inline-block;
+  padding:5px 10px;
+  background:#eee;
+  border:1px solid #d8d8d8;
+  font-family:Helvetica, Arial, sans-serif;font-size:14px;color:#444; 
+  -webkit-border-radius: 3px; border-radius: 3px; } 
+  [name="kapat"]{position: relative;bottom:20px;left:150px;} 
+  .pencere{ 
+  position:fixed;
+  top:-50%;
+  left:-50%;
+  width:500px;
+  height:auto;
+  overflow:auto;
+  box-sizing:border-box;
+  background:#2e3338;
+  box-shadow:0 0 6px 2px rgba(0,0,0,0.4); 
+  opacity:0; 
+  transition:opacity 0.6s ease-out; 
+  z-index:10; 
+  padding:10px 15px 0px 25px; 
+  -webkit-border-radius: 3px; border-radius: 3px; margin:-150px 0 0 -200px; } .Pencereac{width:1px;height:1px;visibility:hidden;transition:20000ms all;} 
+  .Pencereac:checked + 
+  .pencere
+  { 
+left:47%;
+top:30%;
+  display:block; 
+  z-index:9; 
+  opacity:1;
+  }
+     @media only screen and (max-width:768px){
+    
+    .masaustu{
+        display:None;
+    }
+    
+}
+@media only screen and (min-width:768px){
+    
+    .mobil{
+        display:None;
+    }
+    
+}
+@media only screen and (max-width:768px){
+    
+    .web{
+        display:None;
+    }
+    
+}
+</style>
+<div class="masaustu">
+   <div class="bosluk">
+      <div class="container">
+         <div class="col-lg-6 col-md-offset-3">
+            {% if site['service_speed'] == 2 %}
+            <div class="well">
+               <div class="top justify-content-center text-center">
+                  <span class="list">
+                  <span class="">
+                  <span style="color: #f24236;font-weight: 500; font-size:13px;" class="fa fa-arrow-down"></span>
+                  <span style="color: #f24236;font-weight: 500; font-size:13px;"><b><u>: {{ lang['services.speed.veryslow'] }} </u></b></span></span><br>
+                  <span class="ml-4x">
+                  <span style="color: #fe6d86;font-weight: 500; font-size:13px;" class="fa fa-arrow-down"></span>
+                  <span style="color: #fe6d86;font-weight: 500; font-size:13px;"><b><u>: {{ lang['services.speed.slow'] }} </u></b></span></span><br>
+                  <span class="ml-4x">
+                  <span style="color: #5696c9;font-weight: 500; font-size:13px;" class="fa fa-compress"></span>
+                  <span style="color: #5696c9;font-weight: 500; font-size:13px;"><b><u>: {{ lang['services.speed.normal'] }} </u></b></span></span><br>
+                  <span class="ml-4x">
+                  <span style="color: #0dd887;font-weight: 500; font-size:13px;" class="fa fa-arrow-up"></span>
+                  <span style="color: #0dd887;font-weight: 500; font-size:13px;"><b><u>: {{ lang['services.speed.fast'] }} </u></b></span></span>
+                  </span>
+               </div>
+            </div>
+            {% endif %}
+         </div>
+         <div class="row">
+            <div class="hidden-xs col-sm-12 col-md-12 col-lg-12">
+               <div class="well">
+                  <div class="servisbilgi">
+                     <div class="scroll">
+                        <table class="table ">
+                           <thead>
+                              <tr>
+                                 <th>{{ lang['services.id'] }}</th>
+                                 <th class="width-service-name">{{ lang['services.name'] }}</th>
+                                 <th class="nowrap t-r">{{ lang['services.price'] }}</th>
+                                 <th class="nowrap t-r">{{ lang['services.min'] }}</th>
+                                 <th class="nowrap t-r">{{ lang['services.max'] }}</th>
+                                 {% if avarageTime %}
+                                 <th class="nowrap t-r">{{ lang['services.avarage'] }} <i class="fa fa-exclamation-circle"></i></th>
+                                 {% endif %}
+                                 <th class="nowrap t-r">{{ lang['neworder.description'] }}</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              {% for category in serviceCategory %}
+                              <tr>
+                                 <td colspan="7" class="sc"><strong>{{ category["category_name"] }}</strong></td>
+                              </tr>
+                              {% for service in category['services'] %}
+                              <tr class="aralama servie-data-panel">
+                                 <td>{{ service["service_id"] }}</td>
+                                 <td>{{ service["service_name"] }}</td>
+                                 <td class="t-r">{{ service["service_price"] }} {{ site['currency'] }}</td>
+                                 <td class="t-r">{{ service["service_min"] }}</td>
+                                 <td class="t-r">{{ service["service_max"] }}</td>
+                                 {% if avarageTime %}
+                                 <td class="t-r">{{ service["service_speed"] }}</td>
+                                 {% endif %}
+                                <td class="t-r">
+                                    <button class="btn btn-primary btn-xs"  data-toggle="modal" data-target="#service_desc-{{ service['service_id'] }}"><i class="fa fa-eye"></i></button>
+                                 </td>
+                              </tr>
+                              
+                            
+                            <div id="service_desc-{{ service['service_id'] }}" class="modal fade" role="dialog">
+                              <div class="modal-dialog">
+                               <div class="modal-content">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">×</button>
+                                    <h4 class="modal-title">{{ service["service_name"] }}</h4>
+                                  </div>
+                                  <div class="modal-body">
+                                    <p>{{ service["service_description"] }}</p>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                                  </div>
+                                </div>
+                            
+                              </div>
+                            </div>
+                                                          
+                              </tr>
+                              {% endfor %}
+                              {% endfor %}
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<div class="mobil">
+   <div class="bosluk">
+      <div class="container">
+         <div class="row">
+                  {% for category in serviceCategory %}
+                 <div class="col-md-12"><h5 class="msk"  style="background-color:#6A1B9A"><font color="white"><center><i class="fa fa-{{ category["category_icon"] }}"></i><b><u> {{ category["category_name"] }} </u></b><i class="fa fa-{{ category["category_icon"] }}"></i></center></font></h5>
+               </div> {% for service in category['services'] %}      
+               <div class="col-lg-12">
+                  <div class="well-box pshadow">
+                     <div class="w-title">
+                        <h5 class="msk"  style="background-color:#6A1B9A">{{ category["category_name"] }}</h5>
+                        <b>#{{ service["service_id"] }}</b>
+                        <br>
+                        <b>{{ service["service_name"] }}</b>
+                        <br>
+                        <small style="color: #c4c5c4">
+                        Minimum:<b><font style="color:#c4c5c4"> {{ service["service_min"] }}</font></b> - Maksimum:<b><font style="color:#c4c5c4"> {{ service["service_max"] }}</font></b>
+                        </small>
+                        <br><br>
+                        <strong style="text-align: center;font-size: 16px;font-weight: bolder;border: 1px solid #cacaca;padding: 4px;border-radius: 5px;">
+                        <b>
+                        {{ service["service_price"] }} {{ site['currency'] }}
+                        <small style="color: #c4c5c4;font-size: 10px;"></b>/ 1.000 Adet</small>
+                        </strong>
+                        </center>
+                        </p>   
+                     </div>
+                  </div>
+               </div>
+            <br>
+            {% endfor %}
+            {% endfor %}
+         </div>
+      </div>
+   </div>
+</div>
+</div>
+{% include 'footer.twig' %}

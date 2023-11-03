@@ -1,0 +1,236 @@
+{% include 'header.twig' %}
+         <div class="app-content">
+            <!-- page-content -->
+            <div class="container-fluid">
+               <div class="row mt-4">
+                  <div class="col-lg-12">
+                     <section class="order-side">
+                        <div class="row">
+                           <div class="col-lg-6 col-12 mb-5 mb-lg-0">
+                              <div class="d-card dc-dblue">
+                                 <div class="d-card-body" id="dc-body">
+                <form method="post" action="tickets" id="ticketsend">
+                    <div class="form-group">
+                        <label class="ticket-label">{{ lang['tickets.subject'] }}</label>
+                        <div class="select">
+                            <select class="form-control" id="Konu" name="subject" onchange="handleOrderType(this)">
+                          <option value="Problema com Pedido" selected="">Problema com Pedido</option>
+                          <option value="Problema com Pagamento">Problema com Pagamento</option>
+                          <option value="Outro Problema">Outro Problema</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" id="order-grubu">
+                        <label class="mt-3">ID do pedido</label>
+                        <input type="text" class="form-control" id="orderid" placeholder="Para vários pedidos (Ex: 100,1001)" />
+                        <label class="mt-3">Qual seu problema?</label>
+                        <div class="select">
+                            <select class="form-control" id="request">
+                                <option value="O pedido não foi enviado">O pedido não foi enviado</option>
+                                <option value="Pedido está lento">Pedido está lento</option>
+                                <option value="Outro Problema">Outro Problema</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" id="payment-grubu" style="display: none;">
+                        <label class="mt-3">Declare seu problema</label>
+                        <div class="select">
+                            <select class="form-control" id="payment">
+                                <option value="saldo não foi confirmado." selected="">Meu saldo não foi confirmado</option>
+                                <option value="Não consigo adicionar saldo.">Não consigo adicionar saldo</option>
+                                <option value="Outro Problema.">Outro Problema</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="mt-3">{{ lang['tickets.message'] }}<span id="diger-grubu"></span></label>
+                        <textarea name="message" class="form-control mb-3" rows="4" cols="50" id="mesaj" placeholder="Faça sua descrição o mais detalhada possível para que possamos ajudá-lo."></textarea>
+                      	<input type="hidden" id="tmessage" name="message">
+                    </div>
+                    <div class="form-group">
+                      <div id="alertArea" class="flash flash-hata mb-3" role="alert" style=""></div>
+                      <div id="successArea" class="flash flash-basarili mb-3" role="alert" style="">Seu apoio chegou até nós! Você será informado o mais breve possível.</div>
+                        <button id="send-ticket" type="button" class="btn btn-primary btn-block btn-lg">{{ lang['tickets.button'] }}</button>
+                    </div>
+                </form>
+                                 </div>
+                              </div>
+                              <!-- d-card end -->
+                           </div>
+                           <!-- col item end-->
+                           <div class="col-lg-6 col-12 mb-5 mb-lg-0">
+                              <div class="d-card dc-dblue">
+                                 <ul class="nav nav-pills fastside">
+                                    <li class="nav-item col-6 mb-2" style="padding:0">
+                                       <a class="nav-link active" data-toggle="pill" href="#oldTickets" role="tab" aria-controls="pills-oldTickets" aria-selected="true">Meus pedidos anteriores</a>
+                                    </li>
+                                    <li class="nav-item col-6 mb-2" style="padding:0">
+                                       <a class="nav-link second" data-toggle="pill" href="#sssTab" role="tab" aria-controls="pills-sssTab" aria-selected="false">Perguntas frequentes</a>
+                                    </li>
+                                 </ul>
+                                 <div class="d-card-body" id="dc2-body" style="overflow-y: auto;max-height: 500px">
+                                    <div class="tab-content mt-3">
+                                       <div class="tab-pane fade active show" id="oldTickets" role="tabpanel" aria-labelledby="oldTickets">
+											<div class="table-responsive">
+											{% if ticketList %}
+												<table class="table">
+												  <thead>
+													<tr>
+													  <th>{{ lang['tickets.id'] }}</th>
+													  <th>{{ lang['tickets.subject'] }}</th>
+													  <th>{{ lang['tickets.status'] }}</th>
+													  <th>{{ lang['tickets.updated'] }}</th>
+													</tr>
+												  </thead>
+													<tbody>
+													{% for ticket in ticketList %}
+														<tr>
+															<td>{{ ticket['ticket_id'] }}</td>
+															  {% if ticket["support_new"] == 2 %}
+																<td><a href="tickets/{{ ticket['ticket_id'] }}"><strong>{{ ticket['subject'] }}</strong></a></td>
+															  {% else %}
+																<td><a href="tickets/{{ ticket['ticket_id'] }}">{{ ticket['subject'] }}</a></td>
+															  {% endif %}
+															<td>
+															{% if ticket['status'] == 'answered' %}
+															<span style="color: #fff;background-color: #28a745;cursor:text;border-radius:5px; padding: 2px 5px;font-size: 12px">answered</span>
+															{% endif %}               
+															{% if ticket['status'] == 'Pending' %}
+															<span style="color: #fff;background-color: #ffcc29;cursor:text;border-radius:5px; padding: 2px 5px;font-size: 12px">Pending</span>
+															{% endif %}
+															{% if ticket['status'] == 'Closed' %}
+															<span style="color: #fff;background-color: #ec4646;cursor:text;border-radius:5px; padding: 2px 5px;font-size: 12px">Closed</span>
+															{% endif %}
+															</td>
+														  <td><span class="nowrap">{{ ticket['lastupdate_time'] }}</span></td>
+														</tr>
+													{% endfor %}	
+													</tbody>
+												</table>
+												{% endif %}
+											</div>
+										</div>
+
+                                       <div class="tab-pane fade" id="sssTab" role="tabpanel" aria-labelledby="sssTab-tab">
+										<div class="faq-ss-tabs">
+										 <div class="home-ss-tab">
+											<div class="ss-tab-head">
+											   <div class="row">
+												  <div class="col">
+													 O que é o Impulso de Mídias Sociais?
+												  </div>
+												  <div class="col-auto align-self-center right-p">
+													 <i class="fas fa-plus"></i>
+													 <i class="fas fa-minus"></i>
+												  </div>
+											   </div>
+											</div>
+											<div class="ss-tab-content">
+											   Social Media Boost significa “Virtualização” com o termo nosso painel adaptado ao nosso idioma. Virtualização; significa levantar a hipótese de que as contas de mídia social têm um determinado público. Levando em conta a questão da percepção visual dos perfis mostrados como Assunção (Virtualização), é comprovado a cada dia por nossos aplicativos que as contas de mídia social podem atingir os objetivos que desejam alcançar com mais facilidade.
+											</div>
+										 </div>
+										 <!-- home-ss-tab end -->
+										 <div class="home-ss-tab">
+											<div class="ss-tab-head">
+											   <div class="row">
+												  <div class="col">
+													Minha conta está em risco?
+												  </div>
+												  <div class="col-auto align-self-center right-p">
+													 <i class="fas fa-plus"></i>
+													 <i class="fas fa-minus"></i>
+												  </div>
+											   </div>
+											</div>
+											<div class="ss-tab-content">
+											   Registramos e observamos o efeito dos pedidos feitos através do nosso painel nas contas das redes sociais momento a momento. Queremos que você saiba que desde que nosso painel foi colocado em prática, não observamos nenhum risco nas contas a não ser que haja abuso por parte de nossos usuários. No entanto, gostaríamos que você soubesse que nosso painel não se responsabiliza por quaisquer problemas que possam ocorrer.
+											</div>
+										 </div>
+										 <!-- home-ss-tab end -->
+										 <div class="home-ss-tab">
+											<div class="ss-tab-head">
+											   <div class="row">
+												  <div class="col">
+													 Qual é o efeito na minha conta?
+												  </div>
+												  <div class="col-auto align-self-center right-p">
+													 <i class="fas fa-plus"></i>
+													 <i class="fas fa-minus"></i>
+												  </div>
+											   </div>
+											</div>
+											<div class="ss-tab-content">
+											   Você pode ter certeza de que verá o efeito se acompanhar o andamento de maneira controlada e regular nos pedidos que fizer através do nosso painel. Se precisarmos explicar com alguns exemplos; As postagens que você compartilha no Instagram vão para a seção "Descobrir". Isso permitirá que sua postagem alcance mais usuários do Instagram. Para outro exemplo, é mais provável que você apareça na seção "Recomendado" dos vídeos que compartilha no Youtube. Isso ajudará sua postagem de vídeo a ser vista por mais usuários do Youtube.
+											</div>
+										 </div>
+										 <!-- home-ss-tab end -->
+										 <div class="home-ss-tab">
+											<div class="ss-tab-head">
+											   <div class="row">
+												  <div class="col">
+													 Como criar uma solicitação de suporte?
+												  </div>
+												  <div class="col-auto align-self-center right-p">
+													 <i class="fas fa-plus"></i>
+													 <i class="fas fa-minus"></i>
+												  </div>
+											   </div>
+											</div>
+											<div class="ss-tab-content">
+											   Se estiver fazendo login com um computador desktop, clique no ícone "Centro de suporte" no menu à esquerda, se estiver fazendo login com um computador móvel, clique no botão de menu no canto superior direito e clique no botão que diz "Centro de suporte". Na página que é aberta, selecione o tópico para o qual você deseja criar uma solicitação de suporte. Em seguida, preencha os campos obrigatórios e clique no botão "Criar solicitação de suporte".
+											</div>
+										 </div>
+										 <!-- home-ss-tab end -->
+										 <div class="home-ss-tab">
+											<div class="ss-tab-head">
+											   <div class="row">
+												  <div class="col">
+													Como faço para carregar o saldo?
+												  </div>
+												  <div class="col-auto align-self-center right-p">
+													 <i class="fas fa-plus"></i>
+													 <i class="fas fa-minus"></i>
+												  </div>
+											   </div>
+											</div>
+											<div class="ss-tab-content">
+											  Após concluir com sucesso o processo de registro através do nosso painel, clique no ícone “Adicionar Saldo” no menu à esquerda se estiver fazendo login com um computador desktop, se estiver fazendo login com um celular clique no botão de menu no canto superior direito, em seguida, clique no botão que diz "Adicionar saldo". A partir desta página, você pode pagar com Pix 24 horas por dia, 7 dias por semana, sem taxa.
+											</div>
+										 </div>
+										 <!-- home-ss-tab end -->
+										 <div class="home-ss-tab">
+											<div class="ss-tab-head">
+											   <div class="row">
+												  <div class="col">
+													 Como posso encomendar?
+												  </div>
+												  <div class="col-auto align-self-center right-p">
+													 <i class="fas fa-plus"></i>
+													 <i class="fas fa-minus"></i>
+												  </div>
+											   </div>
+											</div>
+											<div class="ss-tab-content">
+											  Se você estiver fazendo login com um computador desktop, clique no ícone "Novo Pedido" no menu à esquerda, se estiver fazendo login com um computador móvel, clique no botão de menu no canto superior direito e clique no botão que diz "Novo Pedido". Todos os serviços pertencentes ao nosso painel podem ser encontrados na seção "Categorias" da página que se abre. Selecione a categoria que deseja solicitar neste menu. Em seguida, selecione o serviço que deseja solicitar no menu "Serviço". O preço escrito no serviço que você escolheu é o preço de 1000 peças. Depois de certificar-se de ter lido a seção "Descrição do Serviço" em detalhes, escreva o tipo de link especificado na descrição onde diz "Link". Em seguida, escreva um valor entre os valores máximo ou mínimo. você pode dar desse serviço na seção de quantidade. Após concluir essas operações, clique no botão "Fazer pedido". Seu pedido será concluído dentro do prazo especificado na seção de descrição.
+											</div>
+										 </div>
+										 <!-- home-ss-tab end -->
+									  </div>
+                                       </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </section>
+                  </div>
+                  <!-- page-content end -->
+               </div>
+               <!-- app-content -->
+            </div>
+         </div>
+
+      </div>
+
+{% include 'footer.twig' %}

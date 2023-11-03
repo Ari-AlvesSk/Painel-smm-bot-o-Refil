@@ -1,0 +1,187 @@
+{% include 'header.twig' %}
+<div class="col-lg-12">
+   <div class="well">
+      <div class="container-fluid">
+         <div class="row">
+           <ul class="nav nav-pills ">
+        <li {% if 'all' == status %}  class="active" {% endif %} ><a href="subscriptions">{{ lang['subscriptions.status.all'] }}</a></li>
+        <li {% if 'active' == status %}  class="active" {% endif %}><a href="subscriptions/active">{{ lang['subscriptions.status.active'] }}</a></li>
+        <li {% if 'paused' == status %}  class="active" {% endif %}><a href="subscriptions/paused">{{ lang['subscriptions.status.paused'] }}</a></li>
+        <li {% if 'completed' == status %}  class="active" {% endif %}><a href="subscriptions/completed">{{ lang['subscriptions.status.completed'] }}</a></li>
+        <li {% if 'expired' == status %}  class="active" {% endif %}><a href="subscriptions/expired">{{ lang['subscriptions.status.expired'] }}</a></li>
+        <li {% if 'canceled' == status %}  class="active" {% endif %}><a href="subscriptions/canceled">{{ lang['subscriptions.status.canceled'] }}</a></li>
+        <li class="pull-right search">
+          <form action="" method="get">
+            <div class="input-group">
+              <input type="text" name="search" class="form-control" value="{{ search }}" placeholder="Siparişleri ara">
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i></button>
+              </span>
+            </div>
+          </form>
+        </li>
+      </ul>
+         </div>
+      </div>
+   </div>
+</div>
+
+<div class="masaustu">
+    <div class="col-lg-12">
+      <div class="well well-float">
+<table class="rwd-table table table-striped table-sm ">
+          <thead class="thead-dark">
+            <tr>
+            <th>{{ lang['subscriptions.id'] }}</th>
+            <th>{{ lang['subscriptions.username'] }}</th>
+            <th>{{ lang['subscriptions.quantity'] }}</th>
+            <th>{{ lang['subscriptions.posts'] }}</th>
+            <th>{{ lang['subscriptions.delay'] }}</th>
+            <th>{{ lang['subscriptions.service'] }}</th>
+            <th>{{ lang['subscriptions.status'] }}</th>
+            <th>{{ lang['subscriptions.created'] }}</th>
+            <th>{{ lang['subscriptions.updated'] }}</th>
+            <th>{{ lang['subscriptions.expiry'] }}</th>
+            <th></th>
+            </tr>
+          </thead>
+          <tbody>
+
+            {% for order in orders %}
+              <tr>
+                <td>{{ order['id'] }}</td>
+                <td class="link">{{ order['link'] }}</td>
+                <td class="nowrap">{% if order['quantity_min'] == order['quantity_max'] %}{{ order['quantity_max']}}{% else %}{{ order['quantity_min'] }}-{{ order['quantity_max'] }}{% endif %}</td>
+                <td class="nowrap">
+                  {% if order['current_count'] %}
+                    <a href="orders?subscription={{ order['id'] }}">{{ order['current_count'] }}</a>
+                  {% else %}
+                    {{ order['current_count'] }}
+  								{% endif %}
+                  / {{ order['posts'] }}</td>
+                <td>{{ order['delay'] }}</td>
+                <td>{{ order['service'] }}</td>
+                <td>{{ order['status_name'] }}</td>
+                <td><span class="nowrap">{{ order['date_created'] }}</span></td>
+                <td><span class="nowrap">{{ order['date_updated'] }}</span></td>
+                <td><span class="nowrap">{{ order['date_expiry'] }}</span></td>
+                <td>
+                  {% if order['status'] == "active" %}
+                    <a href="subscriptions/pause/{{order['id']}}" class="btn btn-primary btn-xs"><font style="color:white">{{ lang['subscriptions.button.pause'] }}</font></a>
+                  {% endif %}
+                  {% if order['status'] == "paused" %}
+                    <a href="subscriptions/resume/{{order['id']}}" class="btn btn-primary btn-xs"><font style="color:white">{{ lang['subscriptions.button.unpause'] }}</font></a>
+                    <a href="subscriptions/stop/{{order['id']}}" class="btn btn-default btn-xs">{{ lang['subscriptions.button.cancel'] }}</a>
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+
+          </tbody>
+        </table>
+      </div>
+</div>
+</div>
+<div class="mobil">
+
+
+     {% for order in orders %}
+
+  <div class="col-lg-3 col-md-3 col-xs-12">
+                      <div class="well">
+                          
+        <div class="content">
+                 <div class="element-box" >
+        
+        
+           <div class="element-box">        
+                     <center>
+                    <font class="three-dot" style="text-align: center;font-size: 14px;"><b><strong style="color: #c7c7c7;">ID:</strong> #{{ order['id'] }}</b><br>
+                    <strong style="color: #c7c7c7;">{{ lang['subscriptions.service'] }}:</strong> <strong>{{ order['service'] }}</strong>
+                    <br><strong style="color: #c7c7c7;">{{ lang['subscriptions.username'] }}:</strong> <strong>{{ order['link'] }}</strong><br>
+                     <strong style="color: #c7c7c7;">{{ lang['subscriptions.posts'] }}:</strong><strong> {% if order['current_count'] %}
+                    <a href="orders?subscription={{ order['id'] }}">{{ order['current_count'] }}</a>
+                  {% else %}
+                    {{ order['current_count'] }}
+  								{% endif %}
+                  / {{ order['posts'] }}</strong><br>
+                     <strong style="color: #c7c7c7;">{{ lang['subscriptions.quantity'] }}:</strong><strong> {% if order['quantity_min'] == order['quantity_max'] %}{{ order['quantity_max']}}{% else %}{{ order['quantity_min'] }}-{{ order['quantity_max'] }}{% endif %}</strong><br>
+                     <strong style="color: #c7c7c7;">{{ lang['subscriptions.delay'] }}:</strong><strong> {{ order['delay'] }}</strong><br>
+                     <strong style="color: #c7c7c7;">{{ lang['subscriptions.created'] }}:</strong><strong> {{ order['date_created'] }}</strong><br>
+                     <strong style="color: #c7c7c7;">{{ lang['subscriptions.updated'] }}:</strong><strong> {{ order['date_updated'] }}</strong><br>
+                     <strong style="color: #c7c7c7;">{{ lang['subscriptions.expiry'] }}:</strong><strong> {{ order['date_expiry'] }}</strong><br><br>
+                     
+                     {% if order['status'] == "active" %}
+                    <a href="subscriptions/pause/{{order['id']}}" class="btn btn-primary btn-xs"><font style="color:white">{{ lang['subscriptions.button.pause'] }}</font></a>
+                  {% endif %}
+                  {% if order['status'] == "paused" %}
+                    <a href="subscriptions/resume/{{order['id']}}" class="btn btn-primary btn-xs"><font style="color:white">{{ lang['subscriptions.button.unpause'] }}</font></a>
+                    <a href="subscriptions/stop/{{order['id']}}" class="btn btn-default btn-xs">{{ lang['subscriptions.button.cancel'] }}</a>
+                  {% endif %}</font>
+                    </center>
+        <br>
+         <div class="progress">
+             <div style='background-color:#00d8a6;color:black;font-weight:Bold;width:100%' class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+                {{ order['status_name'] }}
+              </div>
+            </div>
+            <center>
+                <font style="text-align: center;"><small style="color: #c7c7c7;font-size: 10px;">{{ order['date'] }}</small></font>
+            </center>
+            </div>
+            </div>
+            </div>
+            </div>
+    </div>
+      {% endfor %}
+    </div>
+
+
+
+      {% if pagination["count"] > 1 %}
+        <ul class="pagination">
+
+          {% if pagination["current"] != 1 %}
+            <li>
+              <a href="subscriptions/{{ status }}/{{ pagination["previous"] }}{% if search %}?search={{ search }}{% endif %}" aria-label="Previous">
+                <span aria-hidden="true">«</span>
+              </a>
+            </li>
+          {% endif %}
+
+          {% set r, l = 3, 3 %}
+
+          {% if pagination['current'] == 1 %}
+            {% set r = 7 %}
+          {% endif %}
+
+          {% if pagination['current'] == 2 %}
+            {% set r = 5 %}
+          {% endif %}
+
+          {% if pagination['current'] >= pagination['count'] %}
+            {% set l = 5 %}
+          {% endif %}
+
+          {% for page in 1..pagination["count"] %}
+            {% if page >= (pagination['current']-l) and page <= (pagination['current']+r) %}
+              <li{% if page == pagination['current'] %} class="active" {%endif%}><a href="subscriptions/{{ status }}/{{ page }}{% if search %}?search={{ search }}{% endif %}">{{ page }}</a></li>
+            {%endif%}
+          {% endfor %}
+
+          {% if pagination['current'] < pagination['count'] %}
+            <li>
+              <a href="subscriptions/{{ status }}/{{ pagination['next'] }}{% if search %}?search={{ search }}{% endif %}" aria-label="Next">
+                <span aria-hidden="true">»</span>
+              </a>
+            </li>
+          {% endif %}
+
+        </ul>
+      {% endif %}
+
+    </div>
+  </div>
+</div>
+
+{% include 'footer.twig' %}

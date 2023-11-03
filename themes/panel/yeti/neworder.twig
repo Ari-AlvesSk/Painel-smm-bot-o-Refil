@@ -1,0 +1,308 @@
+{% include 'header.twig' %}
+
+         <div class="app-content">
+            <!-- page-content -->
+            <div class="container-fluid">
+               <div class="row mt-4">
+                  <div class="col-lg-12">
+                     <section class="dash-home-status">
+                        <div class="row">
+                           <div class="col-lg-3 col-md-6 col-6 mb-4 mb-lg-0">
+                              <div class="dhs-item dhs-item--1">
+                                 <div class="row">
+                                    <div class="col-auto align-self-center d-none d-md-block">
+                                       <div class="dhs-item--icon">
+                                          <img src="../img/badge1.png" class="dhs-item--icon-img" alt="">
+                                       </div>
+                                    </div>
+                                    <div class="col align-self-center">
+                                       <div class="dhs-item--title">
+                                          Saldo atual
+                                       </div>
+                                       <div class="dhs-item--text">
+                                        R$ {{ user['balance'] }}
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <!-- row end -->
+                              </div>
+                              <!-- dhs-item end -->
+                           </div>
+                           <!-- dhs-item col end -->
+                           <div class="col-lg-3 col-md-6 col-6 mb-4 mb-lg-0">
+                              <div class="dhs-item dhs-item--2">
+                                 <div class="row">
+                                    <div class="col-auto align-self-center d-none d-md-block">
+                                       <div class="dhs-item--icon">
+                                          <img src="../img/badge2.png" class="dhs-item--icon-img" alt="">
+                                       </div>
+                                    </div>
+                                    <div class="col align-self-center">
+                                       <div class="dhs-item--title">
+                                          Valor gasto
+                                       </div>
+                                       <div class="dhs-item--text">
+                                         R$ {{ user['spent'] }}
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <!-- row end -->
+                              </div>
+                              <!-- dhs-item end -->
+                           </div>
+                           <!-- dhs-item col end -->
+                           <div class="col-lg-3 col-md-6 col-6 mb-4 mb-lg-0">
+                              <div class="dhs-item dhs-item--3">
+                                 <div class="row">
+                                    <div class="col-auto align-self-center d-none d-md-block">
+                                       <div class="dhs-item--icon">
+                                          <img src="../img/badge3.png" class="dhs-item--icon-img" alt="">
+                                       </div>
+                                    </div>
+                                    <div class="col align-self-center">
+                                       <div class="dhs-item--title">
+                                         Status do saldo
+                                       </div>
+											{% if user['balance'] > 10 %}
+												<div class="dhs-item--text">
+													NORMAL
+												</div>
+											{% else %}
+												<div class="dhs-item--text">
+													BAIXO
+												</div>
+											{% endif %}
+                                    </div>
+                                 </div>
+                                 <!-- row end -->
+                              </div>
+                              <!-- dhs-item end -->
+                           </div>
+                           <!-- dhs-item col end -->
+                           <div class="col-lg-3 col-md-6 col-6 mb-4 mb-lg-0">
+                              <div class="dhs-item dhs-item--4">
+                                 <div class="row">
+                                    <div class="col-auto align-self-center d-none d-md-block">
+                                       <div class="dhs-item--icon">
+                                          <img src="../img/badge4.png" class="dhs-item--icon-img" alt="">
+                                       </div>
+                                    </div>
+                                    <div class="col align-self-center">
+                                       <div class="dhs-item--title">
+                                         
+Todos Pedidos
+
+                                       </div>
+                                       <div class="dhs-item--text">
+                                          <span id="accStats"></span>
+										  <p id="spentBalance" style="display:none">             <h3 style="text-align: center; "><div class="dhs-item--text">
+						{{ ordersCount }}
+										  
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <!-- row end -->
+                              </div>
+                              <!-- dhs-item end -->
+                           </div>
+                           <!-- dhs-item col end -->
+                        </div>
+                        <!-- dhs items row end -->
+                     </section>
+                     <section class="order-side">
+                        <div class="row">
+                           <div class="col-lg-7 col-12 mb-5 mb-lg-0">
+                              <div class="d-card dc-dblue">
+                                 <div class="d-card-body" id="dc-body">
+									{% if error %}
+									  <div class="alert alert-dismissible alert-danger">
+										{{ errorText }}
+									  </div>
+									{% endif %}
+
+									{% if data["order"]["success"] == 1 %}
+									  <div class="alert alert-dismissible alert-success">
+										  <strong> {{ lang["neworder.success.id"] }}: </strong> {{ data['order']['id'] }} <br>
+										  <strong> {{ lang["neworder.success.service"] }}: </strong> {{ data['order']['service'] }} <br>
+										  <strong> {{ lang["neworder.success.link"] }}: </strong> {{ data['order']['link'] }} <br>
+										  <strong> {{ lang["neworder.success.quantity"] }}: </strong> {{ data['order']['quantity'] }} <br>
+										  <strong> {{ lang["neworder.success.charge"] }}: </strong> {{ data['order']['price'] }} <br>
+										  <strong> {{ lang["neworder.success.balance"] }}: </strong>{{ data['order']['balance'] }} <br>
+									  </div>
+									{% endif %}
+									{% if data["order"]["success"] == 2 %}
+									  <div class="alert alert-dismissible alert-success">
+										 <strong> {{ lang["neworder.success.id"] }}: </strong> {{ data['order']['id'] }} <br>
+										 <strong> {{ lang["neworder.success.service"] }}: </strong> {{ data['order']['service'] }} <br>
+										 <strong> {{ lang["neworder.success.username"] }}: </strong> {{ data['order']['link'] }} <br>
+										 <strong> {{ lang["neworder.success.quantity"] }}: </strong> {{ data['order']['min'] }} - {{ data['order']['max'] }} <br>
+										 <strong> {{ lang["neworder.success.posts"] }}: </strong> {{ data['order']['posts'] }} <br>
+										 <strong> {{ lang["neworder.success.delay"] }}: </strong>{{ data['order']['delay'] }} <br>
+									   </div>
+									{% endif %}						 
+                                     <form method="post" action="/">
+          {% if categories %}
+            <div class="form-group">
+                <label for="orderform-category" class="control-label">{{ lang["neworder.category"] }}</label>
+
+                <select class="form-control" id="neworder_category" name="categories" style="display: none">
+                  {% for category in categories %}
+                  <option {% if 1 == loop.index %} selected {% endif %} value="{{ category['category_id'] }}" >{{ category["category_name"] }}</option>
+                  {% endfor %}
+                </select>
+
+                <div class="dropdown">
+                  <button class="form-control text-left" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
+                    <span id="categoryTitle"></span>
+                    <i class="fas fa-chevron-down float-right" aria-hidden="true"></i>
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenu2" id="category-drop">
+                  </div>
+                </div>
+            </div>
+          {% endif %}
+                                       
+                                       
+                                       <!-- form-group end -->
+                                       <div class="form-group mb-4">
+                                          <label id="orderform-service" for="orderform-service" class="control-label" data-label="{{ lang["neworder.service"] }}">{{ lang["neworder.service"] }}</label>
+                                          <select class="form-control" id="neworder_services" name="services" style="display: none;"> </select>
+
+											<div class="dropdown">
+												<button class="form-control text-left" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
+													<span id="serviceTitle"></span>
+													<i class="fa fa-caret-down float-right" aria-hidden="true"></i>
+												</button>
+												<div class="dropdown-menu" aria-labelledby="dropdownMenu2" id="orders-drop">
+
+												</div>
+											</div>
+                                       </div>
+
+                                       <!-- form-group end -->
+									   
+									   <div id="neworder_fields"></div>
+									   
+ 
+                                       <div class="form-group mb-4">
+                                          <label>
+                                          Valor
+                                          </label>
+                                          <div class="input-group">
+                                             <div class="input-group-prepend">
+                                                <div class="input-group-text text-center">
+                                                   <i class="fas fa-database"></i>
+                                                </div>
+                                             </div>
+                                             <input type="text" class="form-control" id="charge" value="" placeholder="R$0.00" readonly="" />
+                                          </div>
+                                       </div>
+                                       <!-- form-group end -->
+		   
+										{% if neworderTerms %}
+										  <div class="checkbox">
+											<label>
+											  <input type="checkbox" name="neworder_check">{{ lang['neworder.recheck'] }}
+											</label>
+										  </div>
+										{% endif %}
+									  
+                                       <button type="submit" class="btn btn-primary btn-lg btn-block mb-4">Fazer o Pedido</button>
+                                    </form>
+                                 </div>
+                              </div>
+                              <!-- d-card end -->
+                           </div>
+                           <!-- col item end-->
+                           <div class="col-lg-5 col-12 mb-5 mb-lg-0">
+                              <div class="d-card dc-dblue">
+                                 <ul class="nav nav-pills fastside">
+                                    <li class="nav-item col-6 mb-2" style="padding:0">
+                                       <a class="nav-link active" data-toggle="pill" href="#timeline" role="tab" aria-controls="pills-timeline" aria-selected="true"><i class="fas fa-random mr-1"></i>Anúncios e Avisos</a>
+                                    </li>
+                                    <li class="nav-item col-6 mb-2" style="padding:0">
+                                       <a class="nav-link second" data-toggle="pill" href="#fastdesk" role="tab" aria-controls="pills-fastdesk" aria-selected="false"><i class="fas fa-headset mr-1"></i>Suporte Rápido</a>
+                                    </li>
+                                 </ul>
+                                 <div class="d-card-body" id="dc2-body" style="overflow-y: auto;"> 
+                                    <div class="tab-content mt-3">
+                                       <div class="tab-pane fade active show" id="timeline" role="tabpanel" aria-labelledby="timeline">
+                                          <ul class="notification">
+											 {% for new in newsList %}
+                                             <li>
+                                                <div class="icons">
+                                                   <img width="30" class="mr-1" src="/img/icons/{{ new['news_icon'] }}.png">
+                                                </div>
+                                                <div class="text">
+                                                   <div class="title"><a href="">{{ new['news_title'] }}</a></div>
+                                                   <div class="text"> {{ new['news_content'] }}</div>
+                                                   <div class="date mt-1"><i class="fas fa-clock"></i> {{ new['news_date'] }} </div>
+                                                </div>
+                                             </li>
+											 {% endfor %} 
+                                          </ul>
+                                       </div>
+                                       <div class="tab-pane fade" id="fastdesk" role="tabpanel" aria-labelledby="fastdesk-tab">
+                  <form method="post" action="tickets" id="ticketsend">
+                    <div class="form-group">
+                      <label class="ticket-label">{{ lang['tickets.subject'] }}</label>
+                      <div class="select">
+                        <select class="form-control" id="Konu" name="subject" onchange="handleOrderType(this)">
+                          <option value="Problema com Pedido" selected="">Problema com Pedido</option>
+                          <option value="Problema com Pagamento">Problema com Pagamento</option>
+                          <option value="Outro Problema">Outro Problema</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group" id="order-grubu">
+                      <label class="mt-3">ID do pedido</label>
+                      <input type="text" class="form-control" id="orderid" placeholder="Para vários pedidos separe por virgula (EX: 100,1001,3246)" />
+                      <label class="mt-3">Declare seu problema</label>
+                      <div class="select">
+                        <select class="form-control" id="request">
+                          <option value="O pedido não foi enviado">O pedido não foi enviado</option>
+                          <option value="Pedido está lento">Pedido está lento</option>
+                          <option value="Outro Problema">Outro Problema</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group" id="payment-grubu" style="display: none;">
+                      <label class="mt-3">Declare seu problema</label>
+                      <div class="select">
+                        <select class="form-control" id="payment">
+                          <option value="saldo não foi confirmado." selected="">Meu saldo não foi confirmado</option>
+                          <option value="Não consigo adicionar saldo.">Não consigo adicionar saldo</option>
+                          <option value="Outro Problema">Outro Problema</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="mt-3">{{ lang['tickets.message'] }}<span id="other-grubu"></span></label>
+                      <textarea name="message" class="form-control mb-3" rows="4" cols="50" id="mesaj" placeholder="Faça sua descrição o mais detalhada possível para que possamos ajudá-lo."></textarea>
+                      <input type="hidden" id="tmessage" name="message">
+                    </div>
+                    <div class="form-group">
+                      <div id="alertArea" class="flash flash-hata mb-3" role="alert" style=""></div>
+                      <div id="successArea" class="flash flash-basarili mb-3" role="alert" style="">Seu apoio chegou até nós! Você será informado o mais breve possível.</div>
+                      <button id="send-ticket" type="button" class="btn btn-secondary btn-lg btn-block mt-4"> {{ lang['tickets.button'] }}</button>
+                    </div>
+                  </form>
+       
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </section>
+                  </div>
+                  <!-- page-content end -->
+               </div>
+               <!-- app-content -->
+            </div>
+         </div>
+
+      </div>
+
+
+{% include 'footer.twig' %}

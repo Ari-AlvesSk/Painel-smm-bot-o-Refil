@@ -1,0 +1,61 @@
+{% include 'header.twig' %}
+
+<div class="content">
+	<div class="container-fluid container-fixed">
+		<div class="row">
+          {% if contentText %}
+            <div class="col-md-8 col-md-offset-2">
+              <div class="well ">
+                {{ contentText }}
+              </div>
+            </div>
+            {% endif %}
+			<div class="col-md-8 col-md-offset-2">
+				<div class="well well-float">
+					<table class="table rwd-table">
+						<thead>
+							<tr>
+								<th>{{ lang['affiliates.url'] }}</th>
+								<th>{{ lang['affiliates.bonus'] }}</th>
+								<th>{{ lang['affiliates.type'] }}</th>
+								<th>{{ lang['affiliates.min'] }}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>{{ site['url'] }}/ref/{{ user["referral_code"] }}</td>
+								<td>{{ settings["ref_bonus"] }}%</td>
+								<td>{% if settings["ref_type"] == 1 %}{{ lang['affiliates.type.first'] }}{% else %}{{ lang['affiliates.type.all'] }}{% endif %}</td>
+								<td>{{ settings['ref_min'] }}{{ site['currency'] }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="col-md-8 col-md-offset-2">
+				<div class="well well-float">
+					<table class="table rwd-table">
+						<thead>
+							<tr>
+								<th>{{ lang['affiliates.click'] }}</th>
+								<th>{{ lang['affiliates.total.user'] }}</th>
+								<th>{{ lang['affiliates.total.payment'] }}</th>
+								<th>{{ lang['affiliates.total.win'] }}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+							    <td>{{ user['total_click'] }}</td>
+								<td>{{ refCount }}</td>
+								<td>{{ user['reforder'] }}{{ site['currency'] }}</td>
+								<td>{{ user['refchar'] }}{{ site['currency'] }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% include 'footer.twig' %}

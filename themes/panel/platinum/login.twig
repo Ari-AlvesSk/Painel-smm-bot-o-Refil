@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+{% for lang in site['languages'] %}
+{% if lang['active'] %}
+<html lang="{{ lang['code'] }}">
+{% endif %}
+{% endfor %}
+<head>
+  <base href="{{ site['url'] }}/">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }}</title>
+  <meta name="keywords" content="{{ keywords }}">
+  <meta name="description" content="{{ description }}">
+  {% if site['favicon'] %}
+    <link rel="shortcut icon" type="image/ico" href="{{ site['favicon'] }}" />
+  {% endif %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  
+    {{ headerCode }}
+     
+    <!--google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700%7COpen+Sans&display=swap"
+          rel="stylesheet">
+
+    <!--Bootstrap css-->
+    <link rel="stylesheet" href="assets/platinum/css/bootstrap.min.css">
+    <!--Magnific popup css-->
+    <link rel="stylesheet" href="assets/platinum/css/magnific-popup.css">
+    <!--Themify icon css-->
+    <link rel="stylesheet" href="assets/platinum/css/themify-icons.css">
+    <!--animated css-->
+    <link rel="stylesheet" href="assets/platinum/css/animate.min.css">
+    <!--ytplayer css-->
+    <link rel="stylesheet" href="assets/platinum/css/jquery.mb.YTPlayer.min.css">
+    <!--Owl carousel css-->
+    <link rel="stylesheet" href="assets/platinum/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/platinum/css/owl.theme.default.min.css">
+    <!--custom css-->
+    <link rel="stylesheet" href="assets/platinum/css/style.css">
+    <!--responsive css-->
+    <link rel="stylesheet" href="assets/platinum/css/responsive.css">
+
+</head>
+<body>
+
+
+<!--loader start-->
+<div id="preloader">
+    <div class="loader1">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</div>
+<!--loader end-->
+
+<!--header section start-->
+<header class="header">
+    <!--start navbar-->
+    <nav class="navbar navbar-expand-lg fixed-top bg-transparent">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                 {% if site["logo"] %}
+            <img src="{{ site['logo'] }}" alt="{{ site["site_name"] }}" title="{{ site["site_name"] }}" width="%100" height="50">
+          {% else %}
+            {{ site["site_name"] }}
+          {% endif %}
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="ti-menu"></span>
+            </button>
+            <div class="collapse navbar-collapse h-auto" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto menu">
+                  <li {% if active_menu == "auth" %} class="active" {% endif %}>
+          <a href="/" class="page-scroll">{{ lang['signin.title'] }}</a>
+        </li> 
+        {% if servicesPage %}
+        <li {% if active_menu == "services" %} class="active" {% endif %}>
+          <a class="page-scroll" href="/services">{{ lang['services.title'] }}</a>
+        </li>
+        {% endif %}
+        {% if registerPage %}
+        <li {% if active_menu == "signup" %} class="active" {% endif %}>
+          <a class="page-scroll" href="/signup">{{ lang['signup.title'] }}</a>
+        </li>
+        {% endif %}
+        {% if blogPage %}
+        <li {% if active_menu == "blog" %} class="active" {% endif %}>
+          <a class="page-scroll" href="/blog">{{ lang['blog.title'] }}</a>
+        </li>
+        {% endif %}
+        {% if faqPage %}
+        <li {% if active_menu == "faq" %} class="active" {% endif %}>
+          <a class="page-scroll" href="/faq">{{ lang['faq.title'] }}</a>
+        </li>
+        {% endif %}
+        {% if termsPage %}
+        <li {% if active_menu == "terms" %} class="active" {% endif %}>
+          <a class="page-scroll" href="/terms">{{ lang['terms.title'] }}</a>
+        </li>
+        {% endif %}
+        {% if apiPage %}
+        <li {% if active_menu == "api" %} class="active" {% endif %}>
+          <a class="page-scroll" href="/api">{{ lang['api.title'] }}</a>
+        </li>
+        {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<!--header section end-->
+
+
+<!--body content wrap start-->
+<div class="main">
+
+    <!--hero section start-->
+    <section class="hero-equal-height pt-100 gradient-overlay"
+             style="background: url('assets/platinum/img/hero-bg-4.jpg')no-repeat center center / cover">
+        <div class="container">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-md-6 col-lg-6">
+                    <div class="hero-content-left text-white pb-100 mt-lg-0 mt-md-5 mt-sm-5 mt-5">
+                        <h1 class="text-white">Türkiye'nin En Gelişmiş SMM Paneli</h1>
+                        <p class="lead">
+                            7/24 Tam otomatik alt yapısı sayesinde bütün işlemlerinizi hızlı ve kolayca halledebileceğiniz panelimize hoşgeldiniz.
+                        </p>
+                        
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-5">
+                    <div class="sign-up-form-wrap position-relative z-index shadow-lg rounded p-5 w-100 gray-light-bg">
+                        <div class="sign-up-form-header text-center mb-4">
+                            <h4 class="mb-0">{{ site['site_name'] }}’e Hoş Geldiniz! </h4>
+                            <p>Türkiye’nin En Hızlı Sosyal Medya Paneli</p>
+                        </div>
+                        <form method="post" action="" class="login-signup-form">
+                                  {% if errorText %}
+        <div class="alert alert-dismissible alert-danger">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          {{ errorText }}
+        </div>
+      {% endif %}
+      {% if successText %}
+        <div class="alert alert-dismissible alert-success">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          {{ successText }}
+        </div>
+      {% endif %}
+                              <div class="form-group">
+            <label for="username" class="control-label">{{ lang['signin.username'] }}</label>
+            <input type="text" class="form-control" name="username">
+          </div>
+          <div class="form-group  form-group__password">
+            <label for="password" class="control-label">{{ lang['signin.password'] }}</label>
+            <input type="password" class="form-control" name="password">
+            {% if resetPage %}
+             <a href="resetpassword" class="forgot-password"> {{ lang['signin.password.lost'] }}</a>
+            {% endif %}
+       <br>
+<b>Üyeliğiniz yok ise hemen <a href="/signup"> buraya tıklayarak  </a> ücretsiz üye olabilirsiniz! </b>
+			
+
+
+	   </div>
+
+          {% if captcha %}
+            <div class="form-group">
+              <div class="g-recaptcha" data-sitekey="{{ captchaKey }}"></div>
+            </div>
+          {% endif %}
+
+          <button type="submit" class="btn btn-primary click">{{ lang['signin.button'] }}</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="shape-bottom overflow-hidden">
+            <img src="assets/platinum/img/hero-shape.svg" alt="shape" class="bottom-shape">
+			
+			   
+        </div>
+    </section>
+    <!--hero section end-->
+
+    <!--how it work start-->
+    <section class="work-process-new ptb-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 col-lg-8">
+                    <div class="section-heading">
+                        <h4>Gelişmiş Ayrıcalıklar</h4>
+                      <h2>En Hızlı SMM Panel</h2>
+                        <p>Türkiye'nin en hızlı SMM Paneli ile hemen tanışın. Kalitenin keyfini çıkartın.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="work-process-wrap">
+                        <div class="single-work-process mt-lg-5 mt-md-5 mt-sm-5 mt-5">
+                            <div class="work-process-icon-wrap secondary-bg rounded">
+                                <i class="fa fa-pencil-square-o" style="font-size:44px;color:white"></i>
+                                <span class="process-step color-secondary white-bg shadow-sm">1</span>
+                            </div>
+                            <span class="work-process-divider"></span>
+                            <div class="work-process-content mt-4">
+                                <h5>Kayıt Ol</h5>
+                                <p>Sitemize üyelikler tamamen ücretsizdir ve her zaman ücretsiz kalacaktır.</p>
+                            </div>
+                        </div>
+                        <div class="single-work-process mt-lg-5 mt-md-5 mt-sm-5 mt-5">
+                            <div class="work-process-icon-wrap secondary-bg rounded">
+                                <i class="fa fa-credit-card-alt" style="font-size:44px;color:white"></i>
+                                <span class="process-step color-secondary white-bg shadow-sm">2</span>
+                            </div>
+                            <span class="work-process-divider"></span>
+                            <div class="work-process-content mt-4">
+                                <h5>Bakiye Yükle</h5>
+                                <p>3D Secure ile online ödeme yapabilir. Dilerseniz anlaşmalı bankalar üzerinden Havale ve EFT yapabilirsiniz.</p>
+                            </div>
+                        </div>
+                        <div class="single-work-process mt-lg-5 mt-md-5 mt-sm-5 mt-5">
+                            <div class="work-process-icon-wrap secondary-bg rounded">
+                                <i class="fa fa-shopping-basket" style="font-size:44px;color:white"></i>
+                                <span class="process-step color-secondary white-bg shadow-sm">3</span>
+                            </div>
+                            <span class="work-process-divider"></span>
+                            <div class="work-process-content mt-4">
+                                <h5>Sipariş Ver</h5>
+                                <p>İstediğiniz servisi seçip, formu doldurduktan sonra kolaylıkla sipariş verebilirsiniz.</p>
+                            </div>
+                        </div>
+                        <div class="single-work-process mt-lg-5 mt-md-5 mt-sm-5 mt-5">
+                            <div class="work-process-icon-wrap secondary-bg rounded">
+                                <i class="fa fa-star" style="font-size:44px;color:white"></i>
+                                <span class="process-step color-secondary white-bg shadow-sm">4</span>
+                            </div>
+                            <span class="work-process-divider"></span>
+                            <div class="work-process-content mt-4">
+                                <h5>Fenomen Ol!</h5>
+                                <p>Sosyal Medya da fenomen olmaya başlayın.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--how it work end-->
+
+    <!--features section start-->
+    <section id="features" class="feature-section ptb-100 gray-light-bg">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-9 col-lg-9">
+                    <div class="section-heading text-center mb-5">
+                        <h2>{{ site['site_name'] }}</h2>
+                        <p>Türkiye'nin en kaliteli SMM Panelinin öne çıkan özellikleri ile tanışın.</p>
+
+                    </div>
+                </div>
+            </div>
+
+            <!--feature new style start-->
+            <div class="row align-items-center">
+                <div class="col-lg-4 col-md-12">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="d-flex align-items-start mb-sm-0 mb-md-5 mb-lg-5">
+                                <span class="icon-sm color-1 color-1-bg p-3 mr-4 mt-1 rounded"><i class="fa fa-mobile-phone" style="font-size:43px"></i></span>
+                                <div class="icon-text">
+                                    <h5 class="mb-2">Responsive Uyumlu</h5>
+                                    <p>Mobil cihazlarınız üzerinde kolay kullanım sunar.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex align-items-start mb-sm-0 mb-md-5 mb-lg-5">
+                                <span class="icon-sm color-2 color-2-bg p-3 mr-4 mt-1 rounded"><i class="fa fa-language" style="font-size:35px"></i></span>
+                                <div class="icon-text">
+                                    <h5 class="mb-2">Multi Dil</h5>
+                                    <p>İstediğiniz dili seçip kullanabilirsiniz.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex align-items-start mb-sm-0 mb-md-5 mb-lg-5">
+                                <span class="ti-headphone-alt icon-sm color-5 color-5-bg p-3 mr-4 mt-1 rounded"></span>
+                                <div class="icon-text">
+                                    <h5 class="mb-2">7/24 Canlı Destek</h5>
+                                    <p>İstek,soru ve şikayetlerinizi bildirebilirsiniz.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12 d-none d-sm-none d-md-block d-lg-block">
+                    <div class="position-relative pb-md-5 py-lg-0">
+                        <img alt="Image placeholder" src="assets/img/phone-2.png" class="img-center img-fluid">
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="d-flex align-items-start mb-sm-0 mb-md-5 mb-lg-5">
+                                <span class="icon-sm color-4 color-4-bg p-3 mr-4 mt-1 rounded"><i class="fa fa-recycle" style="font-size:35px"></i></span>
+                                <div class="icon-text">
+                                    <h5 class="mb-2">Güncel Servisler</h5>
+                                    <p>Servislerimiz sürekli güncel ve aktiftir.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex align-items-start mb-sm-0 mb-md-5 mb-lg-5">
+                                <span class="icon-sm color-3 color-3-bg p-3 mr-4 mt-1 rounded"><i class="fa fa-heartbeat" style="font-size:35px"></i></span>
+                                <div class="icon-text">
+                                    <h5 class="mb-2">Kaliteli Servisler</h5>
+                                    <p>Sürekli test ettiğimiz kaliteli servisleri sizlere sunuyoruz.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex align-items-start mb-sm-0 mb-md-5 mb-lg-5">
+                                <span class="icon-sm color-6 color-6-bg p-3 mr-4 mt-1 rounded"><i class="fa fa-bolt" style="font-size:43px"></i></span>
+                                <div class="icon-text">
+                                    <h5 class="mb-2">Hızlı Servisler</h5>
+                                    <p>Hızlı başlayıp çabuk tamamlanan servisleri sunuyoruz.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--feature new style end-->
+        </div>
+    </section>
+    <!--features section end-->
+
+    <!--feature section tab style start-->
+    <section id="how-it-work" class="feature-tab-section ptb-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="feature-content-wrap">
+                        <ul class="nav nav-tabs feature-tab justify-content-center border-bottom-0" data-tabs="tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active h6 d-flex align-items-center" href="#tab6-1" data-toggle="tab">
+                                    <span class="d-inline-block color-1 mr-2 icon-sm p-1"><i class="fa fa-pencil-square-o" style="font-size:44px"></i></span>
+                                    Kayıt Ol
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link h6 d-flex align-items-center" href="#tab6-2" data-toggle="tab">
+                                    <span class="d-inline-block color-2 mr-2 icon-sm p-1"><i class="fa fa-credit-card-alt" style="font-size:44px"></i></span>
+                                    Bakiye Yükle
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link h6 d-flex align-items-center" href="#tab6-3" data-toggle="tab">
+                                    <span class="d-inline-block color-3 mr-2 icon-sm p-1"><i class="fa fa-shopping-basket" style="font-size:44px"></i></span>
+                                    Sipariş Ver
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link h6 d-flex align-items-center" href="#tab6-4" data-toggle="tab">
+                                    <span class="d-inline-block color-4 mr-2 icon-sm p-1"><i class="fa fa-star" style="font-size:44px"></i></span>
+                                    Fenomen Ol!
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content feature-tab-content">
+                            <div class="tab-pane active" id="tab6-1">
+                                <div class="row align-items-center justify-content-between pt-5">
+                                    <div class="col-md-5 col-lg-4">
+                                        <div class="tab-content-wrap">
+                                            <span class="h1 display-3 color-secondary font-weight-bold mb-3 d-block">01.</span>
+                                            <h3>Kayıt Nasıl Olunur?</h3>
+                                            <p>Sitemize üyelikler tamamen ücretsizdir ve her zaman ücretsiz kalacaktır.</p>
+                                            <p>Kayıt ol butonuna tıklayıp karşınıza çıkan kayıt formunu eksiksiz doldurmanız durumunda kaydınız başarılı bir şekilde gerçekleşir.</p>
+                                            <a href="signup" class="mt-3 d-flex align-items-center">Kayıt Olmak İçin Tıklayınız.<span class="ti-angle-right ml-2"></span></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-7">
+                                        <div class="img-wrap">
+                                            <img src="./assets/img/slider.png" alt="feature" class="img-fluid rounded"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab6-2">
+                                <div class="row align-items-center justify-content-between pt-5">
+                                    <div class="col-md-5 col-lg-4">
+                                        <div class="tab-content-wrap">
+                                            <span class="h1 display-3 color-secondary font-weight-bold mb-3 d-block">02.</span>
+                                            <h3>Bakiye Nasıl Yüklenir?</h3>
+                                            <p>3D Secure ile online ödeme yapabilir. Dilerseniz anlaşmalı bankalar üzerinden Havale ve EFT yapabilirsiniz.</p>
+                                            <p>Bakiye yükle butonuna tıklayıp karşınıza çıkan ödeme yöntemlerinden dilediğinizi seçerek bakiyenizi yükleyebilirsiniz. Online ödemeler anında yüklenir fakat Havale ve EFT ödemeleriniz için Ödeme Bildirimi oluşturmalısınız.</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-7">
+                                        <div class="img-wrap">
+                                            <img src="assets/img/phone-2.png" alt="feature" class="img-fluid rounded"/>
+                                         
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab6-3">
+                                <div class="row align-items-center justify-content-between pt-5">
+                                    <div class="col-md-5 col-lg-4">
+                                        <div class="tab-content-wrap">
+                                            <span class="h1 display-3 color-secondary font-weight-bold mb-3 d-block">03.</span>
+                                            <h3>Sipariş Nasıl Verilir?</h3>
+                                            <p>İstediğiniz servisi seçip, formu doldurduktan sonra kolaylıkla sipariş verebilirsiniz.
+
+</p>
+                                            <p>İstediğiniz kategoriyi ve servisi seçerek ilgili servisin açıklamasındaki örnek linki baz alarak sipariş vermek istediğiniz linki yazarak ve miktarını girerek siparişinizi verebilirsiniz.</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-7">
+                                        <div class="img-wrap">
+                                            <img src="assets/img/customers.png" alt="feature" class="img-fluid rounded"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab6-4">
+                                <div class="row align-items-center justify-content-between pt-5">
+                                    <div class="col-md-5 col-lg-4">
+                                        <div class="tab-content-wrap">
+                                            <span class="h1 display-3 color-secondary font-weight-bold mb-3 d-block">04.</span>
+                                            <h3>Fenomen Olun!</h3>
+                                            <p>Sosyal Medya da fenomen olmaya başlayın.</p>
+                                            <p>Satın almış olduğunuz etkileşimlerin hızlı bir şekilde teslim edilmesinin ardından sosyal medyada fenomen olabilir. Geniş kitlelere adınızı duyurabilirsiniz.</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-7">
+                                        <div class="img-wrap">
+                                            <img src="assets/img/home-image (1).png" alt="feature" class="img-fluid rounded"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--feature section tab style end-->
+
+
+    <!--testimonial section start-->
+    <section id="reviews" class="testimonial-section ptb-100 gray-light-bg">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-9 col-lg-8">
+                    <div class="section-heading mb-5 text-center">
+                        <h2>Müşteri Yorumları</h2>
+                        <p class="lead">
+                            10.000+ Mutlu Müşterinin Yorumları </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 col-lg-4">
+                    <div class="testimonial-single shadow-sm gray-light-bg rounded p-4">
+                        <blockquote>
+                            Güvenilir, kaliteli ve hızlı servisler ile her zaman müşteri memnuniyeti odaklı çalıştıkları için teşekkürler {{ site["site_name"] }}.
+                        </blockquote>
+                        <div class="client-ratting mt-2">
+                            <ul class="list-inline">
+                                <li class="list-inline-item"><span class="ti-star ratting-color"></span></li>
+                                <li class="list-inline-item"><span class="ti-star ratting-color"></span></li>
+                                <li class="list-inline-item"><span class="ti-star ratting-color"></span></li>
+                                <li class="list-inline-item"><span class="ti-star ratting-color"></span></li>
+                                <li class="list-inline-item"><span class="ti-star ratting-color"></span></li>
+                            </ul>
+                            <h6 class="font-weight-bold">5.0 <small class="font-weight-lighter">Yıldız</small></h6>
+                        </div>
+                    </div>
+                    <div class="client-info-wrap d-flex align-items-center mt-5">
+                        <div class="client-img mr-3">
+                            <img src="assets/platinum/img/client-1.jpg" alt="client" width="60" class="img-fluid rounded-circle shadow-sm"/>
+                        </div>
+                        <div class="client-info">
+                            <h5 class="mb-0">Abdullah Uçkun</h5>
+                            <p class="mb-0">R10.net</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4">
+                    <div class="testimonial-single shadow-sm gray-light-bg rounded p-4">
+                        <blockquote>
+                           {{ site["site_name"] }} ile çalışmaya başladığımdan beri hizmetlerinden son derece memnunum.
+                        </blockquote>
+                        <div class="client-ratting mt-2">
+                            <ul class="list-inline">
+                                <li class="list-inline-item"><span class="ti-star ratting-color"></span></li>
+                                <li class="list-inline-item"><span class="ti-star ratting-color"></span></li>
+                                <li class="list-inline-item"><span class="ti-star ratting-color"></span></li>
+                                <li class="list-inline-item"><span class="ti-star ratting-color"></span></li>
+                                <li class="list-inline-item"><span class="ti-star ratting-color"></span></li>
+                            </ul>
+                            <h6 class="font-weight-bold">5.0 <small class="font-weight-lighter">Yıldız</small></h6>
+                        </div>
+                    </div>
+                    <div class="client-info-wrap d-flex align-items-center mt-5">
+                        <div class="client-img mr-3">
+                            <img src="assets/platinum/img/client-2.jpg" alt="client" width="60" class="img-fluid rounded-circle shadow-sm"/>
+                        </div>
+                        <div class="client-info">
+                            <h5 class="mb-0">Dilara Kurt</h5>
+                            <p class="mb-0">Virgul.net</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4">
+                    <div class="testimonial-single shadow-sm gray-light-bg rounded p-4">
+                        <blockquote>
+                            İşini gerçekten hakkıyla yapan bir panel. Teşekkürler {{ site["site_name"] }}.
+                        </blockquote>
+                        <div class="client-ratting mt-2">
+                            <ul class="list-inline">
+                                <li class="list-inline-item"><span class="ti-star ratting-color"></span></li>
+                                <li class="list-inline-item"><span class="ti-star ratting-color"></span></li>
+                                <li class="list-inline-item"><span class="ti-star ratting-color"></span></li>
+                                <li class="list-inline-item"><span class="ti-star ratting-color"></span></li>
+                                <li class="list-inline-item"><span class="ti-star ratting-color"></span></li>
+                            </ul>
+                            <h6 class="font-weight-bold">5.0 <small class="font-weight-lighter">Yıldız</small></h6>
+                        </div>
+                    </div>
+                    <div class="client-info-wrap d-flex align-items-center mt-5">
+                        <div class="client-img mr-3">
+                            <img src="assets/platinum/img/client-3.jpg" alt="client" width="60" class="img-fluid rounded-circle shadow-sm"/>
+                        </div>
+                        <div class="client-info">
+                            <h5 class="mb-0">Şemsi Ovacı</h5>
+                            <p class="mb-0">WMAraci.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!--testimonial section end-->
+
+    <!--download section start-->
+    <section id="download" class="gradient-overlay" style="background: url('assets/platinum/img/hero-bg-4.jpg')no-repeat center center / cover">
+        <div class="container">
+            <div class="row justify-content-around align-items-end">
+                <div class="col-md-6 col-lg-5">
+                    <div class="download-txt text-white ptb-100">
+                        <h2 class="text-white">
+                            Kaliteyi Ucuza Almak İster Misin?
+                        </h2>
+                        <p class="lead">Hemen aşağıdan servis listemize ve fiyatlarımıza ulaşabilirsin.</p>
+                        <div class="action-btns download-btn mt-4">
+                            <a href="services" class="btn solid-white-btn mr-3">Servis Listesi</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-7">
+                    <div class="d-flex align-items-end">
+                        <img src="assets/img/home-image (1).png" alt="download"  width="%100" height="400"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--download section end-->
+
+    
+
+    <!--faq section start-->
+    <div id="faq" class="ptb-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 col-lg-8">
+                    <div class="section-heading mb-5">
+                        <h2>Sık Sorulan Sorular</h2>
+                        <p>Merak ettiğiniz tüm herşey burada. Eğer sorunlarınız hakkında daha detaylı bilgi almak isterseniz bizimle iletişime geçiniz.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-lg-12">
+                    <div id="accordion" class="accordion">
+                        <div class="card mb-0">
+                            <a class="card-header collapsed" data-toggle="collapse" href="#collapseOne">
+                                <h6 class="mb-0 d-inline-block"><span class="ti-receipt mr-3"></span> ÖDEMEYİ NASIL YAPABİLİRİM ?</h6>
+                            </a>
+                            <div id="collapseOne" class="collapse" data-parent="#accordion" style="">
+                                <div class="card-body">
+                                    <p>Havale ve EFT , Mobil veya Kredi Kartı üzerinden ödeme yapabilirsiniz.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mb-0">
+                            <a class="card-header collapsed" data-toggle="collapse" href="#collapseTwo">
+                                <h6 class="mb-0 d-inline-block"><span class="ti-gallery mr-3"></span> SMM PANELİM MEVCUT , SİZE NASIL SERVİSLERİ BAĞLAYABİLİRİM ?</h6>
+                            </a>
+                            <div id="collapseTwo" class="collapse" data-parent="#accordion" style="">
+                                <div class="card-body">
+                                    <p>SMM Paneliniz mevcut ise , üye girişi yaptıktan sonra sağ üstteki ayarlar kısmından api key mevcuttur. Api keyi kendi panelinize girerek sistemden servisleri otomatik olarak kendi sisteminize bağlayabilir , satış yapabilirsiniz.Detaylı bilgi için site içi destek kısmından ulaşabilirsiniz.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mb-0">
+                            <a class="card-header collapsed" data-toggle="collapse" href="#collapseThree">
+                                <h6 class="mb-0 d-inline-block"><span class="ti-wallet mr-3"></span> ŞİFRE VERMEM GEREKİYOR MU ?</h6>
+                            </a>
+                            <div id="collapseThree" class="collapse" data-parent="#accordion" style="">
+                                <div class="card-body">
+                                    <p>Sistem içerisinde olan tüm servislerde şifreniz gerekmemektedir. Şifrenizi istemiyoruz.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mb-0">
+                            <a class="card-header collapsed" data-toggle="collapse" href="#collapseFour">
+                                <h6 class="mb-0 d-inline-block"><span class="ti-headphone-alt mr-3"></span> BENİM PROFİLİMDEN PAYLAŞIM YAPILACAK MI ? BAŞKASINI BEĞENİR MİYİM ?</h6>
+                            </a>
+                            <div id="collapseFour" class="collapse" data-parent="#accordion" style="">
+                                <div class="card-body">
+                                    <p>Kesinlikle başkasını beğenmez veya takip etmezsiniz. Diğer uygulamalar gibi herhangir bir uygulamaya giriş izinli sistem değildir.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--faq section end-->
+
+    <!--download section start-->
+    <section class="gradient-overlay ptb-100" style="background: url('assets/platinum/img/hero-bg-1.jpg')no-repeat center center / cover fixed">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-9 col-lg-8">
+                    <div class="section-heading text-center">
+                        <h2 class="text-white">Fenomen Olmaya Hazır Mısın?<br>O Halde Ne Duruyorsun?</h2>
+                        <div class="action-btns download-btn mt-4">
+                            <a href="/" class="btn outline-white-btn mr-3 page-scroll"> Giriş Yap</a>
+                            <a href="signup" class="btn solid-white-btn page-scroll"> Kayıt Ol</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--download section end-->
+
+ <!--kayit yeri baslangic-->
+    <div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <br><br>
+      {% if errorText %}
+        <div class="alert alert-dismissible alert-danger">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          {{ errorText }}
+        </div>
+      {% endif %}
+      {% if successText %}
+        <div class="alert alert-dismissible alert-success">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          {{ successText }}
+        </div>
+      {% endif %}
+
+<div class="contact-us-form gray-light-bg rounded p-5">
+<h4>Kayıt Formu</h4>
+  <div class="kayit_form_div">
+       <form method="post" action="signup">
+         <div class="form-group">
+            <label for="username" class="control-label">{{ lang['signup.username'] }}</label>
+            <input type="text" class="form-control" name="username" value="{{ data['username'] }}">
+         </div>  <br>
+        {% if settings['name_secret'] == 2 %}
+          <div class="form-group">
+            <label for="username" class="control-label">{{ lang['signup.first_name'] }}</label>
+            <input type="text" class="form-control"  name="first_name" value="{{ data['first_name'] }}">
+          </div><br>
+          <div class="form-group">
+            <label for="username" class="control-label">{{ lang['signup.last_name'] }}</label>
+            <input type="text" class="form-control"  name="last_name" value="{{ data['last_name'] }}">
+          </div>
+		{% endif %}
+          <br>
+          <div class="form-group">
+            <label for="username" class="control-label">{{ lang['signup.email'] }}</label>
+            <input type="text" class="form-control" name="email" value="{{ data['email'] }}">
+          </div><br>
+        {% if settings['skype_area'] == 2 %}
+          <div class="form-group">
+            <label for="username" class="control-label">{{ lang['signup.telephone'] }}</label>
+            <input type="text" class="form-control" name="telephone" value="{{ data['telephone'] }}">
+          </div>
+		{% endif %}<br>
+          <div class="form-group">
+            <label for="password" class="control-label">{{ lang['signup.password'] }}</label>
+            <input type="password" class="form-control" name="password">
+          </div><br>
+          <div class="form-group">
+            <label for="password" class="control-label">{{ lang['signup.confirm'] }}</label>
+            <input type="password" class="form-control" name="password_again">
+          </div><br>
+        {% if settings['terms_checkbox'] == 2 %}
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="terms" value="1"> {{ lang['signup.accept_terms_text'] }}
+            </label>
+          </div>
+        {% endif %}
+<br>
+          <div class="form-group">
+             <div class="g-recaptcha" data-sitekey="{{ captchaKey }}"></div>
+          </div>
+<br>
+            <button type="submit" class="btn btn-primary click">{{ lang['signup.button'] }}</button>
+        </form>
+</div>
+
+</div>
+</div>
+</div>
+{% for lang in site['languages'] %}
+  {% if lang['active'] %}
+    <script src="https://www.google.com/recaptcha/api.js?hl={{ lang['code'] }}"></script>
+  {% endif %}
+{% endfor %}
+      <br><br>
+ <!--kayit yeri bitis-->
+
+</div>
+<!--body content wrap end-->
+
+<!--footer section start-->
+<footer class="footer-section">
+    <!--footer top start-->
+    <div class="footer-top gradient-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-12">
+                    <div class="footer-nav-wrap text-white mb-0 mb-md-4 mb-lg-0">
+                        <center><a class="navbar-brand" href="/">
+                 {% if site["logo"] %}
+            <img src="{{ site['logo'] }}" alt="{{ site["site_name"] }}" class="img-fluid" title="{{ site["site_name"] }}">
+          {% else %}
+            {{ site["site_name"] }}
+          {% endif %}
+            </a></center>
+                        <p>İnternette Öne Çıkmanız İçin, Sizlere 10 Yıldır 7/24 Kesintisiz Hizmet Vermekteyiz. Web Site Tasarımı, Arama Motoru Optimizasyonu (SEO), Sosyal Medya Yönetimi ve Facebook, Twitter, Instagram, Youtube Başta Olmak Üzere Birçok Platform İçin; Takipçi, Abone, Beğeni, İzlenme, Etkileşim Hizmetleri Sunmaktayız. Referanslarımıza Göz Atmak ve Daha Fazla Bilgi Almak İçin Sitemizi Ziyaret Edin.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6 col-12">
+                    <div class="footer-nav-wrap text-white">
+                        <h5 class="text-white">Site Bağlantıları</h5>
+                        <ul class="list-unstyled footer-nav-list mt-3">
+                            <li><a href="/" class="text-foot"><span class="ti-angle-double-right"></span> {{ lang['signin.title'] }}</a></li>
+                            <li><a href="signup" class="text-foot"><span class="ti-angle-double-right"></span> {{ lang['signup.title'] }}</a></li>
+                            <li><a href="blog" class="text-foot"><span class="ti-angle-double-right"></span> {{ lang['blog.title'] }}</a></li>
+                            <li><a href="faq" class="text-foot"><span class="ti-angle-double-right"></span> {{ lang['faq.title'] }}</a></li>
+                            <li><a href="terms" class="text-foot"><span class="ti-angle-double-right"></span> {{ lang['terms.title'] }}</a></li>
+                          <li><a href="api" class="text-foot"><span class="ti-angle-double-right"></span> {{ lang['api.title'] }}</a></li>
+                        </ul>
+                    </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-12">
+                    <div class="footer-nav-wrap text-white">
+                        <h5 class="text-light footer-head">Bize Ulaşın</h5>
+                        <p>Takıldığınız bir yer mi var? Hemen ulaşın sorununuzu beraber çözelim.</p>
+                        <ul class="list-unstyled social-list mb-0">
+                          <li class="list-inline-item"><a href="tel:05000000000" class="rounded"><span class="white-bg color-2 shadow rounded-circle"><i class="fa fa-phone"></i></span></a></li>
+                          <li class="list-inline-item"><a href="mailto:mail@mail.com" class="rounded"><span class="white-bg color-2 shadow rounded-circle"><i class="fa fa-envelope"></i></span></a></li>
+                          <li class="list-inline-item"><a href="https://wa.me/+905000000000" class="rounded"><span class="white-bg color-2 shadow rounded-circle"><i class="fa fa-whatsapp"></i></span></a></li>
+                          <li class="list-inline-item"><a href="/" class="rounded"><span class="white-bg color-2 shadow rounded-circle"><i class="fa fa-skype"></i></span></a></li>
+                         <br><br>
+                            <li class="list-inline-item"><a href="https://www.facebook.com/" class="rounded"><span class="white-bg color-2 shadow rounded-circle"><i class="fa fa-facebook-square"></i></span></a></li>
+                            <li class="list-inline-item"><a href="https://www.twitter.com/" class="rounded"><span class="white-bg color-2 shadow rounded-circle"><i class="fa fa-twitter"></i></span></a></li>
+                            <li class="list-inline-item"><a href="https://www.instagram.com/" class="rounded"><span class="white-bg color-2 shadow rounded-circle"><i class="fa fa-instagram"></i></span></a></li>
+                          <li class="list-inline-item"><a href="https://t.me/" class="rounded"><span class="white-bg color-2 shadow rounded-circle"><i class="fa fa-telegram"></i></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--footer top end-->
+
+    <!--footer copyright start-->
+    <div class="footer-bottom gray-light-bg py-3">
+        <div class="container">
+            <div class="row text-center justify-content-center">
+                <div class="col-md-6 col-lg-5"><p class="copyright-text pb-0 mb-0"><a href="/">{{ site["site_name"] }}</a> © Copyright 2020
+Tüm Hakları Saklıdır.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--footer copyright end-->
+</footer>
+<!--footer section end-->
+
+<!--bottom to top button start-->
+<button class="scroll-top scroll-to-target" data-target="html">
+    <span class="ti-angle-up"></span>
+</button>
+<!--bottom to top button end-->
+{% for lang in site['languages'] %}
+  {% if lang['active'] %}
+    <script src="https://www.google.com/recaptcha/api.js?hl={{ lang['code'] }}"></script>
+  {% endif %}
+{% endfor %}
+{{ footerCode }}
+
+<!--jQuery-->
+<script src="assets/platinum/js/jquery-3.4.1.min.js"></script>
+<!--Popper js-->
+<script src="assets/platinum/js/popper.min.js"></script>
+<!--Bootstrap js-->
+<script src="assets/platinum/js/bootstrap.min.js"></script>
+<!--Magnific popup js-->
+<script src="assets/platinum/js/jquery.magnific-popup.min.js"></script>
+<!--jquery easing js-->
+<script src="assets/platinum/js/jquery.easing.min.js"></script>
+<!--wow js-->
+<script src="assets/platinum/js/wow.min.js"></script>
+<!--owl carousel js-->
+<script src="assets/platinum/js/owl.carousel.min.js"></script>
+<!--countdown js-->
+<script src="assets/platinum/js/jquery.countdown.min.js"></script>
+<!--custom js-->
+<script src="assets/platinum/js/scripts.js"></script>
+</body>
+
+
+
+
+
+</html>

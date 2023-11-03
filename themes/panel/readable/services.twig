@@ -1,0 +1,75 @@
+{% include 'header.twig' %}
+<div class="container">
+   <div class="row">
+      <div class="col-lg-12">
+         <div class="well well-float">
+            <table class="table ">
+               <thead>
+                  <tr>
+                     <th>{{ lang['services.id'] }}</th>
+                     <th class="width-service-name">{{ lang['services.name'] }}</th>
+                     <th class="nowrap">{{ lang['services.price'] }}</th>
+                     <th class="nowrap">{{ lang['services.min'] }}</th>
+                     <th class="nowrap">{{ lang['services.max'] }}</th>
+                     {% if avarageTime %}
+                     <th class="nowrap">{{ lang['services.avarage'] }} <i class="fa fa-exclamation-circle"></i></th>
+                     {% endif %}
+                     <th class="nowrap t-r">{{ lang['neworder.description'] }}</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  {% for category in serviceCategory %}
+                  <tr>
+                     <td colspan="6"><strong>{{ category["category_name"] }}</strong></td>
+                  </tr>
+                  {% for service in category['services'] %}
+                  <tr>
+                     <td>{{ service["service_id"] }}</td>
+                     <td>{{ service["service_name"] }}</td>
+                     <td>{{ service["service_price"] }}</td>
+                     <td>{{ service["service_min"] }}</td>
+                     <td>{{ service["service_max"] }}</td>
+                     {% if avarageTime %}
+                     <td>{{ service["service_speed"] }}</td>
+                     {% endif %}
+                     <td class="t-r">
+                        <button class="btn btn-primary btn-xs"  data-toggle="modal" data-target="#service_desc-{{ service['service_id'] }}"><i class="fa fa-eye"></i></button>
+                     </td>
+                  </tr>
+                  <div id="service_desc-{{ service['service_id'] }}" class="modal fade" role="dialog">
+                     <div class="modal-dialog">
+                        <div class="modal-content">
+                           <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              <h4 class="modal-title">{{ service["service_name"] }}</h4>
+                           </div>
+                           <div class="modal-body">
+                              <p>{{ service["service_description"] }}</p>
+                           </div>
+                           <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  </tr>
+                  {% endfor %}
+                  {% endfor %}
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+</div>
+{% if contentText %}
+<div class="container">
+   <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+         <div class="well ">
+            {{ contentText }}
+         </div>
+      </div>
+   </div>
+</div>
+{% endif %}
+{% include 'footer.twig' %}

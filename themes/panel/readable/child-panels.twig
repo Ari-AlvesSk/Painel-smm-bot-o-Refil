@@ -1,0 +1,105 @@
+{% include 'header.twig' %}
+{% if contentText %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="well ">
+        {{ contentText }}
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+      {% if errorText %}
+        <div class="alert alert-dismissible alert-danger">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          {{ errorText }}
+        </div>
+      {% endif %}
+      {% if successText %}
+        <div class="alert alert-dismissible alert-success">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          {{ successText }}
+        </div>
+      {% endif %}
+                <div class="well">
+                    <form action="/child-panels" method="post">
+                            <div class="form-group">
+                                <label for="domain" class="control-label">{{ lang["childpanels.panel.domain"] }}</label>
+                                <input type="text" class="form-control" id="domain" name="domain" value="">
+                            </div>
+                            <div class="alert alert-info">
+                                <p style="margin-bottom: 5px">
+                                    {{ lang["childpanels.nameservers"] }}
+                                </p>
+                              <ul style="padding-left: 20px">
+                                  <li>ns1.ownmmspanel.in</li>
+                                  <li>ns2.ownmmspanel.in</li>
+                              </ul>
+                            </div>
+                        <div class="form-group">
+                            <label class="control-label">{{ lang["childpanels.panel.currency"] }}</label>
+                            <select class="form-control" name="panel_currency" aria-required="true">
+                                                                    <option value="USD">
+                                        United States Dollars (USD)
+                                    </option>
+                                                                    <option value="TRY">
+                                        Türk Lirası (TRY)
+                                    </option>
+                                                                    <option value="EUR">
+                                        Euro (EUR)
+                                    </option>
+                 
+                                                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">{{ lang["childpanels.admin.username"] }}</label>
+                            <input type="text" class="form-control" value="admin" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">{{ lang["childpanels.admin.password"] }}</label>
+                            <input class="form-control" value="admin@123" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">{{ lang["childpanels.panel.amount"] }}</label>
+                            <input type="text" class="form-control" value="{{ settings['panel_price'] }}{{ site['currency'] }}" disabled>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">{{ lang["neworder.button"] }}</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% if ticketList %}
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="well well-float">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>{{ lang["childpanels.domain"] }}</th>
+                            <th>{{ lang["childpanels.currency"] }}</th>
+                            <th>{{ lang["childpanels.price"] }}</th>
+                            <th>{{ lang["childpanels.created"] }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+              {% for panel in ticketList %}
+                <tr>
+                  <td>{{ panel['panel_domain'] }}</td>
+                  <td>{{ panel['panel_currency'] }}</td>
+                  <td>{{ panel['panel_price'] }}</td>
+                  <td><span class="nowrap">{{ panel['panel_created'] }}</span></td>
+                </tr>
+              {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    {% endif %}   
+</div>
+{% include 'footer.twig' %}

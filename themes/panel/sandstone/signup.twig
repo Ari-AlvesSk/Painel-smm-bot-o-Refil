@@ -1,0 +1,79 @@
+{% include 'header.twig' %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+
+      {% if errorText %}
+        <div class="alert alert-dismissible alert-danger">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          {{ errorText }}
+        </div>
+      {% endif %}
+      {% if successText %}
+        <div class="alert alert-dismissible alert-success">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          {{ successText }}
+        </div>
+      {% endif %}
+
+      <div class="well">
+        <form method="post" action="">
+         <div class="form-group">
+            <label for="username" class="control-label">{{ lang['signup.username'] }}</label>
+            <input type="text" class="form-control" name="username" value="{{ data['username'] }}">
+         </div>  
+        {% if settings['name_secret'] == 2 %}
+          <div class="form-group">
+            <label for="username" class="control-label">{{ lang['signup.first_name'] }}</label>
+            <input type="text" class="form-control"  name="first_name" value="{{ data['first_name'] }}">
+          </div>
+          <div class="form-group">
+            <label for="username" class="control-label">{{ lang['signup.last_name'] }}</label>
+            <input type="text" class="form-control"  name="last_name" value="{{ data['last_name'] }}">
+          </div>
+		{% endif %}
+          <div class="form-group">
+            <label for="username" class="control-label">{{ lang['signup.email'] }}</label>
+            <input type="text" class="form-control" name="email" value="{{ data['email'] }}">
+          </div>
+        {% if settings['skype_area'] == 2 %}
+          <div class="form-group">
+            <label for="username" class="control-label">{{ lang['signup.telephone'] }}</label>
+            <input type="text" class="form-control" name="telephone" value="{{ data['telephone'] }}">
+          </div>
+		{% endif %}
+          <div class="form-group">
+            <label for="password" class="control-label">{{ lang['signup.password'] }}</label>
+            <input type="password" class="form-control" name="password">
+          </div>
+          <div class="form-group">
+            <label for="password" class="control-label">{{ lang['signup.confirm'] }}</label>
+            <input type="password" class="form-control" name="password_again">
+          </div>
+        {% if settings['terms_checkbox'] == 2 %}
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="terms" value="1">{{ lang['signup.accept_terms_text'] }}
+            </label>
+          </div>
+        {% endif %}
+
+          <div class="form-group">
+             <div class="g-recaptcha" data-sitekey="{{ captchaKey }}"></div>
+          </div>
+
+            <button type="submit" class="btn btn-primary click">{{ lang['signup.button'] }}</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% for lang in site['languages'] %}
+  {% if lang['active'] %}
+    <script src="https://www.google.com/recaptcha/api.js?hl={{ lang['code'] }}"></script>
+  {% endif %}
+{% endfor %}
+
+{% include 'footer.twig' %}

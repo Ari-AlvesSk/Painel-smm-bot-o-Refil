@@ -1,0 +1,305 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,600;1,700;1,800;1,900&display=swap');
+@media only screen and (min-width: 600px){
+.dgizle {
+    display:none;
+}
+}
+@media only screen and (max-width: 600px){
+.mgizle {
+    display:none;
+}
+}
+.well .mof2:last-child{
+border-bottom:0;
+}
+.mohr{
+margin-bottom:5px;
+}
+.mohr hr{
+background:crimson;
+height:5px;
+}
+.moff {
+    color: black;
+    padding: 5px 10px;
+    border-bottom: 1px solid crimson;
+}
+.mof2 {
+    color: black;
+    padding: 5px 10px;
+    border-bottom: 1px solid crimson;
+}
+.well-box{
+background:white;
+padding:25px;
+border-radius:30px;
+margin-top:10px;
+text-align:center;
+}
+.w-title{
+color:black;
+font-weight:bold;
+}
+.well-box hr{
+padding:10px;
+}
+.w-content{
+color:black;
+}
+.w-price {
+	color:black;
+    padding: 5px;
+    border: 2px solid #a13d95;
+    text-align: center;
+    border-radius: 30px;
+}
+.msk{
+    color: white;
+    font-weight: bold;
+    background: #a13d95;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+
+body{
+font-family: 'Nunito', sans-serif;
+}
+.t-r{
+text-align:right;
+}
+.sc {
+    background: rgb(1 114 255);
+    background: linear-gradient(90deg, rgb(0 105 255) 0%, rgb(76 208 255) 100%);
+    color: white;
+    font-weight: 900;
+    font-size: 22px;
+    text-align: center;
+    border-radius: 30px;
+}
+.pshadow {
+    box-shadow: 0 0px 10px rgb(6 94 252);
+}
+
+.mt50{
+margin-top:50px;
+}
+.mb50{
+margin-bottom:50px;
+}
+.bshadow {
+    box-shadow: 0 0px 10px rgb(1 107 255);
+}
+.b3{
+border: 3px solid white;
+}
+.m-l{
+float:right;
+}
+@media only screen and (max-width: 600px){
+.m-l {
+    float: none;
+    text-align: center;
+}
+}
+@media only screen and (min-width: 600px){
+.m-services {
+    display:none;
+}
+}
+@media only screen and (max-width: 600px){
+.d-services {
+    display:none;
+}
+}
+.nav-pills li{
+color:#fff;
+background: #fff;
+}
+.nav-pills li a{
+color: white;
+}
+.table-striped tbody tr{
+color:black;
+}
+
+.well a {
+color: black !important;
+}
+.bg-light {
+    background: #ffffff;
+    border: 2px solid black;
+    color: black;
+}
+.form-control:focus {
+    border-left: 6px solid #008cff;
+    transition: 0.3s;
+}
+.w100{
+width:100%;
+}
+.dbakiye{
+    font-family: 'Barlow', sans-serif;
+    letter-spacing: .3em;
+}
+.text-white{
+color:white !important;
+}
+
+.ibox {
+    background: #FFFFFF;
+    width: 100%;
+    min-height: 115px;
+    color: black;
+    padding: 15px 15px 0px 15px;
+    border-radius: 10px;
+    border: 1px solid #e3e3e3;
+    text-align: center;
+}
+.ibox2 {
+    background: rgb(0 104 255);
+    background: linear-gradient(90deg, rgb(0 104 255) 0%, rgb(57 173 255) 100%);
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    text-align: center;
+    padding: 20px;
+    align-items: center;
+    box-shadow: 0 0px 10px rgb(0 111 255);
+}
+.ibox i{
+font-size:42px;
+color:white;
+}
+.text-right{
+text-align:right;
+}
+.main-panel .index-announcement {
+    float: left;
+    width: 100%;
+    border-radius: 10px;
+}
+.main-panel .index-announcement .index-announcement-title {
+    float: left;
+    width: 100%;
+    margin-top: 0;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 1px;
+    background: #ffffff;
+    padding: 20px 30px;
+    border-radius: 10px 10px 0 0;
+}
+.main-panel .index-announcement .index-announcement-bell {
+    float: left;
+    width: 50%;
+    padding-right: 43px;
+    text-align: right;
+    margin-top: -20px;
+    }
+    
+.main-panel .index-announcement .index-announcement-content {
+    float: left;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    height: 470px;
+    padding: 0 30px;
+    background: #ffffff;
+    border-radius: 0 0 10px 10px;
+}
+.main-panel .index-announcement ul {
+    float: left;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 0;
+    border-left: 4px solid #eff0ff;
+    padding-left: 30px;
+}
+.main-panel .index-announcement ul li {
+    list-style: none;
+    float: left;
+    width: 100%;
+    position: relative;
+    margin-bottom: 45px;
+    box-shadow: 1px 5px 19px 0 rgb(0 0 0 / 22%);
+    padding: 20px;
+    border-radius: 0 0 6px 6px;
+}
+.main-panel .index-announcement ul li:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 1px;
+    background-image: linear-gradient(90deg,#41479d,#7c3588,#d01b6b);
+}
+.main-panel .index-announcement ul li .icon {
+    position: absolute;
+    left: -52px;
+    top: 48px;
+    width: 40px;
+    height: 40px;
+    padding: 7px 0;
+    text-align: center;
+    background: #eff0ff;
+    font-size: 16px;
+    border-radius: 3px;
+    box-shadow: 1px 5px 19px 0 rgba(255,255,255,0.05);
+}
+.main-panel .index-announcement ul li .time {
+    float: left;
+    color: #8c909a;
+    border-radius: 3px;
+    margin-top: 8px;
+}
+.main-panel .index-announcement ul li .time i {
+    margin-right: 5px;
+}
+.main-panel .index-announcement ul li .t-instagram {
+    color: #f40083;
+    border-color: #f40083;
+}
+.main-panel .index-announcement ul li .service {
+    float: left;
+    width: 100%;
+    color: #48494c;
+    font-weight: 600;
+    margin-top: 10px;
+}
+.main-panel .index-announcement ul li .desc {
+    float: left;
+    width: 100%;
+    color: #8c909a;
+    margin-top: 5px;
+}
+.main-panel .index-announcement ul li .title {
+    float: right;
+    color: #8c909a;
+    padding: 5px 10px;
+    border: 1px solid #8c909a;
+    border-radius: 3px;
+    width: 90px;
+    text-align: center;
+    position: relative;
+}
+.main-panel .index-announcement ul li .t-instagram {
+    color: #f40083;
+    border-color: #f40083;
+}
+.main-panel .index-announcement ul li .icon img {
+    max-width: 60%;
+}
+.w .index-announcement-title {
+    float: left;
+    width: 100%;
+    margin-top: 0px;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 12px;
+    background: #ffffff;
+    padding: 20px 30px;
+    border-radius: 10px 10px 0 0;
+    border-bottom: 1px solid #0618ff;
+}

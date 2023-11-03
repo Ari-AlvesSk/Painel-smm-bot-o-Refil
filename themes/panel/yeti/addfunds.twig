@@ -1,0 +1,186 @@
+{% include 'header.twig' %}
+
+{% if paymentsList %}
+ <!-- app-header -->
+         <div class="app-content">
+            <!-- page-content -->
+            <div class="container-fluid">
+               <div class="row mt-4">
+                  <div class="col-lg-12">
+               <section class="order-side">
+                  <div class="row">
+                     <div class="col-lg-7 col-12 mb-5 mb-lg-0">
+                        <div class="d-card dc-dblue">
+                           <div class="d-card-body" id="dc-body">
+							  <form method="post" action="addfunds">
+								{% if error %}
+								  <div class="alert alert-dismissible alert-danger">
+									<button type="button" class="close" data-dismiss="alert">×</button>
+									{{ errorText }}
+								  </div>
+								{% endif %}
+								{% if success %}
+								  <div class="alert alert-dismissible alert-success">
+									<button type="button" class="close" data-dismiss="alert">×</button>
+									{{ successText }}
+								  </div>
+								{% endif %}
+                              <div class="form-group">
+                                 <label for="method" class="control-label">{{ lang['addfunds.method'] }}</label>
+								  <select class="form-control" id="payment_method" name="payment_type">
+								   {% for payment in paymentsList %}
+									  <option value="{{ payment['id'] }}" {% if data['payment_type'] == payment['id'] %} selected {% endif %} >{{ payment['method_name'] }}</option>
+									{% endfor %}
+								  </select>
+                              </div>
+                              <div class="form-group">
+							     <label for="amount" class="control-label">{{ lang['addfunds.amount'] }}</label>
+                                 <input class="form-control" name="payment_amount" value="{{ data['payment_amount'] }}">
+                              </div>
+
+                              <button type="submit" class="btn btn-primary btn-lg btn-block mb-4">Efetuar Pagamento</button>
+                              
+                              </form>
+                           </div>
+                        </div>
+                        <!-- d-card end -->
+                        <br>
+                        <button type="button" class="btn btn-purple btn-lg btn-block" data-toggle="modal" data-target="#papara-modal">Pagamento Manual</button>
+                     </div>
+                     <!-- col item end-->
+                     <div class="col-lg-5 col-12 mb-5 mb-lg-0">				 
+                        <div class="d-card dc-dblue">
+                           <ul class="nav nav-pills fastside">
+                              <li class="nav-item col-6 mb-2" style="padding:0">
+                                 <a class="nav-link active" data-toggle="pill" href="#payInfo" role="tab" aria-controls="pills-payInfo" aria-selected="true">Informação de pagamento</a>
+                              </li>
+                              <li class="nav-item col-6 mb-2" style="padding:0">
+                                 <a class="nav-link second" data-toggle="pill" href="#payAll" role="tab" aria-controls="pills-payAll" aria-selected="false">Contas bancárias</a>
+                              </li>
+                           </ul>
+                           
+                           
+                           
+                           
+                           
+                           
+                           <div class="d-card-body" id="dc2-body" style="overflow-y: auto; max-height: 500px">
+                              <div class="tab-content mt-3">
+                                 <div class="tab-pane fade active show" id="payInfo" role="tabpanel" aria-labelledby="payInfo">
+									<!--<img src="../img/paytm.png" style="display: inline-block; width: 128px; max-width: 100%;" class="img-responsive">--->
+									<p class="my-3">
+Olá! <strong>{{ user['username'] }}</strong>,<br /> Em primeiro lugar, queremos que saiba que recebemos uma comissão de 0% em todos os nossos métodos de pagamento. Você pode iniciar suas transações carregando um saldo mínimo de R$ 1.00</p>
+
+								<br />
+                                 </div>
+                                 
+                                 
+                                 
+                                 
+                                 <div class="tab-pane fade" id="payAll" role="tabpanel" aria-labelledby="payAll-tab">
+									  <div class="table-responsive">
+										<table class="table table-striped table-bordered table-checkable ">
+										    
+										    
+										    
+										  
+										  
+										  
+										  
+										</div>
+
+									  <div class="table-responsive">
+										<table class="table table-striped table-bordered table-checkable ">
+										  <tbody>
+											<tr>
+											  <td>
+												<b>PARA INFORMAR: </b> As taxas de transferência/TEF deduzidas durante o pagamento não serão cobertas por nós.</b>.
+											  </td>
+											</tr>
+										  </tbody>
+										</table>
+									  </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </section>
+            </div>
+            <!-- page-content end -->
+         </div>
+         <!-- app-content -->
+			</div>
+		</div>
+		{% endif %}
+		
+
+		
+      </div>
+
+
+<!-- Papara -->
+<div class="modal fade" id="papara-modal">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <!-- Modal Header -->
+         <div class="modal-header">
+            <h4 class="modal-title">Faça a transferencia para a chave pix abaixo para realizar o pagamento...</h4>
+            <button type="button" class="close" data-dismiss="modal">×</button>
+         </div>
+         <!-- Modal body -->
+         <div class="modal-body">
+             
+             
+         <form method="post" action="addfunds">
+                                <center>
+                                
+                               
+                              </center>
+                              </br>
+                    
+                    <div class="table-responsive">
+					<table class="table table-striped table-bordered table-checkable ">
+						<tbody>
+						<tr>
+						<td>
+					<center>
+                         
+                    
+                    <h4>Pagamento Manual</h4>
+                    
+                     <b>
+                         <font color="#000000">
+                             
+                             Faça a transferencia na chave pix de acordo com o aplicativo do seu banco.
+                             
+                         </font>
+                         </br> 
+                     <font color="#000000">
+                     <h5>Chaves:</h5>
+                     
+                    <img width="30" height="30" src="https://i.imgur.com/OUvMNrJ.png" > Chave 1  </br>CPF [ 88888888888888 ] 
+                    </br>
+                    
+                     </br>
+                     
+                     <img width="30" height="30" src="https://i.imgur.com/OUvMNrJ.png" > Chave 2 </br>EMAIL [888888888888]
+                     
+                     </font>
+                     </b>
+                     </label>
+                     
+                     </center>
+                      </td>
+						</tr>
+                  </tbody>
+               </table>
+            </div>
+            <a href="https://api.whatsapp.com/send?phone=5582981292504&text=Ol%C3%A1%2C%20aqui%20est%C3%A1%20meu%20comprovante%20de%20pagamento!%20" target="_blank"><button type="button" class="btn btn-primary btn-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Enviar Comprovante</font></font></button></a>
+         </div>
+      </div>
+   </div>
+</div>
+
+{% include 'footer.twig' %}

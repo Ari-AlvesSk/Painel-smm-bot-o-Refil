@@ -1,0 +1,120 @@
+{% include 'header.twig' %}
+
+<style>
+  .header {display: none}
+</style>
+<div class="register-page">
+    <div class="register-page-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 align-self-center">
+                    <div class="register-left">
+                        <a href="/">
+						  {% if site["logo"] %}
+							<img src="{{ site['logo'] }}" width="300" height="30" alt="{{ site["site_name"] }}" class="rl-logo" title="{{ site["site_name"] }}">
+						  {% else %}
+							{{ site["site_name"] }}
+						  {% endif %}
+						</a>
+                        <div class="rl-text">
+                           Para beneficiar dos nossos serviços como seguidores e gostos, registe-se no nosso sistema preenchendo o formulário.
+                        </div>
+                        <ul class="rl-menu d-none d-lg-block">
+                            <li>
+                                <a href="/">Pagina inicial</a>
+                            </li>
+                            <li>
+                                <a href="/services">Serviços</a>
+                            </li>
+                            <li>
+                                <a href="/api">API</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-5 offset-lg-1 align-self-center">
+    
+                    <div class="loginSide">
+					<form method="post" action="">
+                        <div class="login-box">
+							  {% if errorText %}
+								<div class="alert alert-dismissible alert-danger">
+								  <button type="button" class="close" data-dismiss="alert">×</button>
+								  {{ errorText }}
+								</div>
+							  {% endif %}
+							  {% if successText %}
+								<div class="alert alert-dismissible alert-success">
+								  <button type="button" class="close" data-dismiss="alert">×</button>
+								  {{ successText }}
+								</div>
+							  {% endif %}
+                            <div class="lgb-title">
+                                Cadastre-se em nosso sistema
+                            </div>
+                            <div class="lgb-text">
+                               Suas informações nunca são compartilhadas com terceiros.
+                            </div>
+                            <div class="fc-home">
+                                <label for="regUsername"><span class="label-text">{{ lang['signup.username'] }}</span></label>
+                                <input type="text" class="form-control" name="username" value="{{ data['username'] }}">
+                            </div><!-- fc-home -->
+							{% if settings['name_secret'] == 2 %}
+                            <div class="fc-home">
+                                <label for="regName"><span class="label-text">{{ lang['signup.first_name'] }}</span></label>
+                                <input type="text" class="form-control"  name="first_name" value="{{ data['first_name'] }}">
+                            </div><!-- fc-home -->
+                            <div class="fc-home">
+                                <label for="regSurname"><span class="label-text">{{ lang['signup.last_name'] }}</span></label>
+                                <input type="text" class="form-control"  name="last_name" value="{{ data['last_name'] }}">
+                            </div><!-- fc-home -->	
+							{% endif %}
+                            <div class="fc-home">
+                                <label for="regMail"><span class="label-text">{{ lang['signup.email'] }}</span></label>
+                                <input type="text" class="form-control" name="email" value="{{ data['email'] }}">
+                            </div><!-- fc-home -->	
+							{% if settings['skype_area'] == 2 %}
+                            <div class="fc-home">
+                                <label for="regPhone"><span class="label-text">{{ lang['signup.telephone'] }}</span></label>
+                                <input type="text" class="form-control" name="telephone" value="{{ data['telephone'] }}">
+                            </div><!-- fc-home -->	
+							{% endif %}
+                            <div class="fc-home">
+                                <label for="regPass"><span class="label-text">{{ lang['signup.password'] }}</span></label>
+                                <input type="password" class="form-control" name="password">
+                            </div><!-- fc-home -->
+                            <div class="fc-home">
+                                <label for="reregPass"><span class="label-text">{{ lang['signup.confirm'] }}</span></label>
+                                <input type="password" class="form-control" name="password_again">
+                            </div><!-- fc-home -->
+							{% if settings['terms_checkbox'] == 2 %}
+							  <div class="checkbox">
+								<label>
+								  <input type="checkbox" name="terms" value="1">{{ lang['signup.accept_terms_text'] }}
+								</label>
+							  </div>
+							{% endif %}
+
+							  <div class="form-group">
+								 <div class="g-recaptcha" data-sitekey="{{ captchaKey }}"></div>
+							  </div>
+                            <button class="btn btn-secondary btn-lg btn-block mt-3" type="submit">
+                               {{ lang['signup.button'] }}
+                            </button>
+                        </div><!-- login box -->
+						</form>
+                    </div>
+    
+                </div>
+            </div><!-- row end -->
+        </div>
+    </div>
+</div>
+
+{% for lang in site['languages'] %}
+  {% if lang['active'] %}
+    <script src="https://www.google.com/recaptcha/api.js?hl={{ lang['code'] }}"></script>
+  {% endif %}
+{% endfor %}
+
+{% include 'footer.twig' %}

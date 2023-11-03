@@ -1,0 +1,24 @@
+{% include 'header.twig' %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+          {% for post in blogList %}
+            <div class="well">
+                <h3>{{ post['blog_title'] }}</h3>
+                {% if post['blog_image'] %}
+                  <p><img src="{{ post['blog_image'] }}" alt="{{ post['blog_title'] }}" class="img-responsive"></p>
+                {% endif %}  
+                <div>{{ post['blog_content'] }}</div>
+            </div>
+          {% endfor %}
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="{{ site['url'] }}/blog" class="btn btn-primary">{{ lang['blog.back'] }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'footer.twig' %}

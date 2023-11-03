@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+{% for lang in site['languages'] %}
+{% if lang['active'] %}
+<html lang="{{ lang['code'] }}">
+{% endif %}
+{% endfor %}
+<head>
+      <base href="{{ site['url'] }}/">
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>{{ title }}</title>
+      <meta name="keywords" content="{{ keywords }}">
+      <meta name="description" content="{{ description }}">
+      {% if site['favicon'] %}
+        <link rel="shortcut icon" type="image/ico" href="{{ site['favicon'] }}" />
+      {% endif %}
+  
+    
+      <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+      <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+      
+		<!-- CSS here -->
+        <link rel="stylesheet" href="css/aqua/bootstrap.min.css">
+        <link rel="stylesheet" href="css/aqua/animate.min.css">
+        <link rel="stylesheet" href="css/aqua/magnific-popup.css">
+        <link rel="stylesheet" href="css/aqua/dripicons.css">
+        <link rel="stylesheet" href="css/aqua/slick.css">
+        <link rel="stylesheet" href="css/aqua/default.css">
+        <link rel="stylesheet" href="css/aqua/swiper.css">
+        <link rel="stylesheet" href="css/aqua/majer.css">
+        <link rel="stylesheet" href="css/aqua/responsive.css">
+        <link rel="stylesheet" href="https://cdn.mypanel.link/css/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      
+          {{ headerCode }}
+    </head>
+    <body>
+        <!-- header -->
+        <header class="header-area">            
+            <div id="header-sticky" class="menu-area">
+                <div class="container">
+                    <div class="second-menu">
+                        <div class="row align-items-center">
+                            <div class="col-xl-2 col-lg-2">
+                                <div class="logo">
+                                    
+                                    <a href="/">
+                                        {% if site["logo"] %}
+                                      <img src="{{ site['logo'] }}" alt="{{ site["site_name"] }}" title="{{ site["site_name"] }}" height="50" width="%100">
+                                    {% else %}
+                                      {{ site["site_name"] }}
+                                    {% endif %}   
+                                    </a>
+                                    
+                                </div>
+                            </div>
+                            <div class="col-xl-8 col-lg-9">
+                                <div class="responsive" style="margin-top: 1px;"><i class="fa fa-bars"></i></div>
+                                <div class="main-menu text-right text-xl-right">
+                                     <nav id="mobile-menu">
+                                        <ul>
+                                                           <li {% if active_menu == "auth" %} class="active" {% endif %}>
+          <a href="#contact">{{ lang['signin.title'] }}</a>
+        </li> 
+        {% if registerPage %}
+        <li >
+          <a href="/signup">{{ lang['signup.title'] }}</a>
+        </li>
+        {% endif %}
+          {% if servicesPage %}
+        <li {% if active_menu == "services" %} class="active" {% endif %}>
+          <a href="/services">{{ lang['services.title'] }}</a>
+        </li>
+        {% endif %}
+        
+        {% if blogPage %}
+        <li {% if active_menu == "blog" %} class="active" {% endif %}>
+          <a href="/blog">{{ lang['blog.title'] }}</a>
+        </li>
+        {% endif %}
+        {% if faqPage %}
+        <li {% if active_menu == "faq" %} class="active" {% endif %}>
+          <a href="/faq">{{ lang['faq.title'] }}</a>
+        </li>
+        {% endif %}
+        {% if termsPage %}
+        <li {% if active_menu == "terms" %} class="active" {% endif %}>
+          <a href="/terms">{{ lang['terms.title'] }}</a>
+        </li>
+        {% endif %}
+        {% if apiPage %}
+        <li {% if active_menu == "api" %} class="active" {% endif %}>
+          <a href="/api">{{ lang['api.title'] }}</a>
+        </li>
+        {% endif %}                                          
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>       
+                            {% if registerPage %}
+                            <div class="col-xl-2 text-right d-none d-xl-block">
+                                <div class="header-btn second-header-btn">
+                                    <a href="signup" class="btn">{{ lang['signup.title'] }}</a>
+                                </div>
+                            </div>
+                                    {% endif %}                                          
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- header-end -->
+        <!-- main-area -->
+        <main>
+            <!-- slider-area -->
+            <section id="parallax" class="slider-area slider-bg2 second-slider-bg d-flex fix" style="background-image: url(img/aqua/bg/pink-header-bg.png); background-position:right 0; background-repeat: no-repeat; background-size: 65%;">
+                
+                <div class="slider-shape ss-one layer" data-depth="0.10"><img src="img/aqua/shape/header-sape.png" alt="shape"></div>
+               
+     			 <div class="slider-shape ss-eight layer" data-depth="0.50"></div>
+                
+                
+               
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="slider-content second-slider-content left-center">         
+                                        <ul class="small-title mb-30">
+                                            <li>{{ site['site_name'] }}</li>
+                                      </ul>
+                                        <h2 data-animation="fadeInUp" data-delay=".4s">India's <span>Leading </span>SMM Panel Lider SMM Panel</h2>
+                                        
+                                        <p data-animation="fadeInUp" data-delay=".6s">We are working 24/7 to always provide 100% quality and affordable service to our customers.</p>
+                                      
+                                      <br>
+                                      <form method="POST" action="/auth" class="contact-form">
+							<div class="row">
+                            <div class="col-lg-8">
+                                <div class="contact-field p-relative c-name mb-20">                                    
+                                    <input type="text" name="username" placeholder="USERNAME">
+                                </div>                               
+                            </div>
+							 <div class="col-lg-8">                    
+                                <div class="contact-field p-relative c-email mb-20">                                    
+                                    <input type="password" name="password" placeholder="PASSWORD">
+                                </div>                                
+                            </div>							
+                            <div class="col-lg-12">
+                                   {% if captcha %}
+            <div class="form-group">
+              <div class="g-recaptcha" data-sitekey="{{ captchaKey }}"></div>
+            </div>
+          {% endif %}
+                                <button class="btn">Login</button>  <a href="signup"> Sign up</a>
+                            </div>
+                            </div>
+                        
+                    </form>
+        
+                                    </div> 
+                                    {% if errorText %}
+        <div class="alert alert-dismissible alert-danger">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          {{ errorText }}
+        </div>
+      {% endif %}
+      {% if successText %}
+        <div class="alert alert-dismissible alert-success">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          {{ successText }}
+        </div>
+      {% endif %}
+                                </div>     
+                                 <div class="col-lg-6">
+                                     <img src="img/aqua/bg/output-onlinepngtools (2).png" alt="shape" class="s-img">
+                                </div>
+                            </div>
+                   
+                </div>
+            </section>
+            <!-- slider-area-end -->
+			 <!-- services-area -->
+            <section id="about" class="services-area services-bg pt-25 pb-20" style="background-image: url(img/aqua/shape/header-sape2.png); background-position: right top; background-size: auto;background-repeat: no-repeat;">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-7 col-lg-10">
+                            <div class="section-title text-center pl-40 pr-40 mb-45">
+                                <h2>Ease of Use</h2>
+                                <p>Service details are located under the services. You can shop easily by just entering your user id or link. We offer you easy use with our Social Media Panel support team and ease of use.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-12 mb-30">
+                            <div class="s-single-services active text-center">
+                              <ul class="small-title mb-30">
+                                            <li>1</li>
+                                      </ul>
+                                <div class="services-icon">
+                                   <img src="img/aqua/icon/f-icon1.png"/>
+                                </div>
+                                <div class="second-services-content">
+                                    <h5>Secure Payment Options</h5>
+                                    <p>In SMMPanel Payment options, there are many options such as credit card, debit card, eft. Your money will be deposited in your account within a maximum of 10 minutes. Online and secure payment is available.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12 mb-30">
+                            <div class="s-single-services text-center">
+                              <ul class="small-title mb-30">
+                                            <li>2</li>
+                                      </ul>
+                                 <div class="services-icon">
+                                  <img src="img/aqua/icon/f-icon3.png"/>
+                                </div>
+                                <div class="second-services-content">
+                                    <h5>Friendly Customer Support</h5>
+                                    <p>We deal with all kinds of problems of our customers and help them solve all their problems.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12 mb-30">
+                           <div class="s-single-services text-center">
+                             <ul class="small-title mb-30">
+                                            <li>3</li>
+                                      </ul>
+                                <div class="services-icon">
+                                  <img src="img/aqua/icon/f-icon2.png"/>
+                                </div>
+                                <div class="second-services-content">
+                                    <h5>Cheap Services</h5>
+									<p>There are usually inexpensive social media services available. Quality services are a click or two more expensive. The differences between them are speed and painstaking work. Cheap Services are slower than others.</p>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                  
+                </div>
+            </section>
+            <!-- services-area-end -->
+			<!-- choose-area -->
+            <section class="choose-area pt-100 pb-60 p-relative" style="background-image: url(img/aqua/shape/header-sape3.png); background-position: right center; background-size: auto;background-repeat: no-repeat;">
+                <div class="chosse-img" style="background-image:url(img/aqua/bg/easy-m-bg.png)"></div>
+                <div class="chosse-img2"><img src="img/aqua/bg/Ehc4a4.png" alt="mobile"/></div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-5">
+                        </div>
+                        <div class="col-xl-7">
+                            <div class="choose-wrap">
+                                <div class="section-title w-title left-align mb-25">
+                                    <h2>our vision</h2>
+                                </div>
+                                <div class="choose-content">
+                                    <p>To provide regular and quality service with our cheap price policy by bringing all our customers together with smooth and fast services.</p>
+                                  <p>In order for you to stand out on the Internet, we have been providing you with 24/7 uninterrupted service for 10 years. For Web Site Design, Search Engine Optimization (SEO), Social Media Management and Many Platforms, Especially Facebook, Twitter, Instagram, Youtube; We Provide Followers, Subscribers, Likes, Views, Interaction Services. Visit Our Site To Browse Our References And Get More Information.</p>
+                              </div>
+                                   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- choose-area-end -->
+            <!-- how-app-work -->
+            <section id="features" class="app-work pt-70 pb-100 p-relative" style="background-image: url(img/aqua/shape/header-sape4.png); background-position: right center; background-size: auto;background-repeat: no-repeat;">            
+                <div class="container">
+                    <div class="row align-items-center ">
+                       
+                        <div class="col-xl-6">
+                            <div class="choose-wrap">
+                                <div class="section-title w-title left-align mb-15">
+                                    <h2>So How Does It Work?</h2>
+                                </div>
+                                <div class="app-work-content mt-20">
+                                    <ul>
+                                        <li>
+                                            <div class="icon"><img src="img/aqua/icon/apw-Icon1.png"></div> 
+                                            <div class="text">
+                                                <h4>Register</h4>
+                                                <p>Memberships to our site are completely free and will always remain free.</p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="icon"><img src="img/aqua/icon/apw-Icon2.png"></div> 
+                                            <div class="text">
+                                                <h4>Load Balance</h4>
+                                                <p>You can make online payments with 3D Secure. If you wish, you can make money transfer and EFT through contracted banks.</p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="icon"><img src="img/aqua/icon/apw-Icon3.png"></div> 
+                                            <div class="text">
+                                                <h4>Order</h4>
+                                                <p>After choosing the service you want and filling out the form, you can easily place an order.</p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="col-xl-6">
+                            <img src="img/aqua/bg/app-work-img.png" alt="app-work-img" class="img">
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- how-app-work -->
+            <!-- video-area -->
+            <section class="video-area pt-100 pb-100 p-relative">                
+                <div class="video-img2">
+                    
+                    <img src="img/aqua/bg/204072 (1).jpg" alt="mobile"/>
+                
+                    <a href="https://www.youtube.com/watch?v=ioNng23DkIM" class="popup-video"><img src="img/aqua/bg/play-btn.png" alt="play-btn.png"></a>
+                </div>
+                <div class="video-img3">
+                    <img src="img/aqua/shape/header-sape5.png" alt="header-sape4">
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-6">
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="video-wrap">
+                                <div class="section-title w-title left-align mb-25">
+                                    <h2>{{ site['site_name'] }}</h2>
+                                </div>
+                                <div class="video-content">
+                                    <p>Meet with the outstanding features of Turkey's best quality SMM Panel.</p>
+                                     <ul>
+                                        <li>
+                                            <div class="icon"><img src="img/aqua/icon/vs-icon.png"></div> 
+                                            <div class="text">You can choose the language you want and use it.</div>
+                                        </li>
+                                        <li>
+                                            <div class="icon"><img src="img/aqua/icon/vs-icon.png"></div> 
+                                            <div class="text">24/7 Live Support is available. You can report your requests, questions and complaints.</div>
+                                        </li>
+                                        <li>
+                                            <div class="icon"><img src="img/aqua/icon/vs-icon.png"></div> 
+                                            <div class="text">Responsive Compatible. It offers easy use on your mobile devices.  </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- video-area-end -->
+           
+            
+            <!-- faq-area -->
+            <section class="faq-area pb-100" style="background-image: url(img/aqua/shape/header-sape6.png); background-position: right center; background-size: auto;background-repeat: no-repeat;">
+                <div class="container">
+                    <div class="row align-items-end">                        
+                        <div class="col-lg-6">
+                            <div class="faq-img text-right">
+                                <img src="img/aqua/bg/feel-img.png" alt="img" class="img">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="section-title left-align mb-50">                               
+                                <h2>Frequently asked Questions</h2>
+                                <p>Everything you are wondering about is here. If you want to get more detailed information about your problems, please contact us.</p>
+                            </div>
+                            <div class="faq-wrap">
+                                <div class="accordion" id="accordionExample">
+                                    <div class="card">
+                                        <div class="card-header" id="headingThree">
+                                            <h2 class="mb-0">
+                                                <button class="faq-btn" type="button" data-toggle="collapse"
+                                                    data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                                                    I HAVE SMM PANEL, HOW CAN I CONNECT SERVICES TO YOU?
+                                                </button>
+                                            </h2>
+                                        </div>
+                                        <div id="collapseThree" class="collapse show" aria-labelledby="headingThree"
+                                            data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                If you have an SMM Panel, api key is available from the settings section at the top right after logging in as a member. By entering the API key on your own panel, you can automatically connect the services from the system to your own system and make sales. For detailed information, you can reach the on-site support section.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header" id="headingOne">
+                                            <h2 class="mb-0">
+                                                <button class="faq-btn collapsed" type="button" data-toggle="collapse"
+                                                    data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                                   DO I NEED A PASSWORD?
+                                                </button>
+                                            </h2>
+                                        </div>
+                                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                            <div class="card-body">
+                                               Your password is not required for all services in the system. We don't want your password.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header" id="headingTwo">
+                                            <h2 class="mb-0">
+                                                <button class="faq-btn collapsed" type="button" data-toggle="collapse"
+                                                    data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                  CAN I SHARE FROM MY PROFILE? CAN I LIKE SOMEONE ELSE?
+                                                </button>
+                                            </h2>
+                                        </div>
+                                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                            <div class="card-body">
+                                               You definitely don't like or follow anyone else. It is not a system with access to any application, like other applications.
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- faq-aread-end -->
+            
+       
+          
+		
+			
+            <!-- testimonial-area -->
+            <section id="testimonios" class="testimonial-area testimonial-p  pt-100 pb-70" style="background-image:url(img/aqua/bg/client-bg.png); background-repeat: no-repeat; background-position: right center;">
+                <div class="container">
+                    <div class="row">    
+                        <div class="col-lg-6">
+                             <div class="section-title center-align">                              
+                                <h2>Customer comments</h2>
+                                <p>5000+ Happy Customer's Comments</p>
+                            </div>
+                        </div>
+                       <div class="col-lg-12">
+                           
+                            <div class="testimonial-active">
+         
+                                 <div class="col-xl-4">
+                                    <div class="single-testimonial">
+                                       <div class="testi-author text-left">
+                                            <img src="img/aqua/testimonial/testi_avatar2.png" alt="img">
+                                            <div class="ta-info">
+                                                <h6>Riya Singh</h6>
+                                                <span>India</span>
+                                            </div>
+                                        </div>
+                                         <div class="qutation"><img src="img/aqua/bg/qutation.png" alt="qutation.png"></div>
+                                         <p>{{ site['site_name'] }} I am extremely satisfied with their services since I started working with</p>
+                                        
+                                       
+                                    </div>
+                                </div>
+                                 <div class="col-xl-4">
+                                    <div class="single-testimonial">
+                                         <div class="testi-author text-left">
+                                            <img src="img/aqua/testimonial/testi_avatar3.png" alt="img">
+                                            <div class="ta-info">
+                                                <h6>Fethi Cetin</h6>
+                                                <span>USA</span>
+                                            </div>
+                                        </div>
+                                         <div class="qutation"><img src="img/aqua/bg/qutation.png" alt="qutation.png"></div>
+                                        <p>Thanks for always working with a focus on customer satisfaction with reliable, high quality and fast services. {{ site['site_name'] }}</p>
+                                        
+                                    </div>
+                                </div>
+                                 <div class="col-xl-4">
+                                    <div class="single-testimonial">
+                                        <div class="testi-author text-left">
+                                            <img src="img/aqua/testimonial/testi_avatar.png" alt="img">
+                                            <div class="ta-info">
+                                                <h6>Arman</h6>
+                                                <span>GOA</span>
+                                            </div>
+                                        </div>
+                                        <div class="qutation"><img src="img/aqua/bg/qutation.png" alt="qutation.png"></div>
+                                         <p>A panel that really does its job right. Thanks {{ site['site_name'] }}</p>
+                                        
+                                    </div>
+                                </div>
+                                
+                                
+                            </div>
+                        </div>
+						
+                    </div>
+                </div>
+            </section>
+            <!-- testimonial-area-end -->
+           
+           
+       
+            <!-- contact-area -->
+            <section id="contact" class="contact-area contact-bg  pt-50 pb-100 p-relative fix"  style="background-image: url(img/aqua/shape/header-sape8.png); background-position: right center; background-size: auto;background-repeat: no-repeat;">
+                <div class="container">
+             
+					<div class="row">
+						<div class="col-lg-6">
+                            <div class="contact-img2">
+                                <img src="img/aqua/bg/illustration.png" alt="test">
+                            </div>						
+						</div>
+						<div class="col-lg-6">
+                            <div class="section-title mb-40">                              
+                                <h2>Are You Ready to Become a {{ site['site_name'] }}?</h2>
+                                  <p>So What Are You Standing? Login Now and Take the First Step on the Path of {{ site['site_name'] }}.</p>
+                            </div>
+						<form method="POST" action="/auth" class="contact-form">
+							<div class="row">
+                            <div class="col-lg-12">
+                                <div class="contact-field p-relative c-name mb-20">                                    
+                                    <input type="text" name="username" placeholder="username">
+                                </div>                               
+                            </div>
+							 <div class="col-lg-12">                    
+                                <div class="contact-field p-relative c-email mb-20">                                    
+                                    <input type="password" name="password" placeholder="password">
+                                </div>                                
+                            </div>
+							          
+
+          {% if captcha %}
+            <div class="form-group">
+              <div class="g-recaptcha" data-sitekey="{{ captchaKey }}"></div>
+            </div>
+          {% endif %}
+							
+                            <div class="col-lg-12">
+                         
+                                <button class="btn">Login</button>
+                            </div>
+                            </div>
+                        
+                    </form>
+						</div>
+					</div>
+                    
+                </div>
+               
+            </section>
+            <!-- contact-area-end -->
+        </main>
+        <!-- main-area-end -->
+        <!-- footer -->
+        <footer class="footer-bg footer-p pt-60" style="background-image: url(img/aqua/bg/f-bg.png); background-position: center top; background-size: auto;background-repeat: no-repeat;">            
+  
+            <div class="footer-top">
+                <div class="container">
+                    <div class="row justify-content-between">
+                        <div class="col-xl-3 col-lg-3 col-sm-6">
+                            <div class="footer-widget mb-30">
+                                <div class="logo mt-15 mb-15">
+                                    <a href="#">
+  {% if site["logo"] %}
+                                      <img src="{{ site['logo'] }}" alt="{{ site["site_name"] }}" title="{{ site["site_name"] }}" height="50" width="%100">
+                                    {% else %}
+                                      {{ site["site_name"] }}
+                                    {% endif %}                                       </a>
+                                </div>
+                                <div class="footer-text mb-20">
+                                    <p>It is the SMM panel where you can handle all your transactions quickly and easily thanks to its 24/7 fully automatic infrastructure.</p>
+                                </div>
+                                <div class="footer-social">
+                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                    <a href="#"><i class="fab fa-instagram"></i></a>
+                                    <a href="#"><i class="fab fa-google-plus-g"></i></a>
+                                </div>
+                            </div>
+                        </div>
+						<div class="col-xl-2 col-lg-3 col-sm-6">
+                            <div class="footer-widget mb-30">
+                                <div class="f-widget-title">
+                                    <h5>Sitelinks
+</h5>
+                                </div>
+                                <div class="footer-link">
+                                    <ul>                                        
+                                        <li><a href="#contact">{{ lang['signin.title'] }}</a></li>
+										<li><a href="signup">{{ lang['signup.title'] }}</a></li>
+                                        <li><a href="blog">{{ lang['blog.title'] }}</a></li>
+                                        <li><a href="faq">{{ lang['faq.title'] }}</a></li>
+                                        <li><a href="terms">{{ lang['terms.title'] }}</a></li>                                <li><a href="api">{{ lang['api.title'] }}</a></li>                                      
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-sm-6">
+                            <div class="footer-widget mb-30">
+                                <div class="f-widget-title">
+                                    <h5>Contact us</h5>
+                                </div>
+                                  <div class="footer-social">
+                                   <a href="https://wa.me+905555555555">
+                    <i class="fa fa-whatsapp"></i></a>
+                                    <a href="mailto:mail@mail.com"> 
+                     <i class="fa fa-envelope"></i></a>
+                                    <a href="https://t.me/">
+                     <i class="fa fa-telegram"></i></a>
+                                    
+                                    
+                                    </div>
+                                   
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright-wrap text-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="copyright-text">
+                                <p>{{ site['site_name'] }} © Copyright 2022 All rights reserved.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- footer-end -->
+
+    {{ footerCode }}
+
+
+
+{% for lang in site['languages'] %}
+  {% if lang['active'] %}
+    <script src="https://www.google.com/recaptcha/api.js?hl={{ lang['code'] }}"></script>
+  {% endif %}
+{% endfor %}
+
+		<!-- JS here -->
+        <script src="js/aqua/aqua/modernizr-3.5.0.min.js"></script>
+        <script src="js/aqua/vendor/jquery-1.12.4.min.js"></script>
+        <script src="js/aqua/popper.min.js"></script>
+        <script src="js/aqua/bootstrap.min.js"></script>
+        <script src="js/aqua/one-page-nav-min.js"></script>
+        <script src="js/aqua/slick.min.js"></script>
+        <script src="js/aqua/ajax-form.js"></script>
+        <script src="js/aqua/paroller.js"></script>
+        <script src="js/aqua/wow.min.js"></script>
+        <script src="js/aqua/js_isotope.pkgd.min.js"></script>
+        <script src="js/aqua/imagesloaded.min.js"></script>
+        <script src="js/aqua/parallax.min.js"></script>
+        <script src="js/aqua/jquery.waypoints.min.js"></script>
+        <script src="js/aqua/jquery.counterup.min.js"></script>
+        <script src="js/aqua/jquery.scrollUp.min.js"></script>
+        <script src="js/aqua/typed.js"></script>
+        <script src="js/aqua/parallax-scroll.js"></script>
+        <script src="js/aqua/jquery.magnific-popup.min.js"></script>
+        <script src="js/aqua/element-in-view.js"></script>
+        <script src="js/aqua/swiper.min.js"></script>
+        <script src="js/aqua/main.js"></script>
+      
+        
+        
+    </body>
+</html>

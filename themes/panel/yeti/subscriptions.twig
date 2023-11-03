@@ -1,0 +1,178 @@
+{% include 'header.twig' %}
+
+         <div class="app-content">
+            <!-- page-content -->
+            <div class="container-fluid">
+               <section class="services-list mt-4">
+                  <div class="d-card">
+                     <div class="d-card-body p0">
+                        <div class="orders-btn py-3">
+                           <ul class="nav nav-pills orderNav">
+                              <li class="mr-2">
+                                 <a {% if 'all' == status %} class="active"{% endif %} href="subscriptions"><i class="fas fa-filter mr-1"></i>{{ lang['subscriptions.status.all'] }}</a>
+                              </li>
+                              <li class="mr-2">
+                                 <a {% if 'active' == status %} class="active"{% endif %} href="subscriptions/active"><i class="fas fa-spinner mr-1"></i>{{ lang['subscriptions.status.active'] }}</a>
+                              </li>
+                              <li class="mr-2">
+                                 <a {% if 'paused' == status %} class="active"{% endif %} href="subscriptions/paused"><i class="fas fa-file-import mr-1"></i>{{ lang['subscriptions.status.paused'] }}</a>
+                              </li>
+                              <li class="mr-2">
+                                 <a {% if 'completed' == status %} class="active"{% endif %} href="subscriptions/completed"><i class="far fa-check-circle mr-1"></i>{{ lang['subscriptions.status.completed'] }}</a>
+                              </li>
+                              <li class="mr-2">
+								 <a {% if 'expired' == status %} class="active"{% endif %} href="subscriptions/expired"><i class="fas fa-hourglass-start mr-1"></i>{{ lang['subscriptions.status.expired'] }}</a>
+						      </li>
+                              <li class="mr-2">
+                                 <a {% if 'canceled' == status %} class="active"{% endif %} href="subscriptions/canceled"><i class="fas fa-ban mr-1"></i>{{ lang['subscriptions.status.canceled'] }}</a>
+                              </li>
+                              <li class="pull-right search mr-2">
+                                 <form action="{{ page['url'] }}" method="get" id="history-search">
+                                    <div class="dfb-search">
+                                       <input type="text" name="search" value="{{ search }}" placeholder="Siparişleri ara" class="dfb-input">
+                                       <button type="submit" class="dfb-submit">
+                                       <i class="fas fa-search"></i>
+                                       </button>
+                                    </div>
+                                 </form>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="dash-list mt-4">
+                           <div class="accordion" id="orderDetail">
+						    {% for order in orders %}
+                              <div class="card">
+                                 <div class="card-header" id="ordHead{{ order['id'] }}">
+                                    <a href="#" class="btn-header-link" data-toggle="collapse" data-target="#subs{{ order['id'] }}"
+                                       aria-expanded="true" aria-controls="subs{{ order['id'] }}">
+                                       <div class="row align-items-center">
+                                          <div class="col-lg-2 col-12 ordNumber">
+                                             <strong>Order number</strong>: <span id="ordersid{{ order['id'] }}"><code>{{ order['id'] }}</code> <em  id="paparaCopy" href="javascript:void(0);" onclick="copywalletid('#ordersid{{ order['id'] }}')"><small><span  data-toggle="tooltip" data-placement="top" title="" data-original-title="Kopyala" class="far fa-copy"></span></small></em> </span>
+                                          </div>
+                                          <div class="col-lg-7 col-12">
+                                             <h4>{{ order['link'] }}</h4>
+                                             <small>{{ order['date_created'] }}</small>
+                                          </div>
+                                          <div class="col-lg-3 col-12">
+											{% if order['status_name'] == 'Tamamlanmış' %}
+                                             <div class="ordStatus align-items-center" style="color: #28a745">
+                                                <i class="fas fa-check-circle"></i>
+                                                <span>Order completed</span>
+                                             </div>
+											{% endif %}
+											{% if order['status_name'] == 'Active' %}
+                                             <div class="ordStatus align-items-center" style="color: #ff870b">
+                                                <i class="fas fa-spinner"></i>
+                                                <span>Active</span>
+                                             </div>
+											{% endif %}
+											{% if order['status_name'] == 'expired' %}
+                                             <div class="ordStatus align-items-center" style="color: #ffcc29">
+                                                <i class="fas fa-clock"></i>
+                                                <span>expired</span>
+                                             </div>
+											{% endif %}
+											{% if order['status_name'] == 'stopped' %}
+                                             <div class="ordStatus align-items-center" style="color: #11698e">
+                                                <i class="fas fa-star-half-alt"></i>
+                                                <span>stopped</span>
+                                             </div>
+											{% endif %}
+											{% if order['status_name'] == 'cancelled' %}
+                                             <div class="ordStatus align-items-center" style="color: #ec4646">
+                                                <i class="fas fa-times-circle"></i>
+                                                <span>cancelled</span>
+                                             </div>
+											{% endif %}
+                                          </div>
+                                       </div>
+                                    </a>
+                                 </div>
+                                 <div id="subs{{ order['id'] }}" class="collapse" aria-labelledby="ordHead{{ order['id'] }}" data-parent="#orderDetail">
+                                    <div class="card-body">
+                                       <ul>
+                                          <li><strong>Servis:</strong>{{ order['service'] }}</li>
+                                          <li><strong>Link:</strong> 
+                                             <a href="{{ order['link'] }}" target="_blank">{{ order['link'] }}</a>
+                                          </li>
+                                          <li><strong>Quantity:</strong> {% if order['quantity_min'] == order['quantity_max'] %}{{ order['quantity_max']}}{% else %}{{ order['quantity_min'] }}-{{ order['quantity_max'] }}{% endif %}</li>
+                                          <li><strong>Counter:</strong> {% if order['current_count'] %}
+											<a href="orders?subscription={{ order['id'] }}">{{ order['current_count'] }}</a>
+										  {% else %}
+											{{ order['current_count'] }}
+														{% endif %}
+										  / {{ order['posts'] }}</li>
+                                          <li><strong>Delay:</strong> {{ order['delay'] }}</li>
+                                          <li><strong>Creation:</strong> {{ order['date_created'] }}</li>
+                                          <li><strong>update:</strong> {{ order['date_updated'] }}</li>
+                                          <li><strong>Finish:</strong> {{ order['date_expiry'] }}</li>
+										  <li>
+											  {% if order['status'] == "active" %}
+												<a href="subscriptions/pause/{{order['id']}}" class="btn btn-primary btn-xs">{{ lang['subscriptions.button.pause'] }}</a>
+											  {% endif %}
+											  {% if order['status'] == "paused" %}
+												<a href="subscriptions/resume/{{order['id']}}" class="btn btn-primary btn-xs">{{ lang['subscriptions.button.unpause'] }}</a>
+												<a href="subscriptions/stop/{{order['id']}}" class="btn btn-default btn-xs">{{ lang['subscriptions.button.cancel'] }}</a>
+											  {% endif %}
+										  </li>
+                                       </ul>
+                                    </div>
+                                 </div>
+                              </div>
+							  {% endfor %}
+
+                           </div>
+                        </div>
+                        <!-- dash-list -->
+                     </div>
+                  </div>
+       {% if pagination["count"] > 1 %}
+        <ul class="pagination">
+
+          {% if pagination["current"] != 1 %}
+            <li>
+              <a href="subscriptions/{{ status }}/{{ pagination["previous"] }}{% if search %}?search={{ search }}{% endif %}" aria-label="Previous">
+                <span aria-hidden="true">«</span>
+              </a>
+            </li>
+          {% endif %}
+
+          {% set r, l = 3, 3 %}
+
+          {% if pagination['current'] == 1 %}
+            {% set r = 7 %}
+          {% endif %}
+
+          {% if pagination['current'] == 2 %}
+            {% set r = 5 %}
+          {% endif %}
+
+          {% if pagination['current'] >= pagination['count'] %}
+            {% set l = 5 %}
+          {% endif %}
+
+          {% for page in 1..pagination["count"] %}
+            {% if page >= (pagination['current']-l) and page <= (pagination['current']+r) %}
+              <li{% if page == pagination['current'] %} class="active" {%endif%}><a href="subscriptions/{{ status }}/{{ page }}{% if search %}?search={{ search }}{% endif %}">{{ page }}</a></li>
+            {%endif%}
+          {% endfor %}
+
+          {% if pagination['current'] < pagination['count'] %}
+            <li>
+              <a href="subscriptions/{{ status }}/{{ pagination['next'] }}{% if search %}?search={{ search }}{% endif %}" aria-label="Next">
+                <span aria-hidden="true">»</span>
+              </a>
+            </li>
+          {% endif %}
+
+        </ul>
+      {% endif %}
+               </section>
+            </div>
+            <!-- container end -->
+         </div>
+         <!-- app-content -->
+
+      </div>
+
+{% include 'footer.twig' %}

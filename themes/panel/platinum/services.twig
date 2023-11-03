@@ -1,0 +1,144 @@
+{% include 'header.twig' %}
+<style>
+   @media only screen and (max-width:768px){
+   .masaustu{
+   display:None;
+   }
+   }
+   @media only screen and (min-width:768px){
+   .mobil{
+   display:None;
+   }
+   }
+   @media only screen and (max-width:768px){
+   .web{
+   display:None;
+   }
+   }
+</style>
+<div class="masaustu">
+<div class="container">
+   <div class="row">
+      <div class="col-lg-12">
+    
+                  {% for category in serviceCategory %}    
+                
+                  <div class="well well-float">  
+                  <div style="    background: linear-gradient(to left, rgba(50, 100, 245, 0.90), rgba(74, 84, 232, 0.88), rgba(91, 66, 219, 0.85), rgba(104, 44, 203, 0.88), rgba(114, 2, 187, 0.90));" class="card-header bg-primary text-center text-white">
+      <h3 class="my-3"><strong><center>{{ category["category_name"] }}</strong></center></h3>
+    </div>
+    <br>
+             <div class="form-group">
+            <table class="table w-100 table-res table-sm table-hover table-striped table-light ">
+               <thead>
+                  <tr>
+                     <th><label class="control-label">{{ lang['services.id'] }}</label></th>
+                     <th class="width-service-name">{{ lang['services.name'] }}</th>
+                     <th class="nowrap">{{ lang['services.price'] }}</th>
+                     <th class="nowrap">{{ lang['services.min'] }}</th>
+                     <th class="nowrap">{{ lang['services.max'] }}</th>
+                     {% if avarageTime %}
+                     <th class="nowrap">{{ lang['services.avarage'] }} <i class="fa fa-exclamation-circle"></i></th>
+                     {% endif %}
+                     <th class="nowrap t-r">{{ lang['neworder.description'] }}</th>
+                  </tr>
+               </thead>
+               <tbody>
+    
+                  {% for service in category['services'] %}
+                  <tr>
+                     <td>{{ service["service_id"] }}</td>
+                     <td>{{ service["service_name"] }}</td>
+                     <td>{{ service["service_price"] }} {{ site['currency'] }}</td>
+                     <td>{{ service["service_min"] }}</td>
+                     <td>{{ service["service_max"] }}</td>
+                     {% if avarageTime %}
+                     <td>{{ service["service_speed"] }}</td>
+                     {% endif %}
+                     <td class="t-r">
+                        <button class="btn btn-primary btn-xs"  data-toggle="modal" data-target="#service_desc-{{ service['service_id'] }}"><i class="fa fa-eye"></i></button>
+                     </td>
+                  </tr>
+                  <div id="service_desc-{{ service['service_id'] }}" class="modal fade" role="dialog">
+                                 <div class="modal-dialog">
+                                    <div class="modal-content">
+                                       <div class="modal-header">
+                                         <center><h4 class="modal-title"><b>{{ service["service_name"] }}</b></h4></center> <button type="button" class="close" data-dismiss="modal">×</button>
+                                          
+                                       </div>
+                           <div class="modal-body">
+                              <p>{{ service["service_description"] }}</p>
+                           </div>
+                           <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                           </div>
+                        </div>
+                     </div></div>
+                  {% endfor %}     </tbody>
+            </table>
+         </div>
+         </div>
+                  {% endfor %}
+          
+      </div>
+   </div>
+</div>
+</div>
+<div class="mobil">
+   <div class="bosluk">
+      <div class="container">
+         <div class="row">
+            {% for category in serviceCategory %}
+
+            <div class="col-lg-12">
+               <div class="well well-float">
+                    <h3 class="msk"  style="background-color:#b138ff;    border-radius: 10px;">
+                  <font color="white">
+                     <center><i class="fa fa-{{ category["category_icon"] }}"></i><b>{{ category["category_name"] }}</b><i class="fa fa-{{ category["category_icon"] }}"></i></center>
+                  </font>
+               </h3>
+                  <div class="w-title">
+            {% for service in category['services'] %}      
+       
+                     <b>#{{ service["service_id"] }}</b>
+                     <br>
+                     <b>{{ service["service_name"] }}</b>
+                     <br>
+                     <small style="color: #c4c5c4">
+                     Minimum:<b><font style="color:#c4c5c4"> {{ service["service_min"] }}</font></b> - Maksimum:<b><font style="color:#c4c5c4"> {{ service["service_max"] }}</font></b>
+                     </small>
+                     <br><br>
+                     <strong style="text-align: center;font-size: 16px;font-weight: bolder;border: 1px solid #cacaca;padding: 4px;border-radius: 5px;">
+                     <b>
+                     {{ service["service_price"] }} {{ site['currency'] }}
+                     </b><small style="color: #c4c5c4;font-size: 10px;">/ 1.000 Adet</small>
+                     </strong><br><br>
+                     {% if avarageTime %}
+                      <small style="color: #c4c5c4">
+                     {{ lang['services.avarage'] }}: {{ service["service_speed"] }}
+                     </small>
+                     {% endif %}
+            <hr>      
+            {% endfor %}
+            </div>
+               </div>
+            </div>
+            <br>
+            {% endfor %}
+         </div>
+      </div>
+   </div>
+</div>
+{% if contentText %}
+<div class="container">
+   <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+         <div class="well ">
+            {{ contentText }}
+         </div>
+      </div>
+   </div>
+</div>
+{% endif %}
+
+{% include 'footer.twig' %}

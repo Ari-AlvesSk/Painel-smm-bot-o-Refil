@@ -1,0 +1,118 @@
+{{ footerCode }}
+
+{% for script in scriptList %}
+    <script type="text/javascript" src="{{ script }}"></script>
+{% endfor %}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        setInterval(function () {
+            const leftWell = document.getElementById("left-well");
+            const rightWell = document.getElementById("right-well");
+  			if(leftWell && rightWell)
+            	rightWell.style.height = leftWell.clientHeight - 68 + "px";
+        }, 100);
+    });
+
+    const alertArea = document.getElementById("alertArea");
+    const successArea = document.getElementById("successArea");
+	if(successArea){
+      successArea.style.display = "none";
+      successArea.style.marginTop = "8px";
+    }
+  	if(alertArea){
+    	alertArea.style.display = "none";
+    	alertArea.style.marginTop = "8px";
+	}
+    function handleOrderType(selectObject) {
+        var element = document.getElementById("order-grubu");
+        var element2 = document.getElementById("payment-grubu");
+        var optional = document.getElementById("other-grubu");
+        if (selectObject.value == "Problema com Pedido" || selectObject.value == "VIP - Order") {
+            element.style.display = "block";
+            element2.style.display = "none";
+            optional.style.display = "inline";
+        } else if (selectObject.value == "Problema com Pagamento" || selectObject.value == "VIP - Payment") {
+            element.style.display = "none";
+            element2.style.display = "block";
+            optional.style.display = "none";
+        } else if (selectObject.value == "Outro Problema" || selectObject.value == "VIP - Other") {
+            element.style.display = "none";
+            element2.style.display = "none";
+            optional.style.display = "none";
+        }
+    }
+
+    function validateOrderId() {
+        const status = document.getElementById("orderid").value.trim() !== "";
+        if (status === false) {
+            document.getElementById("orderid").className += " is-invalid";
+            alertChild = document.createElement("span");
+            alertChild.style.display = "block";
+            alertChild.innerHTML = "É obrigatório inserir o número do pedido!";
+            alertArea.appendChild(alertChild);
+            alertArea.style.display = "block";
+        }
+        return status;
+    }
+
+    function validateMessage() {
+        var status = document.getElementById("mesaj").value.trim() !== "";
+  		const statuss = document.getElementById("mesaj").value.length;
+        if (status === false) {
+            document.getElementById("mesaj").className += " is-invalid";
+            alertChild = document.createElement("span");
+            alertChild.style.display = "block";
+            alertChild.innerHTML = "A mensagem é obrigatória!";
+            alertArea.appendChild(alertChild);
+            alertArea.style.display = "block";
+        }
+  		else if (statuss < 10) {
+  			status = false;
+            document.getElementById("mesaj").className += " is-invalid";
+            alertChild = document.createElement("span");
+            alertChild.style.display = "block";
+            alertChild.innerHTML = "Você deve especificar sua mensagem com pelo menos 10 caracteres!";
+            alertArea.appendChild(alertChild);
+            alertArea.style.display = "block";
+        }
+        return status;
+    }
+
+    $("#send-ticket").click(function (event) {
+        event.preventDefault();
+        alertArea.innerHTML = "";
+        alertArea.style.display = "none";
+        successArea.style.display = "none";
+
+        document.getElementById("orderid").className = document.getElementById("orderid").className.replace("is-invalid", "");
+
+        document.getElementById("mesaj").className = document.getElementById("mesaj").className.replace("is-invalid", "");
+
+        var subject = document.getElementById("Konu").value;
+        var message = "";
+        if (subject == "Problema com Pedido" || subject == "VIP - Order") {
+            var status = true;
+            if (!validateOrderId()) status = false;
+            if (!validateMessage()) status = false;
+            if (!status) return;
+
+            message = "ID do pedido: " + document.getElementById("orderid").value + "\n" + ": " + document.getElementById("request").value + "\n Descrição detalhada: " + document.getElementById("mesaj").value;
+        } else if (subject == "Problema com Pagamento" || subject == "VIP - Payment") {
+            if (!validateMessage()) return;
+
+            message = "Problema com Pagamento: " + document.getElementById("payment").value + "\n Descrição detalhada: " + document.getElementById("mesaj").value;
+        } else {
+            if (!validateMessage()) return;
+
+            message = document.getElementById("mesaj").value;
+        }
+		document.getElementById("tmessage").value = message;
+        $("#ticketsend").submit();
+        return false;
+    });
+</script>
+<!-- GetButton.io widget --> <script type="text/javascript">     (function () {         var options = {             whatsapp: "+918810409287", // WhatsApp number             call_to_action: "Message us", // Call to action             position: "right", // Position may be 'right' or 'left'         };         var proto = document.location.protocol, host = "getbutton.io", url = proto + "//static." + host;         var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';         s.onload = function () { WhWidgetSendButton.init(host, proto, options); };         var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);     })(); </script> <!-- /GetButton.io widget -->
+</body>
+</html>
+

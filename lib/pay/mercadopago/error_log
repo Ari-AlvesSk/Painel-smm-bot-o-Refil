@@ -1,0 +1,15 @@
+[14-May-2022 13:54:51 America/Sao_Paulo] PHP Notice:  Undefined index: external_reference in /home/zeyinsta/public_html/lib/pay/mercadopago/notificacao.php on line 52
+[14-May-2022 13:55:00 America/Sao_Paulo] PHP Notice:  Undefined index: external_reference in /home/zeyinsta/public_html/lib/pay/mercadopago/notificacao.php on line 52
+[15-May-2022 14:12:07 America/Sao_Paulo] PHP Notice:  Undefined index: external_reference in /home/zeyinsta/public_html/lib/pay/mercadopago/notificacao.php on line 52
+[17-May-2022 22:16:34 America/Sao_Paulo] PHP Notice:  Undefined index: external_reference in /home/zeyinsta/public_html/lib/pay/mercadopago/notificacao.php on line 52
+[17-May-2022 22:16:35 America/Sao_Paulo] PHP Notice:  Undefined index: external_reference in /home/zeyinsta/public_html/lib/pay/mercadopago/notificacao.php on line 52
+[17-May-2022 22:17:23 America/Sao_Paulo] PHP Notice:  Undefined index: balance in /home/zeyinsta/public_html/lib/pay/mercadopago/notificacao.php on line 69
+[17-May-2022 22:17:23 America/Sao_Paulo] PHP Notice:  Undefined index: external_reference in /home/zeyinsta/public_html/lib/pay/mercadopago/notificacao.php on line 52
+[17-May-2022 22:36:54 America/Sao_Paulo] PHP Notice:  Undefined index: external_reference in /home/zeyinsta/public_html/lib/pay/mercadopago/notificacao.php on line 52
+[17-May-2022 22:36:55 America/Sao_Paulo] PHP Notice:  Undefined index: external_reference in /home/zeyinsta/public_html/lib/pay/mercadopago/notificacao.php on line 52
+[17-May-2022 22:37:23 America/Sao_Paulo] PHP Notice:  Undefined index: balance in /home/zeyinsta/public_html/lib/pay/mercadopago/notificacao.php on line 69
+[17-May-2022 22:37:23 America/Sao_Paulo] PHP Notice:  Undefined index: external_reference in /home/zeyinsta/public_html/lib/pay/mercadopago/notificacao.php on line 52
+[17-May-2022 22:53:43 America/Sao_Paulo] PHP Notice:  Undefined index: external_reference in /home/zeyinsta/public_html/lib/pay/mercadopago/notificacao.php on line 52
+[17-May-2022 22:53:55 America/Sao_Paulo] PHP Notice:  Undefined index: balance in /home/zeyinsta/public_html/lib/pay/mercadopago/notificacao.php on line 69
+[17-May-2022 22:53:55 America/Sao_Paulo] PHP Notice:  Undefined index: external_reference in /home/zeyinsta/public_html/lib/pay/mercadopago/notificacao.php on line 52
+[31-May-2022 02:00:13 UTC] {"message":"unit_price needed","error":"invalid_items","status":400,"cause":null}

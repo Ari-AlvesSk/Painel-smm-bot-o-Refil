@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+{% for lang in site['languages'] %}
+{% if lang['active'] %}
+<html lang="{{ lang['code'] }}">
+{% endif %}
+{% endfor %}
+<head>
+  <base href="{{ site['url'] }}/">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ title }}</title>
+  <meta name="keywords" content="{{ keywords }}">
+  <meta name="description" content="{{ description }}">
+  {% if site['favicon'] %}
+    <link rel="shortcut icon" type="image/ico" href="{{ site['favicon'] }}" />
+  {% endif %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  
+
+    <link rel="stylesheet" href="assets/css/minified.css">
+
+      <link rel="stylesheet" type="text/css" href="https://cdn.mypanel.link/css/font-awesome/css/all.min.css">
+
+    {{ headerCode }}
+
+</head>
+
+<body>
+    <!--============= ScrollToTop Section Starts Here ============= -->
+    <div class="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-icon">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <a href="#0" class="scrollToTop"><i class="fas fa-angle-up"></i></a>
+    <div class="overlay"></div>
+    <!--============= ScrollToTop Section Ends Here =============-->
+
+
+    <!--============= Header Section Starts Here =============-->
+    <header class="header-section header-white-dark">
+        <div class="container">
+            <div class="header-wrapper">
+                <div class="logo">
+                    <a href="/">
+  {% if site["logo"] %}
+                                      <img src="{{ site['logo'] }}" alt="{{ site["site_name"] }}" title="{{ site["site_name"] }}">
+                                    {% else %}
+                                      {{ site["site_name"] }}
+                                    {% endif %}                       </a>
+                </div>
+                <ul class="menu">
+         <li {% if active_menu == "auth" %} class="active" {% endif %}>
+          <a href="/">{{ lang['signin.title'] }}</a>
+        </li> 
+        {% if registerPage %}
+        <li {% if active_menu == "signup" %} class="active" {% endif %}>
+          <a href="/signup">{{ lang['signup.title'] }}</a>
+        </li>
+        {% endif %}
+                  {% if servicesPage %}
+        <li {% if active_menu == "services" %} class="active" {% endif %}>
+          <a href="/services">{{ lang['services.title'] }}</a>
+        </li>
+        {% endif %}
+        {% if blogPage %}
+        <li {% if active_menu == "blog" %} class="active" {% endif %}>
+          <a href="/blog">{{ lang['blog.title'] }}</a>
+        </li>
+        {% endif %}
+        {% if faqPage %}
+        <li {% if active_menu == "faq" %} class="active" {% endif %}>
+          <a href="/faq">{{ lang['faq.title'] }}</a>
+        </li>
+        {% endif %}
+        {% if termsPage %}
+        <li {% if active_menu == "terms" %} class="active" {% endif %}>
+          <a href="/terms">{{ lang['terms.title'] }}</a>
+        </li>
+        {% endif %}
+        {% if apiPage %}
+        <li {% if active_menu == "api" %} class="active" {% endif %}>
+          <a href="/api">{{ lang['api.title'] }}</a>
+        </li>
+        {% endif %}
+ 
+                            
+                </ul>
+                <div class="header-bar d-lg-none">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="header-right">
+                              {% for lang in site['languages'] %}
+              {% if lang['active'] %}
+                    <select class="select-bar">
+                   
+                        {% for lang in site['languages'] %}
+                <option {% if lang['active'] %} selected {% endif %}><a href="?lang={{ lang['code'] }}">{{ lang['name'] }}</a></li>
+              {% endfor %}
+                    </select>
+                        {% endif %}
+            {% endfor %}
+               
+             
+                     
+                    {% if registerPage %}
+                        <a href="/signup" class="header-button d-none d-sm-inline-block light">{{ lang['signup.title'] }}</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--============= Header Section Ends Here =============-->
+
+
+    <!--============= Banner Section Starts Here =============-->
+    <section class="banner-11 oh pos-rel">
+        <div class="extra-bg bg_img" data-background="assets/images/banner/banner11/banner11-bg.jpg"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="banner-content-11">
+                        <h1 class="title">Become a Social Media Promoter</h1>
+                        <p>
+                           Do all your transactions automatically and reliably.
+                        </p>
+                        <form method="post" action="" class="banner-search-form style-two">
+                                  {% if errorText %}
+        <div class="alert alert-dismissible alert-danger">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          {{ errorText }}
+        </div>
+      {% endif %}
+      {% if successText %}
+        <div class="alert alert-dismissible alert-success">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          {{ successText }}
+        </div>
+      {% endif %}
+                              <div class="form-group">
+            <label for="username" class="control-label">{{ lang['signin.username'] }}</label>
+            <input type="text" class="form-control" name="username">
+          </div>
+          <div class="form-group  form-group__password">
+            <label for="password" class="control-label">{{ lang['signin.password'] }}</label>
+            <input type="password" class="form-control" name="password">
+            {% if resetPage %}
+             <a href="resetpassword" class="forgot-password"> {{ lang['signin.password.lost'] }}</a>
+            {% endif %}
+          </div>
+
+
+          {% if captcha %}
+            <div class="form-group">
+              <div class="g-recaptcha" data-sitekey="{{ captchaKey }}"></div>
+            </div>
+          {% endif %}
+
+          <button type="submit"><i class="fa fa-sign-in"></i></button>
+                            
+                            
+                        </form>
+                    </div>
+                    <div class="banner-odometer-two">
+                        <div class="counter-item">
+                            <div class="counter-thumb">
+                                <img src="assets/images/icon/counter1.png" alt="icon">
+                            </div>
+                            <div class="counter-content">
+                                <h2 class="title"><span class="counter">1750</span></h2>
+                                <span>Users</span>
+                            </div>
+                        </div>
+                        <div class="counter-item">
+                            <div class="counter-thumb">
+                                <img src="assets/images/icon/counter2.png" alt="icon">
+                            </div>
+                            <div class="counter-content">
+                                <h2 class="title"><span class="counter">1987</span></h2>
+                                <span>Daily Visit</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 d-none d-lg-block">
+                    <div class="banner-thumb-11">
+                        <div class="main-thumb wow slideInLeft">
+                            <img src="assets/images/banner/banner11/banner11.png" alt="banner">
+                        </div>
+                        <div class="graph wow bounceInDown" data-wow-delay="3s" data-wow-duration="1s"><img src="assets/images/banner/banner11/graph.png" alt="banner"></div>
+                        <div class="boy wow slideInRight" data-wow-delay="1s" data-wow-duration="1s"><img src="assets/images/banner/banner11/boy.png" alt="banner"></div>
+                        <div class="girl wow slideInUp" data-wow-delay="1.5s" data-wow-duration="1s"><img src="assets/images/banner/banner11/girl.png" alt="banner"></div>
+                        <div class="tree1 wow slideInUp" data-wow-delay="2s" data-wow-duration="1s"><img src="assets/images/banner/banner11/tree1.png" alt="banner"></div>
+                        <div class="tree2 wow slideInUp" data-wow-delay="2.5s" data-wow-duration="1s"><img src="assets/images/banner/banner11/tree2.png" alt="banner"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--============= Banner Section Ends Here =============-->
+
+
+    <!--============= How It Works Section Starts Here =============-->
+    <div class="amazing-feature padding-top padding-bottom pos-rel oh" id="feature">
+        <div class="rocket d-none d-xl-block" data-paroller-factor="0.70" data-paroller-factor-lg="-0.70"
+        data-paroller-type="foreground" data-paroller-direction="horizontal"><img src="assets/images/feature/rocket.png" alt="feature"></div>
+        <div class="am-obj"><img src="assets/images/feature/am-obj2.png" alt="feature"></div>
+        <div class="am-obj two"><img src="assets/images/feature/am-obj.png" alt="feature"></div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-xl-7">
+                    <div class="section-header">
+                        <h5 class="cate">Advanced Features</h5>
+                        <h2 class="title">Fastest SMM Panel</h2>
+                      <p class="mw-100">Meet now with India's fastest <strong>SMM Panel</strong>. Enjoy the quality.</p>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row justify-content-center mb-30-none">
+                        <div class="col-sm-6 col-lg-4">
+                            <div class="am-item">
+                                <div class="am-thumb">
+                                    <img src="assets/images/feature/am-fea2.png" alt="feature">
+                                </div>
+                                <div class="am-content">
+                                    <h5 class="title">Trustworthy</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-4">
+                            <div class="am-item">
+                                <div class="am-thumb">
+                                    <img src="assets/images/feature/am-fea3.png" alt="feature">
+                                </div>
+                                <div class="am-content">
+                                    <h5 class="title">Express Services</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-lg-4">
+                            <div class="am-item">
+                                <div class="am-thumb">
+                                    <img src="assets/images/feature/am-fea4.png" alt="feature">
+                                </div>
+                                <div class="am-content">
+                                    <h5 class="title">24/7 Support</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--============= How It Works Section Starts Here =============-->
+
+
+    <!--============= How It Works Section Starts Here =============-->
+    <section class="work-section padding-bottom bg_img mb-md-95 pb-md-0" data-background="./assets/images/work/work-bg2.jpg" id="how">
+        
+        <div class="container">
+            <div class="count-slider owl-thumbs" data-slider-id="2">
+                <div class="count-item">
+                    <span class="serial">01</span>
+                    <h5 class="title">Register</h5>
+                </div>
+                <div class="count-item">
+                    <span class="serial">02</span>
+                    <h5 class="title">Load Balance</h5>
+                </div>
+                <div class="count-item">
+                    <span class="serial">03</span>
+                    <h5 class="title">Order</h5>
+                </div>
+                <div class="count-item">
+                    <span class="serial">04</span>
+                    <h5 class="title">Become a Promoter!</h5>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--============= How It Works Section Ends Here =============-->
+
+
+    <!--============= Tool Section Starts Here =============-->
+    <section class="tool-section padding-bottom padding-top">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-lg-6 col-xl-5 rtl d-none d-lg-block">
+                    <img src="assets/images/recharge/tool.png" alt="recharge">
+                </div>
+                <div class="col-lg-6">
+                    <div class="section-header left-style">
+                        <h5 class="cate">{{ site['site_name'] }}</h5>
+                        <h2 class="title">Features</h2>
+                        <p>Meet with the outstanding features of India's best quality SMM Panel.</p>
+                    </div>
+                    <div class="tool-wrapper mb-40">
+                        <div class="tool-slider mb-30-none owl-carousel owl-theme">
+                            
+                            <div class="to-access-item style-two">
+                                
+                                <div class="to-access-thumb">
+                                    <span class="anime"></span>
+                                    <div class="thumb">
+                                        <img src="assets/images/recharge/2.png" alt="recharge">
+                                    </div>
+                                </div>
+                                <h5 class="title">Express Services</h5>
+                            </div>
+                            <div class="to-access-item style-two">
+                                <div class="to-access-thumb">
+                                    <span class="anime"></span>
+                                    <div class="thumb">
+                                        <img src="assets/images/recharge/3.png" alt="recharge">
+                                    </div>
+                                </div>
+                                <h5 class="title">Trustworthy</h5>
+                            </div>
+                            <div class="to-access-item style-two">
+                                <div class="to-access-thumb">
+                                    <span class="anime"></span>
+                                    <div class="thumb">
+                                        <img src="assets/images/recharge/4.png" alt="recharge">
+                                    </div>
+                                </div>
+                                <h5 class="title">Quality</h5>
+                            </div>
+                            <div class="to-access-item style-two">
+                                <div class="to-access-thumb">
+                                    <span class="anime"></span>
+                                    <div class="thumb">
+                                        <img src="assets/images/recharge/8.png" alt="recharge">
+                                    </div>
+                                </div>
+                                <h5 class="title">Multi Language</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="/signup" class="button-3 long-light">Register <i class="fa fa-pencil-square-o"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--============= Tool Section Ends Here =============-->
+
+
+
+
+    <!--============= Testimonial Section Starts Here =============-->
+    <section class="testimonial-section padding-top pt-lg-half padding-bottom pos-rel oh">
+        <div class="container">
+            <div class="ball-3 style2 d-none d-lg-block" data-paroller-factor="0.30" data-paroller-factor-lg="-0.30" data-paroller-type="foreground" data-paroller-direction="horizontal">
+                <img src="assets/images/client/circle2.png" alt="client">
+            </div>
+            <div class="ball-6 style2 d-none d-lg-block" data-paroller-factor="-0.30" data-paroller-factor-lg="0.60" data-paroller-type="foreground" data-paroller-direction="horizontal">
+                <img src="assets/images/client/circle1.png" alt="client">
+            </div>
+            <div class="row justify-content-between flex-wrap-reverse align-items-center">
+                <div class="col-lg-7">
+                    <div class="testimonial-wrapper style-two">
+                        <a href="#0" class="testi-next trigger">
+                            <img src="assets/images/client/left.png" alt="client">
+                        </a>
+                        <a href="#0" class="testi-prev trigger">
+                            <img src="assets/images/client/right.png" alt="client">
+                        </a>
+                        <div class="testimonial-area testimonial-slider owl-carousel owl-theme">
+                            <div class="testimonial-item">
+                                <div class="testimonial-thumb">
+                                    <div class="thumb">
+                                        <img src="assets/images/client/client1.jpg" alt="client">
+                                    </div>
+                                </div>
+                                <div class="testimonial-content">
+                                    <div class="ratings">
+                                        <span><i class="fas fa-star"></i></span>
+                                        <span><i class="fas fa-star"></i></span>
+                                        <span><i class="fas fa-star"></i></span>
+                                        <span><i class="fas fa-star"></i></span>
+                                        <span><i class="fas fa-star"></i></span>
+                                    </div>
+                                    <p>
+                                        {{ site['site_name'] }} I am extremely satisfied with their services since I started working with
+                                    </p>
+                                    <h5 class="title"><a href="#0">Abdullah Mujahid</a></h5>
+                                </div>
+                            </div>
+                            <div class="testimonial-item">
+                                <div class="testimonial-thumb">
+                                    <div class="thumb">
+                                        <img src="assets/images/client/client1.jpg" alt="client">
+                                    </div>
+                                </div>
+                                <div class="testimonial-content">
+                                    <div class="ratings">
+                                        <span><i class="fas fa-star"></i></span>
+                                        <span><i class="fas fa-star"></i></span>
+                                        <span><i class="fas fa-star"></i></span>
+                                        <span><i class="fas fa-star"></i></span>
+                                        <span><i class="fas fa-star"></i></span>
+                                    </div>
+                                    <p>
+                                       Thanks for always working with a focus on customer satisfaction with reliable, high quality and fast services. {{ site['site_name'] }}
+                                    </p>
+                                    <h5 class="title"><a href="#0">Mehmet UCAR</a></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testi-wrapper">
+                        <div class="testi-header">
+                            <div class="section-header left-style">
+                                <h5 class="cate">Customer comments</h5>
+                                <h2 class="title">10.000+ Happy Customer's Comments</h2>
+                            </div>
+                            <a href="/signup" class="button-3 active">Register<i class="fa fa-pencil-square-o"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--============= Testimonial Section Ends Here =============-->
+
+
+    <!--============= Custom-Plan Section Starts Here =============-->
+    <section class="custom-plan bg_img oh" data-background="assets/images/bg/line-bg.png">
+        <div class="container">
+            <div class="custom-wrapper">
+                <span class="circle"></span>
+                <span class="circle two"></span>
+                <div class="calculate-bg">
+                    <img src="assets/images/bg/calculate-bg.png" alt="bg">
+                </div>
+                <div class="custom-area">
+                    <div class="section-header cl-white">
+                        <h5 class="cate">{{ site['site_name'] }}</h5>
+                        <h2 class="title">Meet with Quality!</h2>
+                        <p>
+                            Register now to get service from hassle-free, fast and cheap services.
+                        </p>
+                    </div>
+                    <div class="text-center">
+                        <a href="/signup" class="custom-button large-button theme-shadow">Register <i class="fa fa-pencil-square-o"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--============= Custom-Plan Section Ends Here =============-->
+
+
+    <!--============= Custom-Plan Section Starts Here =============-->
+    <section class="help-section padding-bottom padding-top oh">
+        <div class="container">
+            <div class="section-header">
+                <h5 class="cate">{{ site['site_name'] }}</h5>
+                <h2 class="title">Need help?</h2>
+            </div>
+            <div class="row justify-content-between">
+                <div class="col-lg-6 rtl d-none d-lg-block">
+                    <img src="assets/images/feature/help.png" alt="feature">
+                </div>
+                <div class="col-lg-6 col-xl-5 mb-30-none">
+                    <div class="help-item">
+                        <div class="help-thumb">
+                            <img src="assets/images/feature/help1.png" alt="help">
+                        </div>
+                        <div class="help-content">
+                            <h5 class="title">Live support</h5>
+                            <p>Share your problem with online customer service.</p>
+                        </div>
+                    </div>
+                    <div class="help-item">
+                        <div class="help-thumb">
+                            <img src="assets/images/feature/help2.png" alt="help">
+                        </div>
+                        <div class="help-content">
+                            <h5 class="title">Support System</h5>
+                            <p>Use the Support System for problems with your orders.</p>
+                        </div>
+                    </div>
+                    <div class="help-item">
+                        <div class="help-thumb">
+                            <img src="assets/images/feature/help3.png" alt="help">
+                        </div>
+                        <div class="help-content">
+                            <h5 class="title">Frequently Asked Questions</h5>
+                            <p><a href="/faq">FAQ PAGE</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--============= Custom-Plan Section Ends Here =============-->
+
+    
+    <!--============= Footer Section Starts Here =============-->
+    <footer class="footer-section bg_img" data-background="assets/images/footer/footer-bg.jpg">
+        <div class="container">
+            <div class="footer-top padding-top padding-bottom">
+                <div class="logo">
+                    <a href="#0">
+  {% if site["logo"] %}
+                                      <img src="{{ site['logo'] }}" alt="{{ site["site_name"] }}" title="{{ site["site_name"] }}">
+                                    {% else %}
+                                      {{ site["site_name"] }}
+                                    {% endif %}                       </a>
+                </div>
+                <ul class="social-icons">
+                    <li>
+                        <a href="#0"><i class="fab fa-facebook-f"></i></a>
+                    </li>
+                    <li>
+                        <a href="#0" class="active"><i class="fab fa-twitter"></i></a>
+                    </li>
+                    <li>
+                        <a href="#0"><i class="fab fa-pinterest-p"></i></a>
+                    </li>
+                    <li>
+                        <a href="#0"><i class="fab fa-google-plus-g"></i></a>
+                    </li>
+                    <li>
+                        <a href="#0"><i class="fab fa-instagram"></i></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-bottom">
+                <ul class="footer-link">
+                    <li>
+                        <a href="#">SMM Panel</a>
+                    </li>
+                    <li>
+                        <a href="#">Social Media Panel</a>
+                    </li>
+                    <li>
+                        <a href="#">{{ site['site_name'] }}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="copyright">
+                <p><a style="color:white;" href="/" rel="nofollow"><u>{{ settings['site_name']  }}</u></a> © Copyright 2022<br>All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!--============= Footer Section Ends Here =============-->
+
+{% for lang in site['languages'] %}
+  {% if lang['active'] %}
+    <script src="https://www.google.com/recaptcha/api.js?hl={{ lang['code'] }}"></script>
+  {% endif %}
+{% endfor %}
+
+
+    <script src="assets/js/minified.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

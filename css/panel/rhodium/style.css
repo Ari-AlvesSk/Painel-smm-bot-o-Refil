@@ -1,0 +1,367 @@
+* { transition: 0s all ease !important; }
+
+.sunmode .CodeMirror {
+background : #000;
+color :#fff ;
+}
+
+.sunmode input[type="checkbox"].selectOrder * {
+
+    background-color:#2e3036; 
+	position:relative;
+}
+
+
+.alert-success {
+    background-color: #2fa200;
+	color: #fff ;
+}
+
+#menu .sunmode .leftmenu {
+    background: #171717;
+}
+
+#menu .leftmenu.on {
+    width: 100px;
+    text-align: center;
+	transition: all .5s ease !important;
+}
+
+#menu .leftmenu.on ul li a {
+    font-size: 10px !important;
+    display: block;
+    width: 100%;
+}
+
+#menu .leftmenu a {
+    color: black;
+}
+
+#menu .leftmenu.on .lefticon {
+    display: block;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 10px;
+    font-size: unset !important;
+}
+
+#menu li.navbar-toggle a span.label {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    color: black;
+}
+
+#menu li.navbar-toggle a {
+    color: #000;
+}
+
+#menu .navbar-brand {
+    width: 100%;
+    text-align: center;
+    height: 58px;
+    line-height: 58px;
+}
+
+#menu-title {
+    position: absolute;
+    right: -50px;
+    top: 10px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid #dbdbdb;
+	z-index: 99999;
+}
+
+#menu .leftmenu {
+    float: left;
+    width: 220px;
+    height: 100vh;
+    background: linear-gradient(180deg, #e5e5e5, #fefefe);
+    position: relative;
+	transition: all .5s ease !important;
+}
+
+#menu .leftmenu ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+#menu .leftmenu li {
+    display: inline-block;
+    width: 100%;
+    padding: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+	transition: all .5s ease !important;
+}
+
+#menu .leftmenu li:hover, .leftmenu li.active {
+    background: #00000012;
+    transition: all .5s ease !important;
+}
+
+.navbar-default .navbar-toggle a {
+    color: black;
+}
+#menu .leftmenu li a {
+    color: #040404;
+}
+
+#menu .leftmenu li a:hover {
+    text-decoration: none;
+}
+
+#menu .lefticon {
+    display: inline-block;
+    width: 20px;
+}
+
+#menu nav.navbar.navbar-default.navbar-static-top {
+    float: right;
+    width: calc(100% - 220px);
+	transition: all .5s ease !important;
+}
+
+#menu .container.page-content, #menu .container-fluid, #menu .container {
+    float: left;
+    width: calc(100% - 220px);
+    margin: auto;
+	transition: all .5s ease !important;
+}
+
+#menu.menuon nav.navbar.navbar-default.navbar-static-top, #menu.menuon .container.page-content, .container-fluid, #menu.menuon .container {
+    width: calc(100% - 100px);
+	transition: all .5s ease !important;
+}
+
+@media(max-width: 1023px) {
+	* li { list-style: none !important; }
+	#menu .container.page-content, #menu .container-fluid, #menu .container {
+    	float: left;
+		width: 100%;
+	}
+	#menu.menuon nav.navbar.navbar-default.navbar-static-top, #menu.menuon .container.page-content, .container-fluid, #menu.menuon .container {
+		width: 100%;
+	}
+	#menu nav.navbar.navbar-default.navbar-static-top {
+		float: right;
+		width: 100%;
+	}
+	#menu .leftmenu {
+		position: absolute;
+		z-index: 9999;
+		left: -220px;
+		height: unset;
+	}
+	#menu .leftmenu.on {
+		left: 0px;
+	}
+	#menu-title {
+		background: linear-gradient(180deg, #f8f8f8, #e7e7e7);
+	}
+	#menu .sunmode #menu-title {
+		background: #000;
+	}
+	#menu .sunmode .leftmenu {
+		background: #000;
+	}
+	
+	#menu.menuon nav.navbar.navbar-default.navbar-static-top {
+		float: right !important;
+		width: calc(100% - 100px) !important;
+	}
+	
+	.menuon .container.page-content {
+		float: right !important;
+		width: calc(100% - 100px) !important;
+	}
+	
+	.menuon .navbar-default .navbar-toggle:last-child {
+		display: none;
+	}
+	
+	.container.page-content {
+		float: right !important;
+		width: 100% !important;
+	}
+}
+
+.normalmode , .darkmode{
+display:none;
+padding:0;
+}
+.darkmode , .normalmode{
+border: none !important;
+background-color: transparent!important;
+font-size: 19px;
+}
+
+
+body.nightmode {
+    padding-bottom: 50px;
+
+	background-repeat:no-repeat;
+	display:unset;
+}
+
+body.sunmode{
+    background: #000 !important;
+	background-color: #000 !important;
+	display:unset;
+	padding-bottom: 50px;
+}
+
+.sunmode .servicehiz  {
+
+color: #3a9cda !important;
+}
+
+.sunmode .ticket-message-right .ticket-message{
+    background-color: #060000 !important;
+}
+
+.sunmode .table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #060000 !important;
+}
+.sunmode * {
+    border-color: transparent !important;
+    color: #fff !important;
+}
+.sunmode .i.far.fa-times-circle * {
+  
+      color: #de5d5d;
+}
+
+.sunmode .navbar, .sunmode.navbar-default, .sunmode.navbar-static-top * {
+background: #171717 !important;
+}
+
+.sunmode.tickedsystem * {
+background: linear-gradient(#88888f, #514d4d) !important;
+}
+
+.sunmode .alert-warning, .sunmode .alert-warning *, .sunmode .alert-danger, .sunmode .alert-danger * {
+    background: #f11930 !important;
+}
+
+.sunmode .child-menu, .sunmode .child-ul *{
+background: #000  !important;
+color: #fff !important;
+}
+
+
+.sunmode pre, .sunmode .alert-info, .sunmode .border-rounded, .sunmode .btn-default, .sunmode .form-control, .sunmode .alert-info *, .sunmode .well, .sunmode .panel-default, .sunmode .panel-default *, .sunmode .nav-pills > li.active > a:hover, .sunmode .nav-pills > li.active > a:focus {
+    background: #171717 !important;
+    border-color: #ffffff0a !important;
+}
+
+.sunmode .dropdown-menu.open, .sunmode .dropdown-menu.open * {
+    background: #171717;
+    color: #fff;
+    border-color: #171717 !important;
+}
+
+.sunmode *::-webkit-scrollbar-track
+{
+	background-color: #000;
+}
+
+.sunmode *::-webkit-scrollbar
+{
+	width: 5px;
+}
+
+.sunmode *::-webkit-scrollbar-thumb
+{
+	background-color: #292929;	
+}
+
+*::-webkit-scrollbar-track
+{
+	background-color: #fff;
+}
+
+*::-webkit-scrollbar
+{
+	width: 5px;
+}
+
+*::-webkit-scrollbar-thumb
+{
+	background-color: #ccc;	
+}
+
+
+
+.form-group__password {
+    position: relative;
+}
+.forgot-password {
+    position: absolute;
+    right: 11px;
+    bottom: 7px;
+}
+
+
+
+
+.scrollToTop.active {
+  right: 20px;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+.appsLand-btn.appsLand-btn-gradient {
+  color: #FFF;
+  background: transparent;
+}
+
+.scrollToTop {
+  position: fixed;
+  bottom: 150px;
+  right: -70px;
+  font-size: 24px;
+  z-index: 3;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  padding: 0;
+  -webkit-transform: rotate(-80deg);
+  -moz-transform: rotate(-80deg);
+  -o-transform: rotate(-80deg);
+  -ms-transform: rotate(-80deg);
+  transform: rotate(-80deg);
+  -webkit-transition: all 0.25s ease-in-out 0s;
+  -moz-transition: all 0.25s ease-in-out 0s;
+  -o-transition: all 0.25s ease-in-out 0s;
+  transition: all 0.25s ease-in-out 0s;
+}
+
+.hero-left-sc-btn a {
+  display: block;
+  margin-bottom: 26px;
+}
+.hero-left-sc-btn a img {
+	width: 95%;
+}
+
+.hero-left-sc-btn {
+  padding-right: px;
+  padding-left: 45px;
+}
+.hero-area {
+	padding-top: 23px;
+}
+
+
+.bootstrap-select .dropdown-menu li a {
+ 
+    white-space: inherit;
+
+}

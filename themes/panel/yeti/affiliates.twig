@@ -1,0 +1,204 @@
+{% include 'header.twig' %}
+
+         <div class="app-content">
+            <!-- page-content -->
+            <div class="container-fluid">
+               <div class="row mt-4">
+                  <div class="col-lg-12">
+                     <section class="order-side">
+                        <div class="row">
+                           <div class="col-lg-7 col-12 mb-5 mb-lg-0">
+                              <div class="d-card dc-dblue">
+                                 <div class="d-card-body" id="dc-body">
+                                    <div class="ref-items ri-sm">
+                                       <div class="ref-item">
+                                          <div class="row">
+                                             <div class="col-md-4 col-12 the-title align-self-center">
+												{{ lang['affiliates.url'] }}
+                                             </div>
+                                             <div class="col-md-8 col-12 the-text align-self-center">
+                                                {{ site['url'] }}/ref/{{ user["referral_code"] }}
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <!-- item end -->
+                                       <div class="ref-item">
+                                          <div class="row">
+                                             <div class="col-md-4 col-12 the-title align-self-center">
+                                                {{ lang['affiliates.bonus'] }}
+                                             </div>
+                                             <div class="col-md-8 col-12 the-text align-self-center">
+                                                {{ settings["ref_bonus"] }}%
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <!-- item end -->
+                                       <div class="ref-item">
+                                          <div class="row">
+                                             <div class="col-md-4 col-12 the-title align-self-center">
+                                               {{ lang['affiliates.type'] }}
+                                             </div>
+                                             <div class="col-md-8 col-12 the-text align-self-center">
+                                                {% if settings["ref_type"] == 1 %}{{ lang['affiliates.type.first'] }}{% else %}{{ lang['affiliates.type.all'] }}{% endif %}
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="ref-item">
+                                          <div class="row">
+                                             <div class="col-md-4 col-12 the-title align-self-center">
+                                               {{ lang['affiliates.min'] }}
+                                             </div>
+                                             <div class="col-md-8 col-12 the-text align-self-center">
+                                                R$ 1,00 {{ settings['ref_min'] }}
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <div class="ref-item">
+                                          <div class="row">
+                                             <div class="col-auto align-self-center">
+                                                <i class="fas fa-info-circle fa-2x text-danger"></i>
+                                             </div>
+                                             <div class="col align-self-center text-style-2">
+                                               Lembre-se, você só ganhará bônus de membros que se registrarem através do link definido em sua conta.
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <!-- item end -->					  
+                                    </div>
+                                 </div>
+                                 <div class="d-card-body mt-3" id="dc-body">
+                                    <div class="ref-items ri-sm">
+                                       <div class="ref-item d-blue mb-2">
+                                          <div class="row">
+                                             <div class="col-md-1 col-1 align-self-center icon">
+                                                <i class="fas fa-mouse-pointer"></i>
+                                             </div>
+                                             <div class="col-md-9 col-8 the-title align-self-center">
+                                                {{ lang['affiliates.click'] }}
+                                             </div>
+                                             <div class="col-md-2 col-2 the-text align-self-center text-right">
+                                                {{ user['total_click'] }}
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <!-- item end -->
+                                       <div class="ref-item d-blue mb-2">
+                                          <div class="row">
+                                             <div class="col-md-1 col-1 align-self-center icon">
+                                                <i class="fas fa-street-view"></i>
+                                             </div>
+                                             <div class="col-md-9 col-8 the-title align-self-center">
+                                                {{ lang['affiliates.total.user'] }}
+                                             </div>
+                                             <div class="col-md-2 col-2 the-text align-self-center text-right">
+                                                {{ refCount }}
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <!-- item end -->
+                                       <div class="ref-item d-blue mb-2">
+                                          <div class="row">
+                                             <div class="col-md-1 col-1 align-self-center icon">
+                                                <i class="fas fa-usd-circle"></i>
+                                             </div>
+                                             <div class="col-md-9 col-8 the-title align-self-center">
+                                                {{ lang['affiliates.total.payment'] }}
+                                             </div>
+                                             <div class="col-md-2 col-2 the-text align-self-center text-right">
+                                           {{ site['currency'] }}{{ user['reforder'] }}
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <!-- item end -->
+                                       <div class="ref-item d-blue mb-2">
+                                          <div class="row">
+                                             <div class="col-md-1 col-1 align-self-center icon">
+                                                <i class="fas fa-smile"></i>
+                                             </div>
+                                             <div class="col-md-9 col-8 the-title align-self-center">
+                                               {{ lang['affiliates.total.win'] }}
+                                             </div>
+                                             <div class="col-md-2 col-2 the-text align-self-center text-right">
+                                               {{ site['currency'] }}{{ user['refchar'] }}
+                                             </div>
+                                          </div>
+                                       </div>
+                                       <!-- item end -->
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- d-card end -->
+                           </div>
+                           <!-- col item end-->
+                           <div class="col-lg-5 col-12 mb-5 mb-lg-0">
+                              <div class="d-card dc-dblue">
+                                 <div class="d-card-body" id="dc2-body" style="overflow-y: auto;">
+                                    <div class="d-card-head">
+                                       <div class="dch-icon">
+                                          <img src="../img/support.png" alt="">
+                                       </div>
+                                     Convide & Ganhe!
+                                    </div>
+                                    <div class="d-card-body py-5">
+                                       <div class="adf-text">
+                                        <p>O sistema de referência, no qual 10% da taxa paga pelas pessoas que se cadastraram no seu link de referência, é definido em sua conta para todas as transações de adição de saldo. </p>
+                                       </div>
+                                       <div class="row mt-5">
+                                          <div class="col-md-6 col-12 mb-md-0 mb-4">
+                                             <a href="" class="btn btn-secondary btn-block" data-toggle="modal" data-target="#affiliate-modal">
+                                             Mais Informações
+                                             </a>
+                                          </div>
+                                          <div class="col-md-6 col-12 mb-md-0 mb-4">
+                                             <a href="/tickets" class="btn btn-danger btn-block">
+                                             Ticket 
+                                               (Suporte)
+                                             </a>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </section>
+                  </div>
+                  <!-- page-content end -->
+               </div>
+               <!-- app-content -->
+            </div>
+         </div>
+
+      </div>
+	  
+<!-- Affiliate -->
+<div class="modal fade" id="affiliate-modal">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <!-- Modal Header -->
+         <div class="modal-header">
+            <h4 class="modal-title">Convidar & Ganhar</h4>
+            <button type="button" class="close" data-dismiss="modal">×</button>
+         </div>
+         <!-- Modal body -->
+         <div class="modal-body">
+            <div class="card-box-top text-center" style="color: #2a255c; padding: 20px;border-radius: 10px; margin: 0 0 25px 0; background: rgba(42, 37, 92, 0.15)">
+               <p>
+			Tudo o que você precisa fazer é adicionar membros ao nosso painel por meio do seu link de convite. Lembre-se, você só ganhará bônus de membros que se registrarem através do link definido em sua conta, não há limite de convites!
+               <p>        
+            </div>
+            <div class="payout mb-5">
+               •O pagamento é feito apenas para usuários recém-recrutados.<br /> 
+               • A autorreferência não será paga e, quando notada, suas contas no site serão encerradas.<br /> 
+               • Você não pode enviar uma solicitação sem ganhar 20 R$ em referências.<br /> 
+               • As contas das suas referências estão encerradas. Você recebe um bônus de 5% para cada pagamento.<br /> 
+               • Quando o valor mínimo de pagamento for atingido, o botão "Enviar solicitação de pagamento" aparecerá na tela.<br />
+            </div>
+            <a href="tickets"><button type="button" class="btn btn-primary btn-block">Suporte</button></a>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+{% include 'footer.twig' %}

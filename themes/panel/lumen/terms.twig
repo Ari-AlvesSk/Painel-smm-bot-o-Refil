@@ -1,0 +1,15 @@
+{% include 'header.twig' %}
+
+{% if contentText %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="well ">
+        {{ contentText }}
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% include 'footer.twig' %}

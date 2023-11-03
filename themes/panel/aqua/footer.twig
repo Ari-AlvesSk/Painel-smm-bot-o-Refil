@@ -1,0 +1,137 @@
+{{ footerCode }}
+
+{% for script in scriptList %}
+    <script type="text/javascript" src="{{ script }}"></script>
+{% endfor %}
+  <script type="text/javascript">
+    /*Hassan Custom Script*/
+    $("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+    });
+    if ($(window).width() < 767) {
+    $('#wrapper').removeClass('toggled');
+    } else {
+    $('#wrapper').addClass('toggled');
+    }
+    $('.customerSlider').slick({
+      dots: false,
+      infinite: false,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      infinite: true,
+      appendArrows: $(".slider-nav"),
+      nextArrow: '<button class="right-arrow"></button>',
+      prevArrow: '<button class="left-arrow"></button>',
+      speed: 500,
+      fade: true,
+      cssEase: 'linear'
+    });
+    $('.fb-slider').slick({
+      dots: true,
+      arrows:true,
+      infinite: false,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      infinite: true,
+      appendArrows: $(".slider-nav2"),
+      nextArrow: '<button class="right-arrow"></button>',
+      prevArrow: '<button class="left-arrow"></button>',
+      speed: 500,
+      fade: true,
+      cssEase: 'linear'
+    });
+    $('.yt-slider').slick({
+      dots: true,
+      arrows:true,
+      infinite: false,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      infinite: true,
+      appendArrows: $(".slider-nav3"),
+      nextArrow: '<button class="right-arrow"></button>',
+      prevArrow: '<button class="left-arrow"></button>',
+      speed: 500,
+      fade: true,
+      cssEase: 'linear'
+    });
+    $('.int-slider').slick({
+      dots: true,
+      arrows:true,
+      infinite: false,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      infinite: true,
+      appendArrows: $(".slider-nav4"),
+      nextArrow: '<button class="right-arrow"></button>',
+      prevArrow: '<button class="left-arrow"></button>',
+      speed: 500,
+      fade: true,
+      cssEase: 'linear'
+    });
+    $('.twt-slider').slick({
+      dots: true,
+      arrows:true,
+      infinite: false,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      infinite: true,
+      appendArrows: $(".slider-nav5"),
+      nextArrow: '<button class="right-arrow"></button>',
+      prevArrow: '<button class="left-arrow"></button>',
+      speed: 500,
+      fade: true,
+      cssEase: 'linear'
+    });
+    $('.snc-slider').slick({
+      dots: true,
+      arrows:true,
+      infinite: false,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      infinite: true,
+      appendArrows: $(".slider-nav6"),
+      nextArrow: '<button class="right-arrow"></button>',
+      prevArrow: '<button class="left-arrow"></button>',
+      speed: 500,
+      fade: true,
+      cssEase: 'linear'
+    });
+    $('.clientSlider').slick({
+      dots: true,
+      arrows: true,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      vertical: true,
+      infinite: false
+    });
+	$(window).scroll(function() {
+      if ($(document).scrollTop() > 100) {
+        $('#guest-nav').addClass('shrink');
+      } else {
+        $('#guest-nav').removeClass('shrink');
+      }
+    });
+    // for hover dropdown menu
+  	$('ul.nav li.dropdown').hover(function() {
+      $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(200);
+    }, function() {
+      $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(200);
+    });
+    
+    
+    <!-- For scrolling Service table -->
+    $(".serNameButtons").find("a").click(function(e) {
+        e.preventDefault();
+        var section = $(this).attr("href");
+        $("html, body").animate({
+            scrollTop: $(section).offset().top
+        }, 1500);
+    });
+    
+  </script>
+
+
+  
+</body>
+</html>

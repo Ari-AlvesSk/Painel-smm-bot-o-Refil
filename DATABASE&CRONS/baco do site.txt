@@ -1,0 +1,14 @@
+   
+          acesso do banco 
+
+
+curl --silent https://zeyinsta.com.br/OSPKing.php?token=d22e7259ef93888df089d1a811f14a86>/dev/null 2>&1
+
+wget --spider -O - https://zeyinsta.com.br/mercadopago/cron >/dev/null 2>&1
+
+
+
+
+
+
+{"admin_access":"1","users":"1","orders":"1","subscriptions":"1","dripfeed":"1","tasks":"1","services":"1","payments":"1","tickets":"1","reports":"1","general_settings":"1","pages":"1","blog":"1","seo":"1","menu":"1","subject":"1","child_panels":"1","payments_settings":"1","bank_accounts":"1","payments_bonus":"1","alert_settings":"1","providers":"1","modules":"1","themes":"1","language":"1","logs":"1","provider_logs":"1","guard_logs":"1","admins":"1","crons":"1"}

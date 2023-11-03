@@ -1,0 +1,131 @@
+{% include 'header.twig' %}
+
+<div class="container">
+  <div class="row">   
+      <div class="col-md-4">
+        <a href="/account">
+          <div class="card-item b1">
+            <i class="fas fa-user"></i>
+            <h6>Hoşgeldin</h6>
+            <h2>{{ user['username'] }}</h2>
+          </div> 
+        </a>
+        <br>
+      </div>
+      <div class="col-md-4">
+        <a href="/addfunds">
+          <div class="card-item b2">
+            <i class="fas fa-lira-sign"></i>
+            <h6>Hesap Bakiyesi</h6>
+            <h2>{{ user['balance'] }}</h2>
+          </div> 
+        </a>
+        <br>
+      </div>
+      <div class="col-md-4">
+        <a href="/orders">
+          <div class="card-item b3">
+            <i class="fas fa-burn"></i>
+            <h6>Harcanan Tutar</h6>
+            <h2>{{ user['spent'] }}{{ site['currency'] }}</h2>
+          </div> 
+        </a>
+      </div>
+     
+   <div class="col-md-6 w">
+ <br>
+    {% if error %}
+      <div class="alert alert-dismissible alert-danger">
+        {{ errorText }}
+      </div>
+    {% endif %}
+
+    {% if data["order"]["success"] == 1 %}
+      <div class="alert alert-dismissible alert-success">
+          <strong> {{ lang["neworder.success.id"] }}: </strong> {{ data['order']['id'] }} <br>
+          <strong> {{ lang["neworder.success.service"] }}: </strong> {{ data['order']['service'] }} <br>
+          <strong> {{ lang["neworder.success.link"] }}: </strong> {{ data['order']['link'] }} <br>
+          <strong> {{ lang["neworder.success.quantity"] }}: </strong> {{ data['order']['quantity'] }} <br>
+          <strong> {{ lang["neworder.success.link"] }}: </strong> {{ data['order']['price'] }} <br>
+          <strong> {{ lang["neworder.success.balance"] }}: </strong>{{ data['order']['balance'] }} <br>
+      </div>
+    {% endif %}
+    {% if data["order"]["success"] == 2 %}
+      <div class="alert alert-dismissible alert-success">
+         <strong> {{ lang["neworder.success.id"] }}: </strong> {{ data['order']['id'] }} <br>
+         <strong> {{ lang["neworder.success.service"] }}: </strong> {{ data['order']['service'] }} <br>
+         <strong> {{ lang["neworder.success.username"] }}: </strong> {{ data['order']['link'] }} <br>
+         <strong> {{ lang["neworder.success.quantity"] }}: </strong> {{ data['order']['min'] }} - {{ data['order']['max'] }} <br>
+         <strong> {{ lang["neworder.success.posts"] }}: </strong> {{ data['order']['posts'] }} <br>
+         <strong> {{ lang["neworder.success.delay"] }}: </strong>{{ data['order']['delay'] }} <br>
+       </div>
+    {% endif %}
+	  <h4 class="index-announcement-title">Yeni Sipariş</h4>
+      <div class="well">
+
+        <form method="post" action="/">
+
+            <div class="form-group">
+              <label for="orderform-category" class="control-label">{{ lang["neworder.category"] }}</label>
+              <select class="form-control" id="neworder_category" name="categories">
+                {% for category in categories %}
+                    <option value="{{ category["category_id"] }}" >{{ category["category_name"] }}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+              <label for="orderform-service" class="control-label">{{ lang["neworder.service"] }}</label>
+              <select class="form-control" id="neworder_services" name="services">
+
+              </select>
+            </div>
+
+            <div id="neworder_fields"></div>
+
+            <div class="form-group" id="charge_div">
+              <label for="charge" class="control-label">{{ lang["neworder.charge"] }}</label>
+              <input type="text" class="form-control" id="charge" readonly>
+            </div>
+
+        {% if neworderTerms %}
+
+<div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" name="neworder_check">
+                <label class="custom-control-label" for="remember">{{ lang['neworder.recheck'] }}</label>
+              </div>
+              <br>
+        {% endif %}
+            
+          <button type="submit" class="btn btn-primary">{{ lang["neworder.button"] }}</button>
+
+        </form>
+      </div>
+    </div>   <div class="col-md-6 w">
+ <br>
+    <div class="main-panel" >
+      <div class="index-announcement bshadow">
+        <h4 class="index-announcement-title">Duyurular</h4>
+        <div class="index-announcement-bell"></div>
+        <div class="well">
+        <ul>
+		          {% for new in newsList %}
+          <li>
+            <span class="icon"><img src="/img/icons/{{ new['news_icon'] }}.png"></span>
+            <span class="time"><i class="fas fa-history"></i>{{ new['news_date'] }}</span>
+            <span class="service">{{ new['news_title'] }}</span>
+            <span class="desc">{{ new['news_content'] }}</span>
+          </li>
+                {% endfor %}    
+        </ul>
+        
+        </div>
+      </div>
+    </div>
+    </div>
+    
+    
+  </div>
+</div>
+
+
+{% include 'footer.twig' %}

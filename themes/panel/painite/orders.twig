@@ -1,0 +1,216 @@
+{% include 'header.twig' %}
+<div class="col-lg-6 col-md-offset-3">
+    <div class="well-box pshadow">
+                  <div class="w-title">
+      <div class="row">
+         
+            <ul class="nav nav-pills ">
+               <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" id="sub_menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     <center> {{ lang['orders.status'] }} <i class="fad fa-angle-double-down"></i></center>
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="sub_menu">
+                     <a class="dropdown-item" href="orders" ><center>{{ lang['orders.status.all'] }}</center></a>
+                     <a class="dropdown-item" href="orders/pending" ><center>{{ lang['orders.status.pending'] }}</center></a>   
+                     <a class="dropdown-item" href="orders/inprogress"><center>{{ lang['orders.status.inprogress'] }}</center></a>
+                     <a class="dropdown-item" href="orders/completed"><center>{{ lang['orders.status.completed'] }}</center></a>
+                     <a class="dropdown-item" href="orders/partial"><center>{{ lang['orders.status.partial'] }}</center></a>
+                     <a class="dropdown-item" href="orders/processing"><center>{{ lang['orders.status.processing'] }}</center></a>
+                     <a class="dropdown-item" href="orders/canceled"><center>{{ lang['orders.status.canceled'] }}</center></a>  
+                  </div>
+               </li>
+                <div class="col-md-6" style="float:right;">
+        <li class="pull-right search">
+          <form action="" method="get">
+            <div class="input-group">
+              <input type="text" name="search" class="form-control" value="{{ search }}" placeholder="Sipariş Ara">
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn-default" style="padding:6px 12px"><i class="fa fa-search" aria-hidden="true"></i></button>
+              </span>
+            </div>
+          </form>
+        </li>
+        </div>
+            </ul>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+<div class="masaustu">
+    <div class="col-lg-12"><br>
+    <div class="well well-float">
+   <table class="rwd-table table table-striped table-sm ">
+      <thead class="thead-dark">
+         <tr>
+            <th><center>{{ lang['orders.id'] }}</center></th>
+              <th><center>{{ lang['orders.date'] }}</center></th>
+              <th class="width-40"><center>{{ lang['orders.link'] }}</center></th>
+              <th><center>{{ lang['orders.charge'] }}</center></th>
+              <th class="nowrap"><center>{{ lang['orders.start.count'] }}</center></th>
+              <th><center>{{ lang['orders.quantity'] }}</center></th>
+              <th><center>{{ lang['orders.service'] }}</center></th>
+              <th><center>{{ lang['orders.status'] }}</center></th>
+              <th><center>{{ lang['orders.remains'] }}</center></th>
+            <th></th>
+            <th></th>
+         </tr>
+      </thead>
+      <tbody>
+         {% for order in orders %}
+         <tr>
+            <td><center>{{ order['id'] }}</center></td>
+                <td><center>{{ order['date'] }}</center></td>
+                <td class="width-40"><center>{{ order['link'] }}</center></td>
+                <td><center>{{ order['charge'] }}</center></td>
+                <td class="nowrap"><center>{{ order['start_count'] }}</center></td>
+                <td><center>{{ order['quantity'] }}</center></td>
+                <td><center>{{ order['service'] }}</center></td>
+                <td><center>{{ order['status'] }}</center></td>
+                <td><center>{{ order['remains'] }}</center></td>
+            <td><center>
+               {% if order['refillButton'] %}
+               <div class="order-actions">
+                  <a href="/orders/refill/{{ order['id'] }}" class="btn btn-xs btn-primary"><font style="color:white">{{ lang['orders.button.refill'] }}</font></a>
+               </div>
+               {% endif %}                
+            </center></td>
+            <td><center>
+               {% if order['cancelButton'] %}
+               <div class="order-actions">
+                  <a href="/orders/cancel/{{ order['id'] }}" class="btn btn-xs btn-primary"><font style="color:white">{{ lang['orders.button.cancel'] }}</font></a> 
+               </div>
+               {% endif %}
+            </center></td>
+         </tr>
+         {% endfor %}
+      </tbody>
+   </table>
+</div>
+  {% if pagination["count"] > 1 %}
+<ul class="pagination">
+   {% if pagination["current"] != 1 %}
+   <li>
+      <a href="orders/{{ status }}/{{ pagination["previous"] }}{% if search %}?search={{ search }}{% endif %}" aria-label="Previous">
+      <span aria-hidden="true">«</span>
+      </a>
+   </li>
+   {% endif %}
+   {% set r, l = 3, 3 %}
+   {% if pagination['current'] == 1 %}
+   {% set r = 7 %}
+   {% endif %}
+   {% if pagination['current'] == 2 %}
+   {% set r = 5 %}
+   {% endif %}
+   {% if pagination['current'] >= pagination['count'] %}
+   {% set l = 5 %}
+   {% endif %}
+   {% for page in 1..pagination["count"] %}
+   {% if page >= (pagination['current']-l) and page <= (pagination['current']+r) %}
+   <li{% if page == pagination['current'] %} class="active" {%endif%}><a href="orders/{{ status }}/{{ page }}{% if search %}?search={{ search }}{% endif %}">{{ page }}</a></li>
+   {%endif%}
+   {% endfor %}
+   {% if pagination['current'] < pagination['count'] %}
+   <li>
+      <a href="orders/{{ status }}/{{ pagination['next'] }}{% if search %}?search={{ search }}{% endif %}" aria-label="Next">
+      <span aria-hidden="true">»</span>
+      </a>
+   </li>
+   {% endif %}
+</ul>
+{% endif %}
+<br><br>
+</div></div>
+
+
+<div class="mobil">
+   <div class="bosluk">
+      <div class="container">
+         <div class="row">
+            {% for order in orders %}
+            <div class="col-lg-12">
+               <div class="well-box pshadow">
+                  <div class="w-title">
+                     <center>
+                        <font class="three-dot" style="text-align: center;font-size: 14px; color: #c7c7c7;"><b>ID:</font><font> #{{ order['id'] }}</b><br>
+                        <strong style="color: #c7c7c7;">{{ lang['orders.service'] }}:</strong> {{ order['service'] }}<br>
+                        <strong style="color: #c7c7c7;">{{ lang['orders.start.count'] }}:</strong><strong> {{ order['start_count'] }}<br>
+                        <strong style="color: #c7c7c7;">{{ lang['orders.remains'] }}:</strong> {{ order['remains'] }}</strong><br>
+                        <small style="color: #c7c7c7;">{{ lang['orders.link'] }}:</small> {{ order['link'] }}<br><br>
+                        <strong style="text-align: center;font-size: 16px;font-weight: bolder;border: 1px solid #cacaca;padding: 4px;border-radius: 5px;">{{ order['charge'] }} <i class="fa fa-try"></i>
+                        <small style="color: #c7c7c7;font-size: 10px;">/ {{ order['quantity'] }} Adet</small></strong></font>
+                     </center>
+                     <br>
+                     <div class="progress">
+                        <div style='background-color:#00d8a6;color:black;font-weight:Bold;width:100%' class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+                           {{ order['status'] }}
+                        </div>
+                     </div>
+                     <div>
+                        {% if order['refillButton'] %}
+                        <div class="order-actions">
+                           <a href="/orders/refill/{{ order['id'] }}" class="btn btn-xs btn-primary">{{ lang['orders.button.refill'] }}</a>
+                        </div>
+                        {% endif %}                
+                     </div>
+                     <div>
+                        {% if order['cancelButton'] %}
+                        <div class="order-actions">
+                           <a href="/orders/cancel/{{ order['id'] }}" class="btn btn-xs btn-primary">{{ lang['orders.button.cancel'] }}</a> 
+                        </div>
+                        {% endif %}
+                     </div>
+                     <center>
+                        <font style="text-align: center;"><small style="color: #c7c7c7;font-size: 10px;">{{ order['date'] }}</small></font>
+                     </center>
+                  </div>
+               </div>
+            </div>
+            <br>
+            {% endfor %}   
+         </div>
+      </div>
+        {% if pagination["count"] > 1 %}
+<ul class="pagination">
+   {% if pagination["current"] != 1 %}
+   <li>
+      <a href="orders/{{ status }}/{{ pagination["previous"] }}{% if search %}?search={{ search }}{% endif %}" aria-label="Previous">
+      <span aria-hidden="true">«</span>
+      </a>
+   </li>
+   {% endif %}
+   {% set r, l = 3, 3 %}
+   {% if pagination['current'] == 1 %}
+   {% set r = 7 %}
+   {% endif %}
+   {% if pagination['current'] == 2 %}
+   {% set r = 5 %}
+   {% endif %}
+   {% if pagination['current'] >= pagination['count'] %}
+   {% set l = 5 %}
+   {% endif %}
+   {% for page in 1..pagination["count"] %}
+   {% if page >= (pagination['current']-l) and page <= (pagination['current']+r) %}
+   <li{% if page == pagination['current'] %} class="active" {%endif%}><a href="orders/{{ status }}/{{ page }}{% if search %}?search={{ search }}{% endif %}">{{ page }}</a></li>
+   {%endif%}
+   {% endfor %}
+   {% if pagination['current'] < pagination['count'] %}
+   <li>
+      <a href="orders/{{ status }}/{{ pagination['next'] }}{% if search %}?search={{ search }}{% endif %}" aria-label="Next">
+      <span aria-hidden="true">»</span>
+      </a>
+   </li>
+   {% endif %}
+</ul>
+{% endif %}
+   </div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+{% include 'footer.twig' %}
